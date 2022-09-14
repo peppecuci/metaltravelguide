@@ -3,7 +3,6 @@ package com.metaltravelguide.places.mappers;
 import com.metaltravelguide.places.models.dtos.PlaceDTO;
 import com.metaltravelguide.places.models.entities.Place;
 import com.metaltravelguide.places.models.forms.PlaceCreateForm;
-import com.metaltravelguide.places.models.forms.PlaceUpdateForm;
 import com.metaltravelguide.places.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
