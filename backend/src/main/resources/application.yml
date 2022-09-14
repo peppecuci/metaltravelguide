@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/metaltravelguide
+    username: postgres
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+application:
+  jwt:
+    secret: "secret"
+    expiresAt: 846000
+    headerPrefix: "Bearer "
+    headerKey: "Authorization"

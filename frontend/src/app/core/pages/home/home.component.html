@@ -1,0 +1,26 @@
+<div class="row align-items-center justify-content-center g-5 py-5">
+  <div class="col-10 col-sm-8 col-md-6 col-lg-4">
+    <img src="/assets/logos/horns.svg" class="d-block w-100 img-fluid mx-lg-auto " alt="Metal Travel Guide" loading="lazy">
+  </div>
+  <div class="col-xl-4 col-lg-6">
+    <h1 class="display-5 fw-bold lh-1 mb-3">Discover your next favorite place to bang your head.</h1>
+    <p class="lead">Metal Travel Guide is a community of metal enthusiasts sharing their favorite bars, clubs & shops from around the world.</p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <a routerLink="places/all" class="btn btn-lg btn-success text-uppercase px-4 py-3 me-md-2">Find places</a>
+      <a routerLink="places/all" class="btn btn-lg btn-outline-success text-uppercase px-4">Add your favorite places</a>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-6 text-start" *ngIf="!isConnected">
+    <form class="p-4 p-md-5 border rounded-3 bg-light" (submit)="onSubmit()">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required [(ngModel)]="username">
+        <label for="username">Username</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required [(ngModel)]="password">
+        <label for="password">Password</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-success" type="submit">Login</button>
+    </form>
+  </div>
+</div>
