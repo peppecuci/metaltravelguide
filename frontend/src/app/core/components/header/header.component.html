@@ -7,8 +7,15 @@
     <a class="me-3 py-2 text-dark text-decoration-none" routerLink="" routerLinkActive="text-black-50" [routerLinkActiveOptions]="{exact: true}">Home</a>
     <a class="me-3 py-2 text-dark text-decoration-none" routerLink="places/all" routerLinkActive="text-black-50">Places</a>
     <a class="me-3 py-2 text-dark text-decoration-none" routerLink="users/all" routerLinkActive="text-black-50" *ngIf="isConnected && isAdmin">Users</a>
-    <a class="me-3 py-2 text-dark text-decoration-none" routerLink="profile" routerLinkActive="text-black-50" *ngIf="isConnected">My Profile</a>
-    <a class="py-2 text-dark text-decoration-none" routerLink="register" routerLinkActive="text-black-50" *ngIf="!isConnected">Register</a>
-    <a class="py-2 text-dark text-decoration-none" href="" (click)="logout()" *ngIf="isConnected">Logout</a>
+    <a class="me-3 py-2 text-dark text-decoration-none" routerLink="register" routerLinkActive="text-black-50" *ngIf="!isConnected">Register</a>
   </nav>
+  <div ngbDropdown class="dropdown" *ngIf="isConnected">
+    <a ngbDropdownToggle class="d-flex align-items-center hidden-arrow" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy"/>
+    </a>
+    <ul ngbDropdownMenu aria-labelledby="navbarDropdownMenuAvatar">
+      <li><a ngbDropdownItem routerLink="profile">My profile</a></li>
+      <li><a ngbDropdownItem href="" (click)="logout()">Logout</a></li>
+    </ul>
+  </div>
 </div>
