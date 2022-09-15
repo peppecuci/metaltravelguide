@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from "../../../features/users/services/users.service";
 import { IUser} from "../../../features/users/models/IUser";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Country } from "../../enums/Country";
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +10,9 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  public countryEnum = Country;
+  private countries : [string, Country][] = [];
 
   private user?: IUser;
 
@@ -22,10 +26,16 @@ export class ProfileComponent implements OnInit {
     countryIso: new FormControl("", [Validators.required, Validators.min(2)])
   });
 
-  constructor(private service: UsersService) { }
+  constructor(private service: UsersService) {
+    this.countries = Object.entries(this.countryEnum)
+  }
 
   get User(): IUser {
     return <IUser>this.user;
+  }
+
+  get Countries(): [string, Country][] {
+    return this.countries;
   }
 
   ngOnInit(): void {

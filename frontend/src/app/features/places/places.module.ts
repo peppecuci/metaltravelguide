@@ -9,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { PlaceCardComponent } from './components/place-card/place-card.component';
 import { SafePipe } from "../../core/pipes/safe.pipe";
 import { DateAsAgoPipe } from "../../core/pipes/date-as-ago.pipe";
+import { PlaceAddComponent } from './pages/place-add/place-add.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { DateAsAgoPipe } from "../../core/pipes/date-as-ago.pipe";
     PlacesComponent,
     PlaceCardComponent,
     SafePipe,
-    DateAsAgoPipe
+    DateAsAgoPipe,
+    PlaceAddComponent
   ],
     imports: [
         CommonModule,

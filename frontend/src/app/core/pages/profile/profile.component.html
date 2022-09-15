@@ -1,32 +1,38 @@
-<p *ngIf="User">{{User | json}}</p>
-
 <div class="row justify-content-center">
-  <form class="row g-3 col col-md-8 col-lg-6 col-xl-4" [formGroup]="updateForm" (submit)="update()">
-    <div class="col-sm-6 form-group mb-3">
-      <label for="username">Username:</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="" formControlName="username">
+  <form class="row g-3 col-auto col-md-8 col-lg-6 col-xl-4" [formGroup]="updateForm" (submit)="update()">
+    <div class="form-group col-sm-6 mb-3">
+      <label class="form-label" for="username">Username:</label>
+      <input class="form-control" type="text" id="username" name="username" placeholder="" formControlName="username">
     </div>
-    <div class="col-sm-6 form-group mb-3">
-      <label for="mail">Email:</label>
-      <input type="email" class="form-control" id="mail" name="mail" placeholder="" formControlName="mail">
+    <div class="form-group col-sm-6">
+      <label class="form-label" for="mail">Email:</label>
+      <input class="form-control" type="email" id="mail" name="mail" placeholder="" formControlName="mail">
     </div>
-    <div class="col-sm-6 form-group mb-3">
-      <label for="firstName">First name:</label>
-      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" formControlName="firstName">
+    <div class="form-group col-sm-6">
+      <label class="form-label" for="firstName">First name:</label>
+      <input class="form-control" type="text" id="firstName" name="firstName" placeholder="" formControlName="firstName">
     </div>
-    <div class="col-sm-6 form-group mb-3">
-      <label for="lastName">Last name:</label>
-      <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" formControlName="lastName">
+    <div class="form-group col-sm-6">
+      <label class="form-label" for="lastName">Last name:</label>
+      <input class="form-control" type="text" id="lastName" name="lastName" placeholder="" formControlName="lastName">
     </div>
-    <div class="col-sm-6 form-group mb-3">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="" formControlName="password">
+    <div class="form-group col-sm-6">
+      <label class="form-label" for="password">Password:</label>
+      <input class="form-control" type="password" id="password" name="password" placeholder="" formControlName="password">
     </div>
-    <div class="col-sm-6 form-group mb-3">
-      <label for="repeatPassword">Repeat password:</label>
-      <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="" formControlName="repeatPassword">
+    <div class="form-group col-sm-6">
+      <label class="form-label" for="repeatPassword">Repeat password:</label>
+      <input class="form-control" type="password" id="repeatPassword" name="repeatPassword" placeholder="" formControlName="repeatPassword">
     </div>
-    <button type="submit" class="btn btn-success">Save changes</button>
+    <div class="form-group col-12">
+      <label for="country">Country:</label>
+      <select class="form-control" id="country" name="country" formControlName="countryIso">
+        <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
+      </select>
+    </div>
+    <div class="col-12">
+      <button class="btn btn-success" type="submit" >Save changes</button>
+    </div>
   </form>
 </div>
 

@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IPlace} from "../../models/IPlace";
+import { Component, Input, OnInit } from '@angular/core';
+import { IPlace } from "../../models/IPlace";
 
 @Component({
   selector: 'app-place-card',

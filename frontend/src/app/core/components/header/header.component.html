@@ -1,21 +1,47 @@
-<div class="d-flex flex-column flex-md-row align-items-center py-1 mb-4 border-bottom">
-  <a routerLink="" class="d-flex align-items-center text-dark text-decoration-none">
-    <img height="48" src="assets/logos/horns.svg" />
-    <img height="48" src="assets/logos/metaltravelguide.svg" />
-  </a>
-  <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-    <a class="me-3 py-2 text-dark text-decoration-none" routerLink="" routerLinkActive="text-black-50" [routerLinkActiveOptions]="{exact: true}">Home</a>
-    <a class="me-3 py-2 text-dark text-decoration-none" routerLink="places/all" routerLinkActive="text-black-50">Places</a>
-    <a class="me-3 py-2 text-dark text-decoration-none" routerLink="users/all" routerLinkActive="text-black-50" *ngIf="isConnected && isAdmin">Users</a>
-    <a class="me-3 py-2 text-dark text-decoration-none" routerLink="register" routerLinkActive="text-black-50" *ngIf="!isConnected">Register</a>
-  </nav>
-  <div ngbDropdown class="dropdown" *ngIf="isConnected">
-    <a ngbDropdownToggle class="d-flex align-items-center hidden-arrow" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-      <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy"/>
+<nav class="navbar navbar-expand-lg navbar-light border-bottom" aria-label="navbar">
+  <div class="container">
+    <a class="navbar-brand" routerLink="">
+      <img height="44" src="assets/logos/horns.svg" />
+      <span class="ms-1 fs-2 text-uppercase vengeance align-middle">Metal Travel Guide</span>
     </a>
-    <ul ngbDropdownMenu aria-labelledby="navbarDropdownMenuAvatar">
-      <li><a ngbDropdownItem routerLink="profile">My profile</a></li>
-      <li><a ngbDropdownItem href="" (click)="logout()">Logout</a></li>
-    </ul>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-md-0 align-items-center">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="" routerLinkActive="fw-semibold" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="places/all" routerLinkActive="fw-semibold">Places</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="places/add" routerLinkActive="fw-semibold">Add Place</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="users/all" routerLinkActive="fw-semibold" *ngIf="isConnected && isAdmin">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="register" routerLinkActive="fw-semibold" *ngIf="!isConnected">Register</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isConnected">
+          <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="assets/logos/profile-default.png" class="rounded-circle" height="32" alt="My Profile" loading="lazy"/>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" routerLink="profile">My profile</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+<!--      <form role="search">-->
+<!--        <input class="form-control" type="search" placeholder="Search" aria-label="Search">-->
+<!--      </form>-->
+    </div>
   </div>
-</div>
+</nav>

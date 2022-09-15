@@ -1,0 +1,69 @@
+<!--<div class="container">-->
+<!--  <h1 class="text-light mt-5">{{title}}</h1>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-12 col-lg-6 mt-3">-->
+<!--      <div class="col-lg-12">-->
+<!--        <agm-map  [latitude]="latAca" [longitude]="lngAca" [zoom]="zoom" (mapClick)="addMarker($event)" [scrollwheel]="null" [mapTypeControl]='true'>-->
+<!--          <agm-marker [markerDraggable]="true" (dragEnd)="dragMarker($event)" [latitude]="latAca" [longitude]="lngAca">-->
+<!--          </agm-marker>-->
+<!--          <agm-marker [iconUrl]='{"url": iconmarker,"scaledSize": {"height": 50, "width": 50}}' [latitude]="item.latitud" [longitude]="item.longtiud" *ngFor="let item of locations" >-->
+<!--            <agm-info-window>-->
+<!--              <div>-->
+<!--                {{item.address}}-->
+<!--                <br>-->
+<!--                <label class="fw-bold">Lat:</label> {{item.latitud}}-->
+<!--                <br>-->
+<!--                <label class="fw-bold">Long:</label>  {{item.longtiud}}-->
+<!--              </div>-->
+<!--            </agm-info-window>-->
+<!--          </agm-marker>-->
+<!--        </agm-map>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <label class="mt-3 fw-bold text-light" for="">Buscar por dirección:</label>-->
+<!--        <div class="row row-cols-2">-->
+<!--          <div class="col-md-10">-->
+<!--            <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Busca una locación" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>-->
+<!--          </div>-->
+<!--          <div class="col-md-2">-->
+<!--            <button type="button" (click)="addLocation()" class="btn btn-danger">Agregar</button>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      <label class="mt-2 fw-bold text-light" for=""> Dirección: </label> <span class="fw-bold text-light"> {{address}}</span>-->
+<!--      <br>-->
+<!--      <label class="mt-2 fw-bold text-light" for=""> Latitud:  </label><span class="fw-bold text-light"> {{latAca}}</span>-->
+<!--      <br>-->
+<!--      <label class="mt-2 fw-bold text-light" for=""> Longitud: </label><span class="fw-bold text-light"> {{lngAca}}</span>-->
+<!--      <br>-->
+<!--    </div>-->
+<!--    <div class="mt-3 col-md-12 col-lg-6">-->
+<!--      <table class="table table-responsive table-bordered table-primary  text-dark">-->
+<!--        <thead class="text-center">-->
+<!--        <tr>-->
+<!--          <th scope="col">#</th>-->
+<!--          <th scope="col">Dirección</th>-->
+<!--          <th scope="col">Latitud</th>-->
+<!--          <th scope="col">Longitud</th>-->
+<!--          <th scope="col">Opciones</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody *ngFor="let item of locations; let i = index">-->
+<!--        <tr class="text-center">-->
+<!--          <td class="fw-bold">{{i+1}}</td>-->
+<!--          <td style="max-width: 150px;" class="">{{item.address}}</td>-->
+<!--          <td>{{item.latitud}}</td>-->
+<!--          <td>{{item.longtiud}}</td>-->
+<!--          <td > <button type="button" (click)="deleteLocation(item)" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>-->
+<!--            <button type="button" (click)="selectLocation(item)" class="ms-2 btn btn-primary"><i class="bi bi-arrow-up"></i></button>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
