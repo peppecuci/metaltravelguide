@@ -12,13 +12,13 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 export class RegisterComponent implements OnInit {
   // variables
   registerForm = new FormGroup({
-    username: new FormControl("", [Validators.required, Validators.min(3)]),
-    password: new FormControl("", [Validators.required, Validators.min(4)]),
-    repeatPassword: new FormControl("", [Validators.required, Validators.min(4)])
+    username: new FormControl("", [Validators.required, Validators.minLength(3)]),
+    password: new FormControl("", [Validators.required, Validators.minLength(4)]),
+    repeatPassword: new FormControl("", [Validators.required, Validators.minLength(4)])
   });
 
   // constructor
-  constructor(private _auth: AuthService, private _session: SessionService, private _router: Router) { }
+  constructor(private auth: AuthService, private session: SessionService, private router: Router) { }
 
   // methods
   ngOnInit(): void {
@@ -26,11 +26,11 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.get("password")?.value === this.registerForm.get("repeatPassword")?.value) {
-      this._auth.register(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(_ => {
-        this._auth.login(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(data => {
+      this.auth.register(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(_ => {
+        this.auth.login(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(data => {
           let token = data["token"];
-          this._session.login(token);
-          this._router.navigate(["/"]);
+          this.session.login(token);
+          this.router.navigate(["/"]);
         });
       });
     }

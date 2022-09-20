@@ -4,7 +4,7 @@ export interface IAddress {
   extra: string;
   city: string;
   region: string;
-  country: string;
+  countryIso: string;
   lat: number;
   lon: number;
 }

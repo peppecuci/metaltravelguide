@@ -23,8 +23,8 @@ public class Address {
     private String city;
     @Column(name = "address_region", nullable = false)
     private String region;
-    @Column(name = "address_country", nullable = false, columnDefinition = "CHAR(2)")
-    private String country;
+    @Column(name = "address_country_iso", nullable = false, columnDefinition = "CHAR(2)")
+    private String countryIso;
     @Column(name = "address_lat", nullable = false)
     private double lat;
     @Column(name = "address_lon", nullable = false)

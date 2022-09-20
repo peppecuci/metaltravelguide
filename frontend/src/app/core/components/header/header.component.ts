@@ -10,25 +10,37 @@ import { SessionService } from "../../security/services/session.service";
 export class HeaderComponent implements OnInit {
   // variables
   date = Date();
+  username: string  = "";
 
   // constructor
-  constructor(private router: Router, private _session: SessionService) {}
+  constructor(private router: Router, private session: SessionService) {}
 
   // getters
+  get Username(): string {
+    return this.username;
+  }
+
   get isConnected(): boolean {
-    return this._session.isConnected();
+    return this.session.isConnected();
   }
 
   get isAdmin(): boolean {
-    return this._session.isAdmin();
+    return this.session.isAdmin();
   }
 
   // methods
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+      this.username = this.session.getUser(token);
+    }
+  }
 
   logout(): void {
     localStorage.clear();
-    this._session.logout();
+    this.session.logout();
     this.router.navigate(["/"]);
   }
 }

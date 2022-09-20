@@ -1,11 +1,11 @@
-<div class="mb-4 rounded" *ngIf="Place">
-  <img class="w-100" src="{{Place.image}}" alt="{{Place.name}}" height="360" style="object-fit: cover; object-position: top"/>
+<div class="mb-4" *ngIf="Place">
+  <img class="w-100 rounded" src="{{Place.image}}" alt="{{Place.name}}" height="360" style="object-fit: cover; object-position: top"/>
 </div>
 <div class="row mb-2" *ngIf="Place">
-  <div class="col">
+  <div class="col-12">
     <div class="card mb-3">
       <div class="row g-0">
-        <div class="col-md-8">
+        <div class="col-12 col-md-8">
           <div class="card-body">
             <h1 class="card-title">{{Place.name}}</h1>
             <div class="d-flex align-items-center mb-2">
@@ -32,7 +32,7 @@
             <p class="card-text"><small class="text-muted">Last updated {{Place.dateLastModified | dateAsAgo}}</small></p>
           </div>
         </div>
-        <div class="col-md-4 row align-items-center">
+        <div class="col-12 col-md-4 row align-items-center">
           <div class="row text-center">
             <a class="d-flex justify-content-center mb-2" href="">
               <i class="bi bi-heart h1 text-danger"></i>
@@ -46,28 +46,26 @@
   </div>
 </div>
 <div class="row g-5" *ngIf="Place">
-  <div class="col-md-8">
+  <div class="col-12 col-md-8">
     <article class="blog-post">
       <h2 class="blog-post-title mb-1">Description</h2>
       <p class="blog-post-meta">Added: {{Place.dateCreated | date: "short"}} by <a routerLink="/users/{{Place.username}}">{{Place.username}}</a></p>
       <p>{{Place.description}}</p>
     </article>
   </div>
-  <div class="col-md-4">
-    <div class="position-sticky" style="top: 2rem;">
-      <div>
-        <iframe
-          class="w-100"
-          height="400"
-          style="border:0"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="no-referrer-when-downgrade"
-          [src]="MapURL | safe">
-        </iframe>
-      </div>
+  <div class="col-12 col-md-4">
+    <iframe
+      class="w-100"
+      height="400"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      [src]="MapURL | safe">
+    </iframe>
+    <p class="text-center">{{Place.address.street}} {{Place.address.number}}, {{Place.address.city}} <span class="fi fi-{{Place.address.countryIso.toLowerCase()}}"></span></p>
+    <p class="text-center"><i class="bi bi-telephone-fill text-success"></i>{{Place.contact.telephone}}</p>
+    <div class="row" *ngIf=IsOwner>
+      <a class="btn btn-success" routerLink="/places/update/{{Id}}">Edit</a>
     </div>
-    <p class="text-center">{{Place.address.street}} {{Place.address.number}}, {{Place.address.city}} <span class="fi fi-{{Place.address.country.toLowerCase()}}"></span></p>
-    <p class="text-center"><i class="bi bi-telephone"></i>{{Place.contact.telephone}}</p>
   </div>
 </div>

@@ -5,11 +5,12 @@ import { PlacesListComponent } from './pages/places-list/places-list.component';
 import { PlaceDetailsComponent } from './pages/place-details/place-details.component';
 import { PlacesComponent } from './places.component';
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PlaceCardComponent } from './components/place-card/place-card.component';
 import { SafePipe } from "../../core/pipes/safe.pipe";
 import { DateAsAgoPipe } from "../../core/pipes/date-as-ago.pipe";
 import { PlaceAddComponent } from './pages/place-add/place-add.component';
+import { PlaceUpdateComponent } from './pages/place-update/place-update.component';
 
 
 @NgModule({
@@ -20,13 +21,15 @@ import { PlaceAddComponent } from './pages/place-add/place-add.component';
     PlaceCardComponent,
     SafePipe,
     DateAsAgoPipe,
-    PlaceAddComponent
+    PlaceAddComponent,
+    PlaceUpdateComponent
   ],
     imports: [
-        CommonModule,
-        PlacesRoutingModule,
-        HttpClientModule,
-        FormsModule,
+      CommonModule,
+      PlacesRoutingModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule
     ]
 })
 export class PlacesModule { }

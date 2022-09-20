@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  <form class="col-12 col-md-10 col-lg-8 col-xl-6" [formGroup]="updateForm" (submit)="update()">
+    <div class="form-group mb-3">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" formControlName="name">
+    </div>
+    <div class="form-group mb-3">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" formControlName="description" rows="10"></textarea>
+    </div>
+    <div class="form-group mb-3">
+      <label for="street">Street:</label>
+      <input type="text" class="form-control" id="street" name="street" formControlName="street">
+    </div>
+    <div class="form-group mb-3">
+      <label for="number">Number:</label>
+      <input type="number" class="form-control" id="number" name="number" formControlName="number">
+    </div>
+    <div class="form-group mb-3">
+      <label for="extra">Extra:</label>
+      <input type="text" class="form-control" id="extra" name="extra" formControlName="extra">
+    </div>
+    <div class="form-group mb-3">
+      <label for="city">City:</label>
+      <input type="text" class="form-control" id="city" name="city" formControlName="city">
+    </div>
+    <div class="form-group mb-3">
+      <label for="region">Region:</label>
+      <input type="text" class="form-control" id="region" name="region" formControlName="region">
+    </div>
+    <div class="form-group col-12">
+      <label for="country">Country:</label>
+      <select class="form-control" id="country" name="country" formControlName="country">
+        <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
+      </select>
+    </div>
+    <div class="form-group mb-3">
+      <label for="website">Website:</label>
+      <input type="text" class="form-control" id="website" name="website" formControlName="website">
+    </div>
+    <div class="form-group mb-3">
+      <label for="facebook">Facebook:</label>
+      <input type="text" class="form-control" id="facebook" name="facebook" formControlName="facebook">
+    </div>
+    <div class="form-group mb-3">
+      <label for="instagram">Instagram:</label>
+      <input type="text" class="form-control" id="instagram" name="instagram" formControlName="instagram">
+    </div>
+    <div class="form-group mb-3">
+      <label for="twitter">Twitter:</label>
+      <input type="text" class="form-control" id="twitter" name="twitter" formControlName="twitter">
+    </div>
+    <div class="form-group mb-3">
+      <label for="mail">E-mail:</label>
+      <input type="mail" class="form-control" id="mail" name="mail" formControlName="mail">
+    </div>
+    <div class="form-group mb-3">
+      <label for="telephone">Telephone:</label>
+      <input type="tel" pattern="^[+]?[0-9]{9,20}$" class="form-control" id="telephone" name="telephone" formControlName="telephone">
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+</div>
+
+{{ Place | json}}

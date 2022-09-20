@@ -10,7 +10,7 @@ import { Country } from "../../enums/Country";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+  // variables
   public countryEnum = Country;
   private countries : [string, Country][] = [];
 

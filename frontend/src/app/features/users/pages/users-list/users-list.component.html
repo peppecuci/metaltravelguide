@@ -1,1 +1,22 @@
-<p>users-list works!</p>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+    <tr>
+      <th scope="col">#id</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Mail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of Users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.mail }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
