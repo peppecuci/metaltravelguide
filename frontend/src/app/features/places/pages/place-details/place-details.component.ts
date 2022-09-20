@@ -3,7 +3,7 @@ import { PlacesService } from "../../services/places.service";
 import { IPlace } from "../../models/IPlace";
 import { ActivatedRoute } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
-import {SessionService} from "../../../../core/security/services/session.service";
+import { SessionService } from "../../../../core/security/services/session.service";
 
 @Component({
   selector: 'app-IPlace-details',
@@ -27,8 +27,8 @@ export class PlaceDetailsComponent implements OnInit {
       if (localStorage.getItem("token") != null)
       { // @ts-ignore
         token = localStorage.getItem("token");
+        this.isOwner = data.username == this.session.getUser(token);
       }
-      this.isOwner = data.username == this.session.getUser(token);
       this.mapURL = `https://www.google.com/maps/embed/v1/search?key=${environment.APIKEY}&q=${this.place.address.street}+${this.place.address.number}+${this.place.address.city}`;
     });
   }
