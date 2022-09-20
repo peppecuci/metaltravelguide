@@ -29,8 +29,8 @@
       <input type="text" class="form-control" id="region" name="region" formControlName="region">
     </div>
     <div class="form-group col-12">
-      <label for="country">Country:</label>
-      <select class="form-control" id="country" name="country" formControlName="country">
+      <label for="countryIso">Country:</label>
+      <select class="form-control" id="countryIso" name="countryIso" formControlName="countryIso">
         <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
       </select>
     </div>
@@ -61,5 +61,3 @@
     <button type="submit" class="btn btn-success">Update</button>
   </form>
 </div>
-
-{{ Place | json}}
