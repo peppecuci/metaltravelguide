@@ -14,17 +14,17 @@ export class LoginComponent implements OnInit {
   password: string = "";
 
   // constructor
-  constructor(private _auth: AuthService, private _session: SessionService, private _router: Router) { }
+  constructor(private authService: AuthService, private sessionService: SessionService, private router: Router) { }
 
   // methods
   ngOnInit(): void {
   }
 
   login(): void {
-    this._auth.login(this.username, this.password).subscribe(data => {
+    this.authService.login(this.username, this.password).subscribe(data => {
       let token = data["token"];
-      this._session.login(token);
-      this._router.navigate(["/"]);
+      this.sessionService.login(token);
+      this.router.navigate(["/"]);
     });
   }
 }
