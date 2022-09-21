@@ -1,5 +1,5 @@
 # Metal Travel Guide
-A "Headbanger's Travel Guide" clone made with Java Spring and Angular
+A "Headbanger's Travel Guide" [website](https://headbangerstravelguide.com/) clone made with Java Spring and Angular as part of my Java Spring course at [digitalcity.brussels](https://digitalcity.brussels/)
 
 ## WORK IN PROGRESS
 
