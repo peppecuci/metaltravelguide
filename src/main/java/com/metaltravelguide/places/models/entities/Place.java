@@ -1,5 +1,6 @@
 package com.metaltravelguide.places.models.entities;
 
+import com.metaltravelguide.places.enums.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

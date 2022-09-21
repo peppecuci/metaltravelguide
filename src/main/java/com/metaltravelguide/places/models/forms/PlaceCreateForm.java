@@ -2,7 +2,7 @@ package com.metaltravelguide.places.models.forms;
 
 import com.metaltravelguide.places.models.entities.Address;
 import com.metaltravelguide.places.models.entities.Contact;
-import com.metaltravelguide.places.models.entities.Type;
+import com.metaltravelguide.places.enums.Type;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
