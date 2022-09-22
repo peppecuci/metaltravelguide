@@ -11,7 +11,7 @@ import { SafePipe } from "../../core/pipes/safe.pipe";
 import { DateAsAgoPipe } from "../../core/pipes/date-as-ago.pipe";
 import { PlaceAddComponent } from './pages/place-add/place-add.component';
 import { PlaceUpdateComponent } from './pages/place-update/place-update.component';
-
+import { PlaceMapComponent } from './pages/place-map/place-map.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { PlaceUpdateComponent } from './pages/place-update/place-update.componen
     SafePipe,
     DateAsAgoPipe,
     PlaceAddComponent,
-    PlaceUpdateComponent
+    PlaceUpdateComponent,
+    PlaceMapComponent
   ],
     imports: [
       CommonModule,
