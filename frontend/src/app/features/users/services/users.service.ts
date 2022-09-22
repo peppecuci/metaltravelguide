@@ -6,6 +6,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 import { IUser } from "../models/IUser";
+import { IPlace } from "../../places/models/IPlace";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UsersService {
 
   private apiServer = environment.APISERVER + "user/";
 
-  constructor(private _http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   readAll(): Observable<IUser[]> {
     let token: string = "";
@@ -23,7 +24,7 @@ export class UsersService {
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this._http.get<IUser[]>(this.apiServer + "all", {headers}).pipe(catchError(this.errorHandler));
+    return this.httpClient.get<IUser[]>(this.apiServer + "all", {headers}).pipe(catchError(this.errorHandler));
   }
 
   getProfile(): Observable<IUser> {
@@ -33,7 +34,17 @@ export class UsersService {
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this._http.get<IUser>(this.apiServer + "profile", {headers}).pipe(catchError(this.errorHandler));
+    return this.httpClient.get<IUser>(this.apiServer + "profile", {headers}).pipe(catchError(this.errorHandler));
+  }
+
+  delete(id: number): Observable<IPlace> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.delete<any>(this.apiServer + "delete/" + id, {headers}).pipe(catchError(this.errorHandler));
   }
 
   errorHandler(error: any) {

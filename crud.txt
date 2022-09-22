@@ -1,1 +1,2 @@
 https://www.techiediaries.com/angular/angular-9-8-crud-example-and-tutorial/
+https://www.bezkoder.com/angular-14-crud-example/

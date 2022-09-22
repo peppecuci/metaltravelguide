@@ -6,23 +6,23 @@
     <div class="form-group mb-3">
       <label for="name">Your name:</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="" formControlName="name">
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('name')?.hasError('required') && IsSubmitted">Name is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('name')?.hasError('minlength') && IsSubmitted">Name must be at least 3 characters long</div>
     </div>
-    <div *ngIf="contactForm.get('name')?.hasError('required') && IsClicked" class='alert alert-danger'>Name is required</div>
-    <div *ngIf="contactForm.get('name')?.hasError('minlength') && IsClicked" class='alert alert-danger'>Name must be at least 3 characters long</div>
     <div class="form-group mb-3">
       <label for="mail">Your e-mail:</label>
-      <input type="mail" class="form-control" id="mail" name="mail" placeholder="" formControlName="mail">
+      <input type="email" class="form-control" id="mail" name="mail" placeholder="" formControlName="mail">
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('mail')?.hasError('required') && IsSubmitted">Mail is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('mail')?.hasError('email') && IsSubmitted">Mail is not valid</div>
     </div>
-    <div *ngIf="contactForm.get('mail')?.hasError('required') && IsClicked" class='alert alert-danger'>Mail is required</div>
-    <div *ngIf="contactForm.get('mail')?.hasError('email') && IsClicked" class='alert alert-danger'>Enter a valid mail</div>
     <div class="form-group mb-3">
       <label for="message">Your message:</label>
       <textarea class="form-control" id="message" name="message" formControlName="message"></textarea>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('message')?.hasError('required') && IsSubmitted">Message is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('message')?.hasError('minlength') && IsSubmitted">Message must be at least 4 characters long</div>
     </div>
-    <div *ngIf="contactForm.get('message')?.hasError('required') && IsClicked" class='alert alert-danger'>Message is required</div>
-    <div *ngIf="contactForm.get('message')?.hasError('minlength') && IsClicked" class='alert alert-danger'>Message must be at least 4 characters long</div>
     <button type="submit" class="btn btn-success">Send</button>
-    <div class="alert alert-success mt-3" role="alert" *ngIf="IsSent">
+    <div class="alert alert-success mt-3" role="alert" *ngIf="WasSent">
       Thank you for your comments!
     </div>
   </form>

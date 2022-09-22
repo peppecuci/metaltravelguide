@@ -41,7 +41,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.service.getProfile().subscribe((data: IUser) => {
       this.user = data;
-      let token = localStorage.getItem("token");
       this.updateForm.setValue({username: this.user.username, password: this.user.password, repeatPassword: this.user.password, mail: this.user.mail, firstName: this.user.firstName, lastName: this.user.lastName, countryIso: this.user.countryIso});
     });
   }

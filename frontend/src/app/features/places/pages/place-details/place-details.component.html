@@ -1,5 +1,7 @@
 <div class="mb-4" *ngIf="Place">
-  <img class="w-100 rounded" src="{{Place.image}}" alt="{{Place.name}}" height="360" style="object-fit: cover; object-position: top"/>
+  <a href="{{Place.image}}">
+    <img class="w-100 rounded" src="{{Place.image}}" alt="{{Place.name}}" height="360" style="object-fit: cover; object-position: top"/>
+  </a>
 </div>
 <div class="row mb-2" *ngIf="Place">
   <div class="col-12">
@@ -25,7 +27,7 @@
               <a class="h1 ms-2" href="{{Place.contact.twitter}}" target="_blank" *ngIf="Place.contact.twitter">
                 <i class="bi bi-twitter text-dark"></i>
               </a>
-              <a class="h1 ms-2" href="{{Place.contact.mail}}" target="_blank" *ngIf="Place.contact.mail">
+              <a class="h1 ms-2" href="mailto:{{Place.contact.mail}}" *ngIf="Place.contact.mail">
                 <i class="bi bi-envelope text-dark"></i>
               </a>
             </div>
@@ -64,8 +66,13 @@
     </iframe>
     <p class="text-center">{{Place.address.street}} {{Place.address.number}}, {{Place.address.city}} <span class="fi fi-{{Place.address.countryIso.toLowerCase()}}"></span></p>
     <p class="text-center"><i class="bi bi-telephone-fill text-success"></i>{{Place.contact.telephone}}</p>
-    <div class="row" *ngIf=IsOwner>
-      <a class="btn btn-success" routerLink="/places/update/{{Id}}">Edit</a>
+    <div class="row justify-content-center">
+      <div class="col-auto" *ngIf="IsOwner || IsAdmin">
+        <a class="btn btn-outline-success" routerLink="/places/update/{{Id}}">Edit</a>
+      </div>
+      <div class="col-auto" *ngIf=IsAdmin>
+        <a class="btn btn-outline-danger" (click)="delete()">Delete</a>
+      </div>
     </div>
   </div>
 </div>

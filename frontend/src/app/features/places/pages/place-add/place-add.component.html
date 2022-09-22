@@ -1,9 +1,3 @@
-<p>place-add works!</p>
-
-<!--<div class="container">-->
-<!--  <h1 class="text-light mt-5">{{title}}</h1>-->
-<!--</div>-->
-
 <!--<div class="container">-->
 <!--  <div class="row">-->
 <!--    <div class="col-md-12 col-lg-6 mt-3">-->
@@ -69,3 +63,115 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
+<div class="row justify-content-center">
+  <form class="col-12 col-md-10 col-lg-8 col-xl-6" [formGroup]="addForm" (submit)="add()">
+    <div class="form-group mb-3">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" formControlName="name">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('name')?.hasError('required') && IsSubmitted">Name is required</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('name')?.hasError('minlength') && IsSubmitted">Name must be at least 2 characters long</div>
+      <p>{{addForm.get('name')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="type">Type:</label>
+      <select class="form-control" id="type" name="type" formControlName="type">
+        <option *ngFor="let type of Types" [value]="type[0]" [label]="type[1]"></option>
+      </select>
+      <p>{{addForm.get('type')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" formControlName="description" rows="10"></textarea>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('description')?.hasError('required') && IsSubmitted">Description is required</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('description')?.hasError('minlength') && IsSubmitted">Description must be at least 4 characters long</div>
+      <p>{{addForm.get('description')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="image">Image:</label>
+      <input type="text" class="form-control" id="image" name="image" formControlName="image">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('image')?.hasError('required') && IsSubmitted">Image is required</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('image')?.hasError('minlength') && IsSubmitted">Image must be at least 4 characters long</div>
+      <p>{{addForm.get('image')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="address">
+      <label for="street">Street:</label>
+      <input type="text" class="form-control" id="street" name="street" formControlName="street">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('street')?.hasError('required') && IsSubmitted">Street is required</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('street')?.hasError('minlength') && IsSubmitted">Street must be at least 1 character long</div>
+      <p>{{addForm.get('street')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="address">
+      <label for="number">Number:</label>
+      <input type="number" class="form-control" id="number" name="number" formControlName="number">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('number')?.hasError('required') && IsSubmitted">Number is required</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('number')?.hasError('min') && IsSubmitted">Number must be greater than 0</div>
+      <p>{{addForm.get('number')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="address">
+      <label for="extra">Extra:</label>
+      <input type="text" class="form-control" id="extra" name="extra" formControlName="extra">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('extra')?.hasError('minlength') && IsSubmitted">Extra info must be at least 1 character long</div>
+      <p>{{addForm.get('extra')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="address">
+      <label for="city">City:</label>
+      <input type="text" class="form-control" id="city" name="city" formControlName="city">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('city')?.hasError('required') && IsSubmitted">City is required</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('city')?.hasError('minlength') && IsSubmitted">City must be at least 2 characters long</div>
+      <p>{{addForm.get('city')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="address">
+      <label for="region">Region:</label>
+      <input type="text" class="form-control" id="region" name="region" formControlName="region">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('region')?.hasError('required') && IsSubmitted">Region is required</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('region')?.hasError('minlength') && IsSubmitted">Region must be at least 2 characters long</div>
+      <p>{{addForm.get('region')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="address">
+      <label for="countryIso">Country:</label>
+      <select class="form-control" id="countryIso" name="countryIso" formControlName="countryIso">
+        <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
+      </select>
+      <p>{{addForm.get('countryIso')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="contact">
+      <label for="website">Website:</label>
+      <input type="text" class="form-control" id="website" name="website" formControlName="website">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('website')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
+      <p>{{addForm.get('website')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="contact">
+      <label for="facebook">Facebook:</label>
+      <input type="text" class="form-control" id="facebook" name="facebook" formControlName="facebook">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('facebook')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
+      <p>{{addForm.get('facebook')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="contact">
+      <label for="instagram">Instagram:</label>
+      <input type="text" class="form-control" id="instagram" name="instagram" formControlName="instagram">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('instagram')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
+      <p>{{addForm.get('instagram')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="contact">
+      <label for="twitter">Twitter:</label>
+      <input type="text" class="form-control" id="twitter" name="twitter" formControlName="twitter">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('twitter')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
+      <p>{{addForm.get('twitter')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="contact">
+      <label for="mail">E-mail:</label>
+      <input type="email" class="form-control" id="mail" name="mail" formControlName="mail">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('mail')?.hasError('email') && IsSubmitted">Not a valid e-mail address</div>
+      <p>{{addForm.get('mail')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3" formGroupName="contact">
+      <label for="telephone">Telephone:</label>
+      <input type="tel" pattern="^[+]?[0-9]{9,20}$" class="form-control" id="telephone" name="telephone" formControlName="telephone">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('telephone')?.hasError('pattern') && IsSubmitted">Not a valid telephone</div>
+      <p>{{addForm.get('telephone')?.errors | json}}</p>
+    </div>
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+</div>
+
+

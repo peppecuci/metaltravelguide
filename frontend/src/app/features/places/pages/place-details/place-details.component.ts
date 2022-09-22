@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from "../../services/places.service";
 import { IPlace } from "../../models/IPlace";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
 import { SessionService } from "../../../../core/security/services/session.service";
 
@@ -17,7 +17,7 @@ export class PlaceDetailsComponent implements OnInit {
   private id: number = 0;
   private mapURL: string = "";
 
-  constructor(private service: PlacesService, private route: ActivatedRoute, private session: SessionService) { }
+  constructor(private service: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -41,11 +41,21 @@ export class PlaceDetailsComponent implements OnInit {
     return this.isOwner;
   }
 
+  get IsAdmin(): boolean {
+    return this.session.isAdmin();
+  }
+
   get Id(): number {
     return this.id;
   }
 
   get MapURL(): string {
     return this.mapURL;
+  }
+
+  delete(): void {
+    if (confirm("Are you sure you want to delete this Place?")) {
+      this.service.delete(this.id).subscribe(data => this.router.navigate(["/places/all"]));
+    }
   }
 }

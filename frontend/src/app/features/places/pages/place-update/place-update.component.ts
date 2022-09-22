@@ -23,23 +23,25 @@ export class PlaceUpdateComponent implements OnInit {
   private place?: IPlace;
   private id: number = 0;
 
+  private isSubmitted: boolean = false;
+
   updateForm = new FormGroup({
-    name: new FormControl("", [Validators.required, Validators.minLength(3)]),
+    name: new FormControl("", [Validators.required, Validators.minLength(2)]),
     address: new FormGroup({
       street: new FormControl("", [Validators.required, Validators.minLength(1)]),
-      number: new FormControl(1, [Validators.required]),
+      number: new FormControl(1, [Validators.required, Validators.min(0)]),
       extra: new FormControl("", [Validators.minLength(1)]),
       city: new FormControl("", [Validators.required, Validators.minLength(2)]),
       region: new FormControl("", [Validators.required, Validators.minLength(2)]),
-      countryIso: new FormControl("", [Validators.required, Validators.minLength(2)]),
+      countryIso: new FormControl("", [Validators.required]),
       }),
     contact: new FormGroup({
-      telephone: new FormControl("", [Validators.required, Validators.pattern("^[+]?[0-9]{9,20}$")]),
-      mail: new FormControl("", [Validators.required, Validators.email]),
-      website: new FormControl("", [Validators.required, Validators.minLength(5)]),
-      facebook: new FormControl("", [Validators.required, Validators.minLength(5)]),
-      instagram: new FormControl("", [Validators.required, Validators.minLength(5)]),
-      twitter: new FormControl("", [Validators.required, Validators.minLength(5)]),
+      telephone: new FormControl("", [Validators.pattern("^[+]?[0-9]{9,20}$")]),
+      mail: new FormControl("", [Validators.email]),
+      website: new FormControl("", [Validators.pattern("[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)")]),
+      facebook: new FormControl("", [Validators.pattern("[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)")]),
+      instagram: new FormControl("", [Validators.pattern("[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)")]),
+      twitter: new FormControl("", [Validators.pattern("[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)")]),
     }),
     type: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required, Validators.minLength(4)]),
@@ -57,6 +59,10 @@ export class PlaceUpdateComponent implements OnInit {
 
   get Place(): IPlace {
     return <IPlace>this.place;
+  }
+
+  get IsSubmitted(): boolean {
+    return this.isSubmitted;
   }
 
   get Countries(): [string, Country][] {
@@ -77,7 +83,7 @@ export class PlaceUpdateComponent implements OnInit {
   }
 
   update(): void {
-    console.log(this.updateForm.valid);
+    this.isSubmitted = true;
     if (this.updateForm.valid) {
       this.placesService.update(this.id, this.updateForm.value).subscribe((data: IPlace) => {
         this.place = data;

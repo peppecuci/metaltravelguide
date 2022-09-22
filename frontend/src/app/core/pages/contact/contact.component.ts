@@ -13,17 +13,17 @@ export class ContactComponent implements OnInit {
     mail: new FormControl("", [Validators.required, Validators.email]),
     message: new FormControl("", [Validators.required, Validators.minLength(4)])
   });
-  private isClicked: boolean = false;
-  private isSent: boolean = false;
+  private isSubmitted: boolean = false;
+  private wasSent: boolean = false;
 
   constructor() { }
 
-  get IsClicked(): boolean {
-    return this.isClicked;
+  get IsSubmitted(): boolean {
+    return this.isSubmitted;
   }
 
-  get IsSent(): boolean {
-    return this.isSent;
+  get WasSent(): boolean {
+    return this.wasSent;
   }
 
   ngOnInit(): void {
@@ -31,13 +31,13 @@ export class ContactComponent implements OnInit {
 
   contact(): void {
     if (this.contactForm.valid) {
-      this.isClicked = false;
-      this.isSent = true;
+      this.isSubmitted = false;
+      this.wasSent = true;
       this.contactForm.reset();
     }
     else {
-      this.isClicked = true;
-      this.isSent = false;
+      this.isSubmitted = true;
+      this.wasSent = false;
     }
   }
 

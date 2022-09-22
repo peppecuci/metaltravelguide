@@ -36,6 +36,16 @@ export class PlacesService {
     return this.httpClient.get<IPlace>(this.apiServer + id, {headers}).pipe(catchError(this.errorHandler));
   }
 
+  add(place: any): Observable<IPlace> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.post<any>(this.apiServer + "create/", place, {headers}).pipe(catchError(this.errorHandler));
+  }
+
   update(id: number, place: any): Observable<IPlace> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
@@ -43,8 +53,17 @@ export class PlacesService {
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    console.log(place);
     return this.httpClient.patch<any>(this.apiServer + "update/" + id, place, {headers}).pipe(catchError(this.errorHandler));
+  }
+
+  delete(id: number): Observable<IPlace> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.delete<any>(this.apiServer + "delete/" + id, {headers}).pipe(catchError(this.errorHandler));
   }
 
   errorHandler(error: any) {

@@ -1,16 +1,17 @@
-<div class="card shadow-sm" *ngIf="place">
-  <img class="bd-placeholder-img card-img-top" src="{{place.image}}" alt="{{place.name}}"/>
-  <div class="card-body">
-    <h5 class="card-title">{{place.name}}</h5>
-    <div class="d-flex justify-content-between">
-      <p>{{place.address.street}} {{place.address.number}}, {{place.address.city}} <span class="fi fi-{{place.address.countryIso.toLowerCase()}}"></span></p>
-    </div>
-    <div class="d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center">
-        <img class="me-2" height="24" src="assets/logos/{{place.type.toLowerCase()}}.svg" alt="{{place.type.toLowerCase()}}" style="opacity: 60%"/>
-        <small class="text-muted">{{place.type}}</small>
+<a class="text-decoration-none text-black" routerLink="/places/{{place.id}}" *ngIf="place">
+  <div class="card shadow-sm">
+    <img class="bd-placeholder-img card-img-top" src="{{place.image}}" alt="{{place.name}}"/>
+    <div class="card-body">
+      <h5 class="card-title">{{place.name}}</h5>
+      <div class="d-flex justify-content-between">
+        <p>{{place.address.street}} {{place.address.number}}, {{place.address.city}} <span class="fi fi-{{place.address.countryIso.toLowerCase()}}"></span></p>
       </div>
-      <a class="btn btn-sm btn-outline-success" routerLink="/places/{{place.id}}">More Info</a>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <img class="me-2" height="24" src="assets/logos/{{place.type.toLowerCase()}}.svg" alt="{{place.type.toLowerCase()}}" style="opacity: 60%"/>
+          <small class="text-muted">{{place.type}}</small>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</a>
