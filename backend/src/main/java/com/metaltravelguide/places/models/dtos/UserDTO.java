@@ -6,6 +6,9 @@ import lombok.Data;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * A DTO for the {@link com.metaltravelguide.places.models.entities.User} entity
+ */
 @Data
 @Builder
 public class UserDTO {

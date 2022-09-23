@@ -3,6 +3,7 @@ package com.metaltravelguide.places.tools;
 import com.metaltravelguide.places.enums.Country;
 import com.metaltravelguide.places.enums.Type;
 import com.metaltravelguide.places.models.entities.*;
+import com.metaltravelguide.places.repositories.CommentRepository;
 import com.metaltravelguide.places.repositories.PlaceRepository;
 import com.metaltravelguide.places.repositories.UserRepository;
 import org.springframework.beans.factory.InitializingBean;
@@ -16,10 +17,12 @@ import java.util.List;
 public class DataInit implements InitializingBean {
     private final UserRepository userRepository;
     private final PlaceRepository placeRepository;
+    private final CommentRepository commentRepository;
 
-    public DataInit(UserRepository userRepository, PlaceRepository placeRepository) {
+    public DataInit(UserRepository userRepository, PlaceRepository placeRepository, CommentRepository commentRepository) {
         this.userRepository = userRepository;
         this.placeRepository = placeRepository;
+        this.commentRepository = commentRepository;
     }
 
     private final List<User> users = Arrays.asList(
@@ -40,9 +43,13 @@ public class DataInit implements InitializingBean {
             new Place("Crypt of the Wizard", new Address("Hackney Rd", "246", "E2 7SJ", "Greater London", "London", "GB", 51.5308519, -0.0711718), new Contact("", "charlie@cryptofthewizard.com", "https://www.cryptofthewizard.com/", "https://www.facebook.com/cryptofthewizard", "https://www.instagram.com/cryptofthewizard/", ""), Type.STORE, "This is the most metal record store in London. A new record store has opened in East London and it might be the greatest place ever. Lurking on a high street in East London sits a small, unassuming, black-fronted shop with a gothic title above its door. It might not sound much on paper (or your screen), but it’s a portal into the deepest, darkest recesses of heavy metal. Crypt Of The Wizard is London’s newest record store and the only one 100% dedicated to defending the faith. The soundproofed black walls house a plethora of albums across the wide spectrum of heavy music – from Anvil and Sepultura to Hexvessel and Twisted Sister to Mayhem and Solstafir. There’s even a sofa and coffee machine to chill out and admire your purchases. Dedicated to promoting the best in metal, the store has an abundance of underground records unavailable anywhere else in the city. From self-released tapes to a wealth of Mexican black metal, your craving for new noise will be sated. Crypt Of The Wizard is open 11am - 7pm, Tuesday to Sunday, and can be found at 246 Hackney Road, London.", "assets/images/Crypt-of-the-Wizard.png", users.get(1))
             );
 
+    private final List<Comment> comments = Arrays.asList(
+            new Comment("The best place to see cover bands in Brussels for free!", users.get(2), places.get(0))
+    );
     @Override
     public void afterPropertiesSet() {
         userRepository.saveAll(users);
         placeRepository.saveAll(places);
+        commentRepository.saveAll(comments);
     }
 }
