@@ -1,3 +1,4 @@
+/// <reference path="../../../../../../node_modules/@types/google.maps/index.d.ts" />
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PlacesService } from "../../services/places.service";
-import { IPlace } from "../../models/IPlace";
 import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
+import { PlacesService } from "../../services/places.service";
+import { CommentsService} from "../../services/comments.service";
 import { SessionService } from "../../../../core/security/services/session.service";
+import { IPlace } from "../../models/IPlace";
+import { IComment} from "../../models/IComment";
 
 @Component({
   selector: 'app-IPlace-details',
@@ -17,11 +19,11 @@ export class PlaceDetailsComponent implements OnInit {
   private id: number = 0;
   private mapURL: string = "";
 
-  constructor(private service: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService) { }
+  constructor(private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.service.readOne(this.id).subscribe((data: IPlace) => {
+    this.placesService.readOne(this.id).subscribe((data: IPlace) => {
       this.place = data;
       let token: string = "";
       if (localStorage.getItem("token") != null)
@@ -55,7 +57,7 @@ export class PlaceDetailsComponent implements OnInit {
 
   delete(): void {
     if (confirm("Are you sure you want to delete this Place?")) {
-      this.service.delete(this.id).subscribe(data => this.router.navigate(["/places/all"]));
+      this.placesService.delete(this.id).subscribe(data => this.router.navigate(["/places/all"]));
     }
   }
 }

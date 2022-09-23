@@ -78,5 +78,4 @@ export class PlacesService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
-
 }

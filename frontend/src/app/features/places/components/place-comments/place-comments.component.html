@@ -1,0 +1,14 @@
+<article class="blog-post">
+  <h2 class="blog-post-title mb-3 border-bottom">Comments</h2>
+  <div class="row border-bottom" *ngFor="let comment of Comments">
+    <p class="blog-post-meta">Added: {{comment.dateCreated | date: "short"}} by <a routerLink="/users/{{comment.username}}">{{comment.username}}</a></p>
+    <p>{{comment.text}}</p>
+  </div>
+  <form>
+    <div class="form-check mb-3">
+      <label class="form-label" for="text">Write your comment:</label>
+      <textarea class="form-control" id="text" name="text"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</article>
