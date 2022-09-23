@@ -44,7 +44,15 @@ public class DataInit implements InitializingBean {
             );
 
     private final List<Comment> comments = Arrays.asList(
-            new Comment("The best place to see cover bands in Brussels for free!", users.get(2), places.get(0))
+            new Comment("The best place to see cover bands in Brussels for free!", users.get(2), places.get(0)),
+            new Comment("Great place to see underground metal and punk bands.", users.get(2), places.get(1)),
+            new Comment("Nice gig in the heart of LA.", users.get(1), places.get(2)),
+            new Comment("Where everything began.", users.get(0), places.get(3)),
+            new Comment("A magnificent monument with a breathtaking view.", users.get(0), places.get(4)),
+            new Comment("An absolute must, Lemmy is God!", users.get(1), places.get(5)),
+            new Comment("What a nice ambient! I really enjoyed partying at this bar and met tons of people.", users.get(1), places.get(6)),
+            new Comment("Amazingly beautiful wooden church. People who work here don't like to talk about black metal though. Comprehensible.", users.get(0), places.get(7)),
+            new Comment("Small record store with a huge variety of dark music.", users.get(1), places.get(8))
     );
     @Override
     public void afterPropertiesSet() {
