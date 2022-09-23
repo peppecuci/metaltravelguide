@@ -180,7 +180,6 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   }
 
   add(): void {
-    console.log(this.addForm.value);
     this.isSubmitted = true;
     if (this.addForm.valid) {
       this.placesService.add(this.addForm.value).subscribe((data: any) => {
