@@ -1,6 +1,6 @@
 export interface IAddress {
   street: string;
-  number: number;
+  number: string;
   extra: string;
   city: string;
   region: string;

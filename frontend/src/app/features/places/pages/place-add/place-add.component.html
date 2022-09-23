@@ -1,6 +1,9 @@
 <div class="row justify-content-center">
-  <input class="row" type="text" name="search" id="search" [(ngModel)]="search" #inputPlaces>
-  <div class="row border" style="height: 400px" #divMap>
+  <div class="col-12 col-md-10 col-lg-8 col-xl-6">
+    <label for="search">Search:</label>
+    <input class="form-control mb-3" type="text" name="search" id="search" [(ngModel)]="search" #inputPlaces>
+    <div class="w-100 border mb-3" style="height: 400px" #divMap>
+  </div>
   </div>
   <form class="col-12 col-md-10 col-lg-8 col-xl-6" [formGroup]="addForm" (submit)="add()">
     <div class="form-group mb-3">
@@ -16,6 +19,12 @@
         <option *ngFor="let type of Types" [value]="type[0]" [label]="type[1]"></option>
       </select>
       <p>{{addForm.get('type')?.errors | json}}</p>
+    </div>
+    <div class="form-group mb-3">
+      <label for="googleId">GoogleId:</label>
+      <input type="text" class="form-control" id="googleId" name="googleId" formControlName="googleId">
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('googleId')?.hasError('minlength') && IsSubmitted">GoogleId must be at least 4 characters long</div>
+      <p>{{addForm.get('googleId')?.errors | json}}</p>
     </div>
     <div class="form-group mb-3">
       <label for="description">Description:</label>
@@ -40,9 +49,9 @@
     </div>
     <div class="form-group mb-3" formGroupName="address">
       <label for="number">Number:</label>
-      <input type="number" class="form-control" id="number" name="number" formControlName="number">
+      <input type="text" class="form-control" id="number" name="number" formControlName="number">
       <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('number')?.hasError('required') && IsSubmitted">Number is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('number')?.hasError('min') && IsSubmitted">Number must be greater than 0</div>
+      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('number')?.hasError('minlength') && IsSubmitted">Number must be at least 1 character long</div>
       <p>{{addForm.get('number')?.errors | json}}</p>
     </div>
     <div class="form-group mb-3" formGroupName="address">
@@ -111,5 +120,4 @@
     <button type="submit" class="btn btn-success">Add</button>
   </form>
 </div>
-
 

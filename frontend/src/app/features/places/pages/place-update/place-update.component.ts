@@ -29,7 +29,7 @@ export class PlaceUpdateComponent implements OnInit {
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
     address: new FormGroup({
       street: new FormControl("", [Validators.required, Validators.minLength(1)]),
-      number: new FormControl(1, [Validators.required, Validators.min(0)]),
+      number: new FormControl("", [Validators.required, Validators.minLength(1)]),
       extra: new FormControl("", [Validators.minLength(1)]),
       city: new FormControl("", [Validators.required, Validators.minLength(2)]),
       region: new FormControl("", [Validators.required, Validators.minLength(2)]),

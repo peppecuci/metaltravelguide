@@ -33,9 +33,10 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
 
   addForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
+    googleId: new FormControl("", [Validators.minLength(4)]),
     address: new FormGroup({
       street: new FormControl("", [Validators.required, Validators.minLength(1)]),
-      number: new FormControl(1, [Validators.required, Validators.min(0)]),
+      number: new FormControl("", [Validators.required, Validators.minLength(1)]),
       extra: new FormControl("", [Validators.minLength(1)]),
       city: new FormControl("", [Validators.required, Validators.minLength(2)]),
       region: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -103,7 +104,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
 
   private loadAutoComplete(): void {
     const autoComplete = new google.maps.places.Autocomplete(this.renderer.selectRootElement(this.inputPlaces.nativeElement), {
-      fields: ["name", "place_id", "address_components", "geometry", "international_phone_number", "opening_hours", "photos", "website"],
+      fields: ["name", "place_id", "address_components", "geometry", "international_phone_number", "photos", "website"],
       types: ["establishment"]
     });
     google.maps.event.addListener(autoComplete, 'place_changed', () => {
@@ -113,33 +114,54 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
         position: this.place.geometry.location
       });
       marker.setMap(this.map);
-      console.log(this.place);
-      this.addForm.setValue({
-        name: this.place.name,
-        address: {
-          street: this.place.address_components[1].long_name,
-          number: this.place.address_components[0].short_name,
-          extra: "",
-          city: this.place.address_components[4].short_name,
-          region: this.place.address_components[3].short_name,
-          countryIso: this.place.address_components[5].short_name,
-          lat: this.place.geometry.viewport.Ab.lo,
-          lon: this.place.geometry.viewport.Va.lo
-        },
-        contact: {
-          telephone: this.place.international_phone_number,
-          mail: "",
-          website: this.place.website,
-          facebook: "",
-          instagram: "",
-          twitter: ""
-        },
-        type: "",
-        description: "",
-        image: this.place.photos[0].html_attributions.toString().match(/(?:"[^"]*"|^[^"]*$)/)[0].replace(/"/g, ""),
-        username: this.User.username
-      });
+      this.fillForm(this.place);
     });
+  }
+
+  fillForm(place: any): void {
+    const addressNameFormat: any = {
+      'route': 'long_name',
+      'street_number': 'short_name',
+      'locality': 'short_name',
+      'administrative_area_level_1': 'short_name',
+      'country': 'short_name',
+      'postal_code': 'short_name'
+    };
+
+    const componentForm = {
+      street: 'route',
+      number: 'street_number',
+      city: 'locality',
+      region: 'administrative_area_level_1',
+      countryIso: 'country',
+      extra: 'postal_code'
+    };
+
+    const getAddressComp = (type: any) => {
+      for (const component of place.address_components) {
+        if (component.types[0] === type) {
+          return component[addressNameFormat[type]];
+        }
+      }
+      return '';
+    };
+
+    Object.entries(componentForm).forEach(entry => {
+      const [key, value] = entry;
+      // @ts-ignore
+      this.addForm.controls['address'].controls[key].setValue(getAddressComp(value));
+    });
+
+    if (this.place.name)
+      this.addForm.controls['name'].setValue(this.place.name);
+    if (this.place.photos[0])
+      this.addForm.controls['image'].setValue(this.place.photos[0].getUrl());
+    if (this.place.place_id)
+      this.addForm.controls['googleId'].setValue(this.place.place_id);
+    if (this.place.international_phone_number)
+      this.addForm.controls['contact'].controls['telephone'].setValue(this.place.international_phone_number.replace(/\s/g, ""));
+    if (this.place.website)
+      this.addForm.controls['contact'].controls['website'].setValue(this.place.website);
   }
 
   loadMap(position: any): any {
@@ -158,9 +180,10 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   }
 
   add(): void {
+    console.log(this.addForm.value);
     this.isSubmitted = true;
     if (this.addForm.valid) {
-      this.placesService.add(this.addForm.value).subscribe((data: IPlace) => {
+      this.placesService.add(this.addForm.value).subscribe((data: any) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
       });
