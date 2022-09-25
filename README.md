@@ -3,10 +3,10 @@ A "Headbanger's Travel Guide" [website](https://headbangerstravelguide.com/) clo
 
 <p align="center">
   <a href="https://spring.io/" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/2560px-Spring_Framework_Logo_2018.svg.png" alt="Java Spring" width="250" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/2560px-Spring_Framework_Logo_2018.svg.png" alt="Java Spring" height="100" />
   </a>
   <a href="https://angular.io/" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/640px-AngularJS_logo.svg.png" alt="Angular" width="250" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/640px-AngularJS_logo.svg.png" alt="Angular" height="100" />
   </a>
 </p>
 
