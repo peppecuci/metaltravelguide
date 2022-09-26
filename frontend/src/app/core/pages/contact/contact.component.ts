@@ -13,13 +13,13 @@ export class ContactComponent implements OnInit {
     mail: new FormControl("", [Validators.required, Validators.email]),
     message: new FormControl("", [Validators.required, Validators.minLength(4)])
   });
-  private isSubmitted: boolean = false;
+  private isClicked: boolean = false;
   private wasSent: boolean = false;
 
   constructor() { }
 
-  get IsSubmitted(): boolean {
-    return this.isSubmitted;
+  get IsClicked(): boolean {
+    return this.isClicked;
   }
 
   get WasSent(): boolean {
@@ -31,12 +31,12 @@ export class ContactComponent implements OnInit {
 
   contact(): void {
     if (this.contactForm.valid) {
-      this.isSubmitted = false;
+      this.isClicked = false;
       this.wasSent = true;
       this.contactForm.reset();
     }
     else {
-      this.isSubmitted = true;
+      this.isClicked = true;
       this.wasSent = false;
     }
   }
