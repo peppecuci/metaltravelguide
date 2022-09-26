@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
+
     public UserDTO toDto(User entity) {
         if (entity == null)
             return null;

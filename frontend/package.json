@@ -21,6 +21,7 @@
     "@angular/router": "^14.1.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
+    "@rxweb/reactive-form-validators": "^2.1.7",
     "@types/google.maps": "^3.50.1",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",

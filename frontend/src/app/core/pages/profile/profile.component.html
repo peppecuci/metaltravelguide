@@ -1,38 +1,57 @@
 <div class="row justify-content-center">
   <form class="row g-3 col-auto col-md-8 col-lg-6 col-xl-4" [formGroup]="updateForm" (submit)="update()">
-    <div class="form-group col-sm-6 mb-3">
-      <label class="form-label" for="username">Username:</label>
-      <input class="form-control" type="text" id="username" name="username" placeholder="" formControlName="username">
+    <div class="form-group col-sm-6">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" [ngClass]="{'is-invalid': updateForm.get('username')?.invalid && (updateForm.get('username')?.touched || updateForm.get('username')?.dirty), 'is-valid': updateForm.get('username')?.valid && (updateForm.get('username')?.touched || updateForm.get('username')?.dirty) }" id="username" name="username" placeholder="Choose a username" formControlName="username" required />
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('username')?.hasError('required') && (updateForm.get('username')?.touched || updateForm.get('username')?.dirty)">Username is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('username')?.hasError('minlength') && (updateForm.get('username')?.touched || updateForm.get('username')?.dirty)">Username must be at least 3 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('username')?.hasError('maxlength') && (updateForm.get('username')?.touched || updateForm.get('username')?.dirty)">Username cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('username')?.hasError('pattern') && (updateForm.get('username')?.touched || updateForm.get('username')?.dirty)">Username must contain only numbers and lowercase letters</div>
     </div>
     <div class="form-group col-sm-6">
-      <label class="form-label" for="mail">Email:</label>
-      <input class="form-control" type="email" id="mail" name="mail" placeholder="" formControlName="mail">
+      <label for="mail">E-mail:</label>
+      <input type="email" class="form-control" [ngClass]="{'is-invalid': updateForm.get('mail')?.invalid && (updateForm.get('mail')?.touched || updateForm.get('mail')?.dirty), 'is-valid': updateForm.get('mail')?.valid && (updateForm.get('mail')?.touched || updateForm.get('mail')?.dirty)}" id="mail" name="mail" placeholder="Enter your e-mail" formControlName="mail" required />
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('mail')?.hasError('email') && (updateForm.get('mail')?.touched || updateForm.get('mail')?.dirty)">Enter a valid e-mail</div>
     </div>
     <div class="form-group col-sm-6">
-      <label class="form-label" for="firstName">First name:</label>
-      <input class="form-control" type="text" id="firstName" name="firstName" placeholder="" formControlName="firstName">
+      <label for="firstName">First name:</label>
+      <input type="firstName" class="form-control" [ngClass]="{'is-invalid': updateForm.get('firstName')?.invalid && (updateForm.get('firstName')?.touched || updateForm.get('firstName')?.dirty), 'is-valid': updateForm.get('firstName')?.valid && (updateForm.get('firstName')?.touched || updateForm.get('firstName')?.dirty)}" id="firstName" name="firstName" placeholder="Enter your first name" formControlName="firstName" required />
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('firstName')?.hasError('required') && (updateForm.get('firstName')?.touched || updateForm.get('firstName')?.dirty)">First name is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('firstName')?.hasError('minlength') && (updateForm.get('firstName')?.touched || updateForm.get('firstName')?.dirty)">First name must be at least 1 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('firstName')?.hasError('maxlength') && (updateForm.get('firstName')?.touched || updateForm.get('firstName')?.dirty)">First name cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('firstName')?.hasError('pattern') && (updateForm.get('firstName')?.touched || updateForm.get('firstName')?.dirty)">First name must contain only numbers and lowercase letters</div>
     </div>
     <div class="form-group col-sm-6">
-      <label class="form-label" for="lastName">Last name:</label>
-      <input class="form-control" type="text" id="lastName" name="lastName" placeholder="" formControlName="lastName">
+      <label for="lastName">Last name:</label>
+      <input type="lastName" class="form-control" [ngClass]="{'is-invalid': updateForm.get('lastName')?.invalid && (updateForm.get('lastName')?.touched || updateForm.get('lastName')?.dirty), 'is-valid': updateForm.get('lastName')?.valid && (updateForm.get('lastName')?.touched || updateForm.get('lastName')?.dirty)}" id="lastName" name="lastName" placeholder="Enter your last name" formControlName="lastName" required />
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('lastName')?.hasError('required') && (updateForm.get('lastName')?.touched || updateForm.get('lastName')?.dirty)">Last name is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('lastName')?.hasError('minlength') && (updateForm.get('lastName')?.touched || updateForm.get('lastName')?.dirty)">Last name must be at least 1 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('lastName')?.hasError('maxlength') && (updateForm.get('lastName')?.touched || updateForm.get('lastName')?.dirty)">Last name cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('lastName')?.hasError('pattern') && (updateForm.get('lastName')?.touched || updateForm.get('lastName')?.dirty)">Last name must contain only numbers and lowercase letters</div>
     </div>
     <div class="form-group col-sm-6">
-      <label class="form-label" for="password">Password:</label>
-      <input class="form-control" type="password" id="password" name="password" placeholder="" formControlName="password">
+      <label for="password">New password:</label>
+      <input type="password" class="form-control" [ngClass]="{'is-invalid': updateForm.get('password')?.invalid && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty), 'is-valid': updateForm.get('password')?.valid && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)}" id="password" name="password" placeholder="Choose a password" formControlName="password" />
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('required') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('minlength') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password must be at least 8 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('maxlength') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('pattern') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password must contain only numbers and letters</div>
     </div>
     <div class="form-group col-sm-6">
-      <label class="form-label" for="repeatPassword">Repeat password:</label>
-      <input class="form-control" type="password" id="repeatPassword" name="repeatPassword" placeholder="" formControlName="repeatPassword">
+      <label for="confirmPassword">Confirm password:</label>
+      <input type="password" class="form-control" [ngClass]="{'is-invalid': updateForm.get('confirmPassword')?.invalid && (updateForm.get('confirmPassword')?.touched || updateForm.get('confirmPassword')?.dirty), 'is-valid': updateForm.get('confirmPassword')?.valid && (updateForm.get('confirmPassword')?.touched || updateForm.get('confirmPassword')?.dirty)}" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" formControlName="confirmPassword" />
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('confirmPassword')?.invalid && (updateForm.get('confirmPassword')?.touched || updateForm.get('confirmPassword')?.dirty)">Passwords must match</div>
     </div>
-    <div class="form-group col-12">
-      <label for="country">Country:</label>
-      <select class="form-control" id="country" name="country" formControlName="countryIso">
+    <div class="form-group mb-3">
+      <label for="countryIso">Country:</label>
+      <select class="form-control" [ngClass]="{'is-invalid': updateForm.get('countryIso')?.invalid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty), 'is-valid': updateForm.get('countryIso')?.valid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty)}" id="countryIso" name="countryIso" formControlName="countryIso">
+        <option selected>Choose a country...</option>
         <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
       </select>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('countryIso')?.invalid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty)">You must choose a country</div>
     </div>
     <div class="col-12">
-      <button class="btn btn-success" type="submit" >Save changes</button>
+      <button type="submit" class="btn btn-success">Save changes</button>
     </div>
   </form>
 </div>
-

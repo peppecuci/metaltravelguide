@@ -37,6 +37,25 @@ export class UsersService {
     return this.httpClient.get<IUser>(this.apiServer + "profile", {headers}).pipe(catchError(this.errorHandler));
   }
 
+  update(form: any): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const user: any = {
+      "username": form.username,
+      "mail": form.mail,
+      "firstName": form.firstName,
+      "lastName": form.lastName,
+      "countryIso": form.countryIso
+    }
+    if (form.password.length > 0)
+      user.password = form.password;
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.patch<any>(this.apiServer + "updateProfile", user, {headers}).pipe(catchError(this.errorHandler));
+  }
+
   delete(id: number): Observable<IPlace> {
     let token: string = "";
     if (localStorage.getItem("token") != null)

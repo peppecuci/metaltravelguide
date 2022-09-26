@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from "../../../features/users/services/users.service";
+import { AuthService } from "../../security/services/auth.service";
+import { SessionService } from "../../security/services/session.service";
 import { IUser} from "../../../features/users/models/IUser";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Country } from "../../enums/Country";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { RxwebValidators } from "@rxweb/reactive-form-validators";
 
 @Component({
   selector: 'app-profile',
@@ -17,16 +20,17 @@ export class ProfileComponent implements OnInit {
   private user?: IUser;
 
   updateForm = new FormGroup({
-    username: new FormControl("", [Validators.required, Validators.min(3)]),
-    password: new FormControl("", [Validators.required, Validators.min(4)]),
-    repeatPassword: new FormControl("", [Validators.required, Validators.min(4)]),
+    id: new FormControl(0),
+    username: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255), Validators.pattern("^[a-z0-9\\_]+$")]),
     mail: new FormControl("", [Validators.required, Validators.email]),
-    firstName: new FormControl("", [Validators.required, Validators.min(1)]),
-    lastName: new FormControl("", [Validators.required, Validators.min(1)]),
-    countryIso: new FormControl("", [Validators.required, Validators.min(2)])
-  });
+    password: new FormControl("", [Validators.minLength(8), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9]+$")]),
+    confirmPassword: new FormControl("", [RxwebValidators.compare({fieldName: 'password'})]),
+    firstName: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(255), Validators.pattern('^([A-Z][A-Za-z ,.\'`-]{3,30})$')]),
+    lastName: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(255), Validators.pattern('^([A-Z][A-Za-z ,.\'`-]{3,30})$')]),
+    countryIso: new FormControl("Choose a country...", [Validators.required, Validators.maxLength(2)])
+  },  {updateOn: 'blur'});
 
-  constructor(private service: UsersService) {
+  constructor(private userService: UsersService, private auth: AuthService, private session: SessionService) {
     this.countries = Object.entries(this.countryEnum)
   }
 
@@ -39,13 +43,28 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.getProfile().subscribe((data: IUser) => {
+    this.userService.getProfile().subscribe((data: IUser) => {
       this.user = data;
-      this.updateForm.setValue({username: this.user.username, password: this.user.password, repeatPassword: this.user.password, mail: this.user.mail, firstName: this.user.firstName, lastName: this.user.lastName, countryIso: this.user.countryIso});
+      this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", mail: this.user.mail, firstName: this.user.firstName, lastName: this.user.lastName, countryIso: this.user.countryIso});
     });
   }
 
   update(): void {
+    if (this.updateForm.valid) {
+      this.userService.update(this.updateForm.value).subscribe(() => {
+        if (this.updateForm.value.password!.length > 0) {
+          this.session.logout();
+          this.auth.login(<string>this.updateForm.get("username")?.value, <string>this.updateForm.get("password")?.value).subscribe(data => {
+            let token = data["token"];
+            this.session.login(token);
+          });
+        }
+        this.userService.getProfile().subscribe((data: IUser) => {
+          this.user = data;
+          this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", mail: this.user.mail, firstName: this.user.firstName, lastName: this.user.lastName, countryIso: this.user.countryIso});
+        });
+      });
+    }
 
   }
 }

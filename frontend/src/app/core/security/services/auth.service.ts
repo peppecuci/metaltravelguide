@@ -8,14 +8,22 @@ import { Observable } from "rxjs";
 export class AuthService {
 
   // constructors
-  constructor(private _http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   // methods
   login(username: string, password: string): Observable<any> {
-    return this._http.post<any>("https://metaltravelguide.herokuapp.com/api/user/login", {"username": username, "password": password });
+    return this.httpClient.post<any>("https://metaltravelguide.herokuapp.com/api/user/login", {"username": username, "password": password });
   }
 
-  register(username: string, password: string): Observable<any> {
-    return this._http.post<any>("https://metaltravelguide.herokuapp.com/api/user/register", {"username": username, "password": password });
+  register(form: any): Observable<any> {
+    const user: any = {
+      "username": form.username,
+      "mail": form.mail,
+      "password": form.password,
+      "firstName": form.firstName,
+      "lastName": form.lastName,
+      "countryIso": form.countryIso
+    }
+    return this.httpClient.post<any>("https://metaltravelguide.herokuapp.com/api/user/register", user);
   }
 }

@@ -34,7 +34,7 @@ export class SessionService {
   }
 
   getUser(token: string): any {
-      return jwtDecode<IPayload>(token).sub;
+    return jwtDecode<IPayload>(token).sub;
   }
 
   getRole(token: string): any {

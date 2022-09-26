@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { SecurityModule } from "./core/security/security.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./core/components/header/header.component";
@@ -12,6 +12,8 @@ import { HomeComponent } from './core/pages/home/home.component';
 import { PrivacyComponent } from './core/pages/privacy/privacy.component';
 import { ContactComponent } from './core/pages/contact/contact.component';
 import { ProfileComponent } from "./core/pages/profile/profile.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ProfileComponent } from "./core/pages/profile/profile.component";
     HttpClientModule,
     SecurityModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RxReactiveFormsModule
   ],
   providers: [],
   exports: [],
