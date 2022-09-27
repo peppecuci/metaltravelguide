@@ -19,9 +19,9 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaces') inputPlaces!: ElementRef;
 
   public countryEnum = Country;
-  private countries : [string, Country][] = [];
+  private readonly countries : [string, Country][] = [];
   public typeEnum = Type;
-  private types : [string, Type][] = [];
+  private readonly types : [string, Type][] = [];
 
   private user?: IUser;
   private place?: any;
@@ -30,7 +30,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
 
   public search: string = "";
   map!: google.maps.Map;
-  markers: google.maps.Marker[] = [];
+  marker: google.maps.Marker = new google.maps.Marker();
 
   addForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -92,15 +92,38 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.loadMap();
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        await this.loadMap(position);
-        this.loadAutoComplete();
-      });
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+        this.map.setZoom(17);
+        }
+      );
     }
-    else {
-      console.log("Browser not compatible with geolocation.")
-    }
+    this.loadAutoComplete();
+  }
+
+  private loadMap(): any {
+    const options = {
+      center: new google.maps.LatLng(20, -30),
+      zoom: 2,
+      gestureHandling: "greedy",
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.renderer.selectRootElement(this.divMap.nativeElement), options);
+    google.maps.event.addListener(this.map, "click", (location: any) => {
+      if (location.placeId) {
+        const service = new google.maps.places.PlacesService(this.map);
+        service.getDetails({placeId: location.placeId}, (place) => {
+          this.place = place;
+          this.search = <string>place!.name + ", " + place!.formatted_address;
+          this.map.setCenter(this.place.geometry.location);
+          this.marker.setPosition(this.place.geometry.location);
+          this.marker.setMap(this.map);
+          this.fillForm(this.place);
+        });
+      }
+    });
   }
 
   private loadAutoComplete(): void {
@@ -111,15 +134,13 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     google.maps.event.addListener(autoComplete, 'place_changed', () => {
       this.place = autoComplete.getPlace();
       this.map.setCenter(this.place.geometry.location);
-      const marker = new google.maps.Marker({
-        position: this.place.geometry.location
-      });
-      marker.setMap(this.map);
+      this.marker.setPosition(this.place.geometry.location);
+      this.marker.setMap(this.map);
       this.fillForm(this.place);
     });
   }
 
-  fillForm(place: any): void {
+  private fillForm(place: any): void {
     const addressNameFormat: any = {
       'route': 'long_name',
       'street_number': 'short_name',
@@ -163,21 +184,6 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
       this.addForm.controls['contact'].controls['telephone'].setValue(this.place.international_phone_number.replace(/\s/g, ""));
     if (this.place.website)
       this.addForm.controls['contact'].controls['website'].setValue(this.place.website);
-  }
-
-  loadMap(position: any): any {
-    const options = {
-      center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-      zoom: 17,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    this.map = new google.maps.Map(this.renderer.selectRootElement(this.divMap.nativeElement), options);
-    const markerPosition = new google.maps.Marker({
-      position: this.map.getCenter(),
-      title: "Place"
-    });
-    markerPosition.setMap(this.map);
-    this.markers.push(markerPosition);
   }
 
   add(): void {

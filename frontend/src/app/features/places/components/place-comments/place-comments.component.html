@@ -4,11 +4,13 @@
     <p class="blog-post-meta">Added: {{comment.dateCreated | date: "short"}} by <a routerLink="/users/{{comment.username}}">{{comment.username}}</a></p>
     <p>{{comment.text}}</p>
   </div>
-  <form>
+  <form class="mt-3">
     <div class="form-check mb-3">
       <label class="form-label" for="text">Write your comment:</label>
       <textarea class="form-control" id="text" name="text"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-check">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </article>
