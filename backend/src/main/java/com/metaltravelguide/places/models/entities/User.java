@@ -29,10 +29,6 @@ public class User implements UserDetails {
     private String password;
     @Column(nullable = false, unique = true)
     private String nickname;
-    @Column
-    private String firstName;
-    @Column
-    private String lastName;
     @Column(columnDefinition = "CHAR(2)")
     private Country countryIso;
     private boolean enabled = true;
@@ -48,21 +44,18 @@ public class User implements UserDetails {
         this.nickname = username.split("@")[0] + Math.floor(Math.random()*101);
     }
 
-    public User(String username, String password, String nickname, String firstName, String lastName) {
-        this.username = username;
-        this.password = password;
+    public User(String username, String password, String nickname) {
+        this(username, password);
         this.nickname = nickname;
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
-    public User(String username, String password, String nickname, String firstName, String lastName, Country countryIso) {
-        this(username, password, nickname, firstName, lastName);
+    public User(String username, String password, String nickname, Country countryIso) {
+        this(username, password, nickname);
         this.countryIso = countryIso;
     }
 
-    public User(String username, String password, String nickname, String firstName, String lastName, Country countryIso, List<String> roles) {
-        this(username, password, nickname, firstName, lastName, countryIso);
+    public User(String username, String password, String nickname, Country countryIso, List<String> roles) {
+        this(username, password, nickname, countryIso);
         this.roles = roles;
     }
 

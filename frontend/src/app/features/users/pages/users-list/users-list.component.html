@@ -3,20 +3,20 @@
     <thead>
     <tr>
       <th scope="col">#id</th>
+      <th scope="col">E-mail</th>
+      <th scope="col">Nickname</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
-      <th scope="col">Username</th>
-      <th scope="col">Mail</th>
       <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let user of Users">
       <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.nickname }}</td>
       <td>{{ user.firstName }}</td>
       <td>{{ user.lastName }}</td>
-      <td>{{ user.username }}</td>
-      <td>{{ user.mail }}</td>
       <td><a class="btn" (click)="delete(user.id)"><i class="bi bi-x-circle-fill text-danger"></i></a></td>
     </tr>
     </tbody>

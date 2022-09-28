@@ -18,15 +18,7 @@ export class AuthService {
     return this.httpClient.post<any>(this.apiServer + "login", {"username": username, "password": password });
   }
 
-  register(form: any): Observable<any> {
-    const user: any = {
-      "username": form.username,
-      "mail": form.mail,
-      "password": form.password,
-      "firstName": form.firstName,
-      "lastName": form.lastName,
-      "countryIso": form.countryIso
-    }
-    return this.httpClient.post<any>(this.apiServer + "register", user);
+  register(username: string, password: string): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + "register", {"username": username, "password": password });
   }
 }

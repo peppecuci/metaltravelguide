@@ -10,11 +10,6 @@ public class UserCreateForm {
     private String username;
     @NotBlank
     private String password;
-    @NotBlank
     private String nickname;
-    @NotBlank
-    private String firstName;
-    @NotBlank
-    private String lastName;
     private String countryIso;
 }

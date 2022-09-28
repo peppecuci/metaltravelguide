@@ -21,8 +21,8 @@ export class ProfileComponent implements OnInit {
 
   updateForm = new FormGroup({
     id: new FormControl(0),
-    username: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255), Validators.pattern("^[a-z0-9\\_]+$")]),
-    mail: new FormControl("", [Validators.required, Validators.email]),
+    username: new FormControl("", [Validators.required, Validators.email, Validators.maxLength(255)]),
+    nickname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9\\_]+$")]),
     password: new FormControl("", [Validators.minLength(8), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9]+$")]),
     confirmPassword: new FormControl("", [RxwebValidators.compare({fieldName: 'password'})]),
     firstName: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(255), Validators.pattern('^([A-Z][A-Za-z ,.\'`-]{3,30})$')]),

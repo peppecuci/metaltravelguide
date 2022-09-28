@@ -67,10 +67,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             user.setPassword(encoder.encode(form.getPassword()));
         if (form.getNickname() != null)
             user.setNickname(form.getNickname());
-        if (form.getFirstName() != null)
-            user.setFirstName(form.getFirstName());
-        if (form.getLastName() != null)
-            user.setLastName(form.getLastName());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
         userRepository.save(user);
@@ -94,10 +90,6 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             user.setPassword(encoder.encode(form.getPassword()));
         if (form.getNickname() != null)
             user.setNickname(form.getNickname());
-        if (form.getFirstName() != null)
-            user.setFirstName(form.getFirstName());
-        if (form.getLastName() != null)
-            user.setLastName(form.getLastName());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
         userRepository.save(user);
