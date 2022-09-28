@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String nickname;
     @Column(columnDefinition = "CHAR(2)")
-    private Country countryIso;
+    private Country countryIso = Country.BE;
     private boolean enabled = true;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = List.of("USER");

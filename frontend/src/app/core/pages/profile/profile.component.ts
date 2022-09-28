@@ -6,6 +6,7 @@ import { IUser} from "../../../features/users/models/IUser";
 import { Country } from "../../enums/Country";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { RxwebValidators } from "@rxweb/reactive-form-validators";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-profile',
@@ -25,12 +26,10 @@ export class ProfileComponent implements OnInit {
     nickname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9\\_]+$")]),
     password: new FormControl("", [Validators.minLength(8), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9]+$")]),
     confirmPassword: new FormControl("", [RxwebValidators.compare({fieldName: 'password'})]),
-    firstName: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(255), Validators.pattern('^([A-Z][A-Za-z ,.\'`-]{3,30})$')]),
-    lastName: new FormControl("", [Validators.required, Validators.minLength(1), Validators.maxLength(255), Validators.pattern('^([A-Z][A-Za-z ,.\'`-]{3,30})$')]),
     countryIso: new FormControl("Choose a country...", [Validators.required, Validators.maxLength(2)])
   },  {updateOn: 'blur'});
 
-  constructor(private userService: UsersService, private auth: AuthService, private session: SessionService) {
+  constructor(private userService: UsersService, private auth: AuthService, private session: SessionService, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum)
   }
 
@@ -45,7 +44,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getProfile().subscribe((data: IUser) => {
       this.user = data;
-      this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", mail: this.user.mail, firstName: this.user.firstName, lastName: this.user.lastName, countryIso: this.user.countryIso});
+      this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", nickname: this.user.nickname, countryIso: this.user.countryIso});
     });
   }
 
@@ -61,7 +60,8 @@ export class ProfileComponent implements OnInit {
         }
         this.userService.getProfile().subscribe((data: IUser) => {
           this.user = data;
-          this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", mail: this.user.mail, firstName: this.user.firstName, lastName: this.user.lastName, countryIso: this.user.countryIso});
+          this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", nickname: this.user.nickname, countryIso: this.user.countryIso});
+          this.toastr.success("Profile has been saved", "Success")
         });
       });
     }

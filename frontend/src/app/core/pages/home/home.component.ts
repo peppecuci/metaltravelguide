@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { SessionService } from "../../security/services/session.service";
 import { AuthService } from "../../security/services/auth.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-home',
@@ -15,20 +16,21 @@ export class HomeComponent implements OnInit {
 
   // getters
   get isConnected(): boolean {
-    return this._session.isConnected();
+    return this.sessionService.isConnected();
   }
 
   //constructor
-  constructor(private _session: SessionService, private _auth: AuthService, private router: Router) {}
+  constructor(private sessionService: SessionService, private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   //methods
   ngOnInit(): void { }
 
-  onSubmit(): void {
-    this._auth.login(this.username, this.password).subscribe(data => {
+  login(): void {
+    this.authService.login(this.username, this.password).subscribe(data => {
       let token = data["token"];
-      this._session.login(token);
+      this.sessionService.login(token);
       this.router.navigate(["/"]);
+      this.toastr.success("Login successful", "Success")
     });
   }
 }

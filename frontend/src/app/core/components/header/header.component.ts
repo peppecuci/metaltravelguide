@@ -9,11 +9,10 @@ import { SessionService } from "../../security/services/session.service";
 })
 export class HeaderComponent implements OnInit {
   // variables
-  date = Date();
   username: string  = "";
 
   // constructor
-  constructor(private router: Router, private session: SessionService) {}
+  constructor(private router: Router, private sessionService: SessionService) {}
 
   // getters
   get Username(): string {
@@ -21,11 +20,11 @@ export class HeaderComponent implements OnInit {
   }
 
   get isConnected(): boolean {
-    return this.session.isConnected();
+    return this.sessionService.isConnected();
   }
 
   get isAdmin(): boolean {
-    return this.session.isAdmin();
+    return this.sessionService.isAdmin();
   }
 
   // methods
@@ -34,13 +33,13 @@ export class HeaderComponent implements OnInit {
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
       token = localStorage.getItem("token");
-      this.username = this.session.getUser(token);
+      this.username = this.sessionService.getUser(token);
     }
   }
 
   logout(): void {
     localStorage.clear();
-    this.session.logout();
+    this.sessionService.logout();
     this.router.navigate(["/"]);
   }
 }

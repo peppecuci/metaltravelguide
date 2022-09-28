@@ -21,7 +21,6 @@ public class UserMapper {
                 .id(entity.getId())
                 .username(entity.getUsername())
                 .nickname(entity.getNickname())
-                .password(entity.getPassword())
                 .countryIso(entity.getCountryIso().name())
                 .enabled(entity.isEnabled())
                 .roles(entity.getRoles())

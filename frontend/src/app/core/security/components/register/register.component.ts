@@ -4,6 +4,7 @@ import { SessionService } from "../../services/session.service";
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { RxwebValidators } from "@rxweb/reactive-form-validators";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
 
   // constructor
-  constructor(private auth: AuthService, private session: SessionService, private router: Router) {
+  constructor(private auth: AuthService, private session: SessionService, private router: Router, private toastr: ToastrService) {
   }
 
   // getters
@@ -32,10 +33,12 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.registerForm.valid) {
       this.auth.register(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(() => {
+        this.toastr.success("Registration successful", "Success")
         this.auth.login(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(data => {
           let token = data["token"];
           this.session.login(token);
           this.router.navigate(["/"]);
+          this.toastr.success("Login successful", "Success")
         });
       });
     }

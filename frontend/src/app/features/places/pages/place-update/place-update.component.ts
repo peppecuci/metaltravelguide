@@ -7,6 +7,7 @@ import { Country } from "../../../../core/enums/Country";
 import { Type } from "../../../../core/enums/Type";
 import { IUser } from "../../../users/models/IUser";
 import { IPlace } from "../../models/IPlace";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-place-update',
@@ -48,7 +49,7 @@ export class PlaceUpdateComponent implements OnInit {
     image: new FormControl("", [Validators.required, Validators.minLength(4)])
   });
 
-  constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router) {
+  constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum);
     this.types = Object.entries(this.typeEnum);
   }
@@ -88,6 +89,7 @@ export class PlaceUpdateComponent implements OnInit {
       this.placesService.update(this.id, this.updateForm.value).subscribe((data: IPlace) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
+        this.toastr.success("Place has been updated", "Success")
       });
     }
   }

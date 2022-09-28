@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import jwtDecode from "jwt-decode";
 import { IPayload } from "../types/IPayload";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class SessionService {
   private token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   // constructor
-  constructor() {
+  constructor(private toastr: ToastrService) {
     const token = localStorage.getItem("token");
     if (token) {
       this.token$.next(token);
@@ -31,6 +32,7 @@ export class SessionService {
 
   logout() {
     this.token$.next(null);
+    this.toastr.success("Logout successful", "Success")
   }
 
   getUser(token: string): any {

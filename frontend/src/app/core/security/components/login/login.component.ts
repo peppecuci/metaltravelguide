@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { SessionService } from "../../services/session.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   password: string = "";
 
   // constructor
-  constructor(private authService: AuthService, private sessionService: SessionService, private router: Router) { }
+  constructor(private authService: AuthService, private sessionService: SessionService, private router: Router, private toastr: ToastrService) { }
 
   // methods
   ngOnInit(): void {
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
       let token = data["token"];
       this.sessionService.login(token);
       this.router.navigate(["/"]);
+      this.toastr.success("Login successful", "Success")
     });
   }
 }

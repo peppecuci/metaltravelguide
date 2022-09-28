@@ -8,6 +8,7 @@ import { Country } from "../../../../core/enums/Country";
 import { Type } from "../../../../core/enums/Type";
 import { IUser } from "../../../users/models/IUser";
 import { IPlace } from "../../models/IPlace";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-place-add',
@@ -59,7 +60,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     username: new FormControl("")
   });
 
-  constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2) {
+  constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum);
     this.types = Object.entries(this.typeEnum);
   }
@@ -192,6 +193,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
       this.placesService.add(this.addForm.value).subscribe((data: any) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
+        this.toastr.success("Place has been added", "Success")
       });
     }
   }

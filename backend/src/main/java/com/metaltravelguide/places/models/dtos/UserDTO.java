@@ -14,7 +14,6 @@ import java.util.Set;
 public class UserDTO {
     private Long id;
     private String username;
-    private String password;
     private String nickname;
     private String countryIso;
     private boolean enabled;
