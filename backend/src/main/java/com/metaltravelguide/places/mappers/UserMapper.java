@@ -20,7 +20,7 @@ public class UserMapper {
         return UserDTO.builder()
                 .id(entity.getId())
                 .username(entity.getUsername())
-                .mail(entity.getMail())
+                .nickname(entity.getNickname())
                 .password(entity.getPassword())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
@@ -35,7 +35,7 @@ public class UserMapper {
         User user = new User();
         user.setUsername(form.getUsername());
         user.setPassword(form.getPassword());
-        user.setMail(form.getMail());
+        user.setNickname(form.getNickname());
         user.setFirstName(form.getFirstName());
         user.setLastName(form.getLastName());
         user.setCountryIso(findByName(form.getCountryIso()));
@@ -46,7 +46,7 @@ public class UserMapper {
         User user = new User();
         user.setUsername(form.getUsername());
         user.setPassword(form.getPassword());
-        user.setMail(form.getMail());
+        user.setNickname(form.getNickname());
         user.setFirstName(form.getFirstName());
         user.setLastName(form.getLastName());
         user.setCountryIso(findByName(form.getCountryIso()));

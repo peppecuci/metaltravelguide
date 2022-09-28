@@ -25,13 +25,13 @@ public class User implements UserDetails {
     private Long id;
     @Column(nullable = false, unique = true)
     private String username;
-    @Column(nullable = false, unique = true)
-    private String mail;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
+    private String nickname;
+    @Column
     private String firstName;
-    @Column(nullable = false)
+    @Column
     private String lastName;
     @Column(columnDefinition = "CHAR(2)")
     private Country countryIso;
@@ -42,21 +42,27 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Place> places = new HashSet<>();
 
-    public User(String username, String password, String mail, String firstName, String lastName) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.mail = mail;
+        this.nickname = username.split("@")[0] + Math.floor(Math.random()*101);
+    }
+
+    public User(String username, String password, String nickname, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public User(String username, String password, String mail, String firstName, String lastName, Country countryIso) {
-        this(username, password, mail, firstName, lastName);
+    public User(String username, String password, String nickname, String firstName, String lastName, Country countryIso) {
+        this(username, password, nickname, firstName, lastName);
         this.countryIso = countryIso;
     }
 
-    public User(String username, String password, String mail, String firstName, String lastName, Country countryIso, List<String> roles) {
-        this(username, password, mail, firstName, lastName, countryIso);
+    public User(String username, String password, String nickname, String firstName, String lastName, Country countryIso, List<String> roles) {
+        this(username, password, nickname, firstName, lastName, countryIso);
         this.roles = roles;
     }
 

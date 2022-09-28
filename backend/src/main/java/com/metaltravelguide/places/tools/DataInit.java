@@ -26,9 +26,9 @@ public class DataInit implements InitializingBean {
     }
 
     private final List<User> users = Arrays.asList(
-            new User("admin", new BCryptPasswordEncoder().encode("password"), "admin@mail.com", "Admin", "Admin", Country.BE, List.of("ADMIN")),
-            new User("marcelo", new BCryptPasswordEncoder().encode("password"),"marcelo@mail.com","Marcelo", "Martins ", Country.BO),
-            new User("fred", new BCryptPasswordEncoder().encode("password"),"fred@mail.com","Fred", "Freddo ", Country.BE)
+            new User("admin@mail.com", new BCryptPasswordEncoder().encode("password"), "admin", "Admin", "Admin", Country.BE, List.of("ADMIN")),
+            new User("marcelo@mail.com", new BCryptPasswordEncoder().encode("password"),"marcelo","Marcelo", "Martins ", Country.BO),
+            new User("fred@mail.com", new BCryptPasswordEncoder().encode("password"))
     );
 
     private final List<Place> places = Arrays.asList(

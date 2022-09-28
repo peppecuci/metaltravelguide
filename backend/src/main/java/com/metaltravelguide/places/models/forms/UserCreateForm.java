@@ -11,7 +11,7 @@ public class UserCreateForm {
     @NotBlank
     private String password;
     @NotBlank
-    private String mail;
+    private String nickname;
     @NotBlank
     private String firstName;
     @NotBlank

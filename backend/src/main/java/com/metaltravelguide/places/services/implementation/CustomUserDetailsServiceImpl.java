@@ -65,8 +65,8 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             throw new CannotChangeOtherAdminException(User.class, user.getUsername());
         if (form.getPassword() != null)
             user.setPassword(encoder.encode(form.getPassword()));
-        if (form.getMail() != null)
-            user.setMail(form.getMail());
+        if (form.getNickname() != null)
+            user.setNickname(form.getNickname());
         if (form.getFirstName() != null)
             user.setFirstName(form.getFirstName());
         if (form.getLastName() != null)
@@ -92,8 +92,8 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             throw new UserNotTheSameException(user.getUsername(), authentication.getName());
         if (form.getPassword() != null)
             user.setPassword(encoder.encode(form.getPassword()));
-        if (form.getMail() != null)
-            user.setMail(form.getMail());
+        if (form.getNickname() != null)
+            user.setNickname(form.getNickname());
         if (form.getFirstName() != null)
             user.setFirstName(form.getFirstName());
         if (form.getLastName() != null)
