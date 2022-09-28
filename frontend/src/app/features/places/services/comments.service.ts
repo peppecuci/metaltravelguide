@@ -24,6 +24,26 @@ export class CommentsService {
     return this.httpClient.get<IComment[]>(this.apiServer + "place/" + id, {headers}).pipe(catchError(this.errorHandler));
   }
 
+  add(comment: any): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.post<any[]>(this.apiServer + "create", comment,{headers}).pipe(catchError(this.errorHandler));
+  }
+
+  delete(id: number): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.delete<any>(this.apiServer + "delete/" + id, {headers}).pipe(catchError(this.errorHandler));
+  }
+
   errorHandler(error: any) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {

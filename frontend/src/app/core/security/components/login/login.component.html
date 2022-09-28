@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <form class="col col-md-8 col-lg-6 col-xl-4" (submit)="login()">
+  <form class="g-3 col-auto col-md-8 col-lg-6 col-xl-4 bg-light p-4 p-md-5 border rounded-3" (submit)="login()">
     <div class="form-floating mb-3">
       <input type="email" class="form-control" id="username" name="username" required [(ngModel)]="username">
       <label for="username">E-mail:</label>
@@ -8,6 +8,6 @@
       <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password">
       <label for="password">Password:</label>
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-success">Login</button>
   </form>
 </div>

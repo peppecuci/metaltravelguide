@@ -1,13 +1,16 @@
 <article class="blog-post">
   <h2 class="blog-post-title mb-3 border-bottom">Comments</h2>
   <div class="row border-bottom" *ngFor="let comment of Comments">
-    <p class="blog-post-meta">Added: {{comment.dateCreated | date: "short"}} by <a routerLink="/users/{{comment.username}}">{{comment.username}}</a></p>
+    <div class="d-flex justify-content-between">
+      <p class="blog-post-meta">Added: {{comment.dateCreated | date: "short"}} by <a routerLink="/users/{{comment.username}}">{{comment.username}}</a></p>
+      <p><a class="btn" (click)="delete(comment.id!)" *ngIf="username == comment.username">Delete <i class="bi bi-x-circle-fill text-danger"></i></a></p>
+    </div>
     <p>{{comment.text}}</p>
   </div>
-  <form class="mt-3">
+  <form class="mt-3" [formGroup]="commentForm" (submit)="add()">
     <div class="form-check mb-3">
       <label class="form-label" for="text">Write your comment:</label>
-      <textarea class="form-control" id="text" name="text"></textarea>
+      <textarea class="form-control" id="text" name="text" formControlName="text"></textarea>
     </div>
     <div class="form-check">
       <button type="submit" class="btn btn-primary">Submit</button>

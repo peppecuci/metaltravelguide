@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
 import { PlacesService } from "../../services/places.service";
-import { CommentsService} from "../../services/comments.service";
 import { SessionService } from "../../../../core/security/services/session.service";
 import { IPlace } from "../../models/IPlace";
-import { IComment} from "../../models/IComment";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-IPlace-details',
@@ -17,9 +16,10 @@ export class PlaceDetailsComponent implements OnInit {
   private place: IPlace | null = null;
   private isOwner: boolean = false;
   private id: number = 0;
+  private username: string = "";
   private mapURL: string = "";
 
-  constructor(private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService) { }
+  constructor(private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -29,7 +29,8 @@ export class PlaceDetailsComponent implements OnInit {
       if (localStorage.getItem("token") != null)
       { // @ts-ignore
         token = localStorage.getItem("token");
-        this.isOwner = data.username == this.session.getUser(token);
+        this.username = this.session.getUser(token)
+        this.isOwner = data.username == this.username;
       }
       this.mapURL = `https://www.google.com/maps/embed/v1/search?key=${environment.APIKEY}&q=${this.place.address.street}+${this.place.address.number}+${this.place.address.city}`;
     });
@@ -51,13 +52,20 @@ export class PlaceDetailsComponent implements OnInit {
     return this.id;
   }
 
+  get Username(): string {
+    return this.username;
+  }
+
   get MapURL(): string {
     return this.mapURL;
   }
 
   delete(): void {
     if (confirm("Are you sure you want to delete this Place?")) {
-      this.placesService.delete(this.id).subscribe(data => this.router.navigate(["/places/all"]));
+      this.placesService.delete(this.id).subscribe(() => {
+        this.router.navigate(["/places/all"]);
+        this.toastr.success("Place has been updated", "Success");
+      });
     }
   }
 }

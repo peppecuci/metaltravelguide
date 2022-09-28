@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <form class="g-3 col-auto col-md-8 col-lg-6 col-xl-4" [formGroup]="registerForm" (submit)="register()">
+  <form class="g-3 col-auto col-md-8 col-lg-6 col-xl-4 bg-light p-4 p-md-5 border rounded-3" [formGroup]="registerForm" (submit)="register()">
     <div class="form-floating mb-3">
       <input type="email" class="form-control" [ngClass]="{'is-invalid': registerForm.get('username')?.invalid && (registerForm.get('username')?.touched || registerForm.get('username')?.dirty), 'is-valid': registerForm.get('username')?.valid}" id="username" name="username" formControlName="username" required />
       <label for="username">E-mail:</label>

@@ -17,7 +17,6 @@
     <div class="form-floating mb-3">
       <input type="password" class="form-control" [ngClass]="{'is-invalid': updateForm.get('password')?.invalid && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty), 'is-valid': updateForm.get('password')?.valid && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)}" id="password" name="password" formControlName="password" />
       <label for="password">New password:</label>
-      <div>{{updateForm.get('password')?.valid}} {{updateForm.get('password')?.value}}</div>
       <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('required') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password is required</div>
       <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('minlength') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password must be at least 8 characters long</div>
       <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('maxlength') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password cannot be more than 255 characters long</div>
