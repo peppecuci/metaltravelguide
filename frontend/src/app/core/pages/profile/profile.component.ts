@@ -60,11 +60,14 @@ export class ProfileComponent implements OnInit {
         }
         this.userService.getProfile().subscribe((data: IUser) => {
           this.user = data;
-          this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", nickname: this.user.nickname, countryIso: this.user.countryIso});
-          this.toastr.success("Profile has been saved", "Success")
+          this.updateForm.reset();
+          this.updateForm.patchValue({id: this.user.id, username: this.user.username, nickname: this.user.nickname, countryIso: this.user.countryIso});
+          this.updateForm.markAsUntouched();
+          this.updateForm.markAsPristine();
+          this.toastr.success("Profile updated successfully", "Success")
         });
-      }, error => {
-        this.toastr.error("Error updating profile", "Error")
+      }, response => {
+        this.toastr.error(response.error.message, "Error")
       });
     }
   }

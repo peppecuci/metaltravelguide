@@ -36,7 +36,10 @@ export class PlaceCommentsComponent implements OnInit {
   private readComments(): void {
     this.commentsService.readAllByPlace(this.id).subscribe((data: IComment[]) => {
       this.comments = data;
-      this.commentForm.setValue({text: "", username: this.username, placeId: this.id});
+      this.commentForm.reset();
+      this.commentForm.patchValue({username: this.username, placeId: this.id})
+      this.commentForm.markAsUntouched();
+      this.commentForm.markAsPristine();
     });
   }
 
@@ -44,9 +47,9 @@ export class PlaceCommentsComponent implements OnInit {
     if(this.commentForm.valid) {
       this.commentsService.add(this.commentForm.value).subscribe(() => {
         this.readComments();
-        this.toastr.success("Comment added successfully", "Success");
+        this.toastr.success("Comment adding successfully", "Success");
       }, error => {
-        this.toastr.error("Error posting comment", "Error");
+        this.toastr.error("Error adding comment", "Error");
       });
     }
   }
@@ -56,7 +59,7 @@ export class PlaceCommentsComponent implements OnInit {
       this.commentsService.delete(id).subscribe(() => {
         this.readComments();
         this.toastr.success("Comment deleted successfully", "Success");
-      }, error => {
+      }, response => {
         this.toastr.error("Error deleting comment", "Error");
       });
     }

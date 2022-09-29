@@ -68,9 +68,9 @@ export class PlaceDetailsComponent implements OnInit {
     if (confirm("Are you sure you want to delete this Place?")) {
       this.placesService.delete(this.id).subscribe(() => {
         this.router.navigate(["/places/all"]);
-        this.toastr.success("Place has been updated", "Success");
-      }, error => {
-        this.toastr.success("Error deleting place", "Error");
+        this.toastr.success("Place deleted successfully", "Success");
+      }, response => {
+        this.toastr.error("Error deleting place", "Error");
       });
     }
   }

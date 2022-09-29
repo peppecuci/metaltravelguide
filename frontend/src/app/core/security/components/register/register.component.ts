@@ -40,12 +40,11 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(["/"]);
           this.toastr.success("Login successful", "Success");
         });
-      }, error =>  {
-        this.registerForm.get("password")?.setValue("");
-        this.registerForm.get("confirmPassword")?.setValue("");
+      }, response =>  {
+        this.registerForm.patchValue({password: "", confirmPassword: ""});
         this.registerForm.markAsUntouched();
         this.registerForm.markAsPristine();
-        this.toastr.error( "Registration error", "Error");
+        this.toastr.error(response.error.message, "Error");
       });
     }
   }

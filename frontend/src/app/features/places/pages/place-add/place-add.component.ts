@@ -83,6 +83,8 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     this.usersService.getProfile().subscribe((data: IUser) => {
       this.user = data;
       this.addForm.patchValue({username: this.user.username});
+      this.addForm.markAsUntouched();
+      this.addForm.markAsPristine();
     });
   }
 
@@ -186,9 +188,9 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
       this.placesService.add(this.addForm.value).subscribe((data: any) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
-        this.toastr.success("Place has been added", "Success")
-      }, error => {
-        this.toastr.error("Error creating place", "Error");
+        this.toastr.success("Place added successfully", "Success")
+      }, response => {
+        this.toastr.error("Error adding place", "Error");
       });
     }
   }

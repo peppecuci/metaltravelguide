@@ -35,11 +35,11 @@ export class HomeComponent implements OnInit {
         this.sessionService.login(token);
         this.router.navigate(["/"]);
         this.toastr.success("Login successful", "Success");
-      }, error => {
-        this.loginForm.get("password")?.setValue("");
+      }, response => {
+        this.loginForm.patchValue({password: ""});
         this.loginForm.markAsUntouched();
         this.loginForm.markAsPristine();
-        this.toastr.error( "Wrong e-mail or password", "Error");
+        this.toastr.error( "Wrong username or password", "Error");
       });
     }
   }

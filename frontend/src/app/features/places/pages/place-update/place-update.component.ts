@@ -127,8 +127,8 @@ export class PlaceUpdateComponent implements OnInit {
       this.placesService.update(this.id, this.updateForm.value).subscribe((data: IPlace) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
-        this.toastr.success("Place has been updated", "Success")
-      }, error => {
+        this.toastr.success("Place updated successfully", "Success")
+      }, response => {
         this.toastr.error("Error updating place", "Error");
       });
     }
