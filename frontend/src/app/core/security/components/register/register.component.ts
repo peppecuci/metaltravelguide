@@ -32,9 +32,9 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
-      this.auth.register(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(() => {
+      this.auth.register(this.registerForm.value).subscribe(() => {
         this.toastr.success("Registration successful", "Success")
-        this.auth.login(<string>this.registerForm.get("username")?.value, <string>this.registerForm.get("password")?.value).subscribe(data => {
+        this.auth.login(this.registerForm.value).subscribe(data => {
           let token = data["token"];
           this.session.login(token);
           this.router.navigate(["/"]);

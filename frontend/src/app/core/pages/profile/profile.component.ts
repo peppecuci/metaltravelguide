@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
       this.userService.update(this.updateForm.value).subscribe(() => {
         if (this.updateForm.value.password!.length > 0) {
           this.session.logout();
-          this.auth.login(<string>this.updateForm.get("username")?.value, <string>this.updateForm.get("password")?.value).subscribe(data => {
+          this.auth.login(this.updateForm.value).subscribe(data => {
             let token = data["token"];
             this.session.login(token);
           });

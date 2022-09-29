@@ -1,9 +1,7 @@
 import { environment } from "../../../../environments/environment";
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { ToastrService } from "ngx-toastr";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +11,14 @@ export class AuthService {
   private apiServer = environment.APISERVER + "user/";
 
   // constructors
-  constructor(private httpClient: HttpClient, private toastr: ToastrService) { }
+  constructor(private httpClient: HttpClient) { }
 
   // methods
-  public login(username: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + "login", {"username": username, "password": password });
+  public login(form: any): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + "login", {"username": form.username, "password": form.password });
   }
 
-  public register(username: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + "register", {"username": username, "password": password });
+  public register(form: any): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + "register", {"username": form.username, "password": form.password });
   }
 }
