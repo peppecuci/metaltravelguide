@@ -16,7 +16,7 @@ public class Address {
     @Column(name = "address_street", nullable = false)
     private String street;
     @Column(name = "address_number", nullable = false)
-    private int number;
+    private String number;
     @Column(name = "address_extra")
     private String extra;
     @Column(name = "address_city", nullable = false)

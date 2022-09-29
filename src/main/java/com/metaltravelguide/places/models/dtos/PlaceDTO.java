@@ -8,6 +8,9 @@ import lombok.Data;
 
 import java.time.Instant;
 
+/**
+ * A DTO for the {@link com.metaltravelguide.places.models.entities.Place} entity
+ */
 @Data
 @Builder
 public class PlaceDTO {

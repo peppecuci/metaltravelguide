@@ -32,6 +32,7 @@ public class Place {
     private Type type;
     @Column(columnDefinition = "TEXT")
     private String description;
+    @Column(columnDefinition = "TEXT")
     private String image;
     private boolean status = false;
     @CreationTimestamp

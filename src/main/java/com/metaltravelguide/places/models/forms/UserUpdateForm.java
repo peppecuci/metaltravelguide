@@ -6,9 +6,7 @@ import lombok.Data;
 public class UserUpdateForm {
     private String username;
     private String password;
-    private String mail;
-    private String firstName;
-    private String lastName;
+    private String nickname;
     private String countryIso;
     private boolean enabled;
 }

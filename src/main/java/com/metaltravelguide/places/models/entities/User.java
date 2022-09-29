@@ -27,14 +27,10 @@ public class User implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    private String mail;
-    @Column(nullable = false)
-    private String firstName;
-    @Column(nullable = false)
-    private String lastName;
+    @Column(nullable = false, unique = true)
+    private String nickname;
     @Column(columnDefinition = "CHAR(2)")
-    private Country countryIso;
+    private Country countryIso = Country.BE;
     private boolean enabled = true;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = List.of("USER");
@@ -42,21 +38,24 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Place> places = new HashSet<>();
 
-    public User(String username, String password, String mail, String firstName, String lastName) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.mail = mail;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.nickname = username.split("@")[0] + Math.floor(Math.random()*101);
     }
 
-    public User(String username, String password, String mail, String firstName, String lastName, Country countryIso) {
-        this(username, password, mail, firstName, lastName);
+    public User(String username, String password, String nickname) {
+        this(username, password);
+        this.nickname = nickname;
+    }
+
+    public User(String username, String password, String nickname, Country countryIso) {
+        this(username, password, nickname);
         this.countryIso = countryIso;
     }
 
-    public User(String username, String password, String mail, String firstName, String lastName, Country countryIso, List<String> roles) {
-        this(username, password, mail, firstName, lastName, countryIso);
+    public User(String username, String password, String nickname, Country countryIso, List<String> roles) {
+        this(username, password, nickname, countryIso);
         this.roles = roles;
     }
 

@@ -13,16 +13,14 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
+
     public UserDTO toDto(User entity) {
         if (entity == null)
             return null;
         return UserDTO.builder()
                 .id(entity.getId())
                 .username(entity.getUsername())
-                .mail(entity.getMail())
-                .password(entity.getPassword())
-                .firstName(entity.getFirstName())
-                .lastName(entity.getLastName())
+                .nickname(entity.getNickname())
                 .countryIso(entity.getCountryIso().name())
                 .enabled(entity.isEnabled())
                 .roles(entity.getRoles())
@@ -34,9 +32,7 @@ public class UserMapper {
         User user = new User();
         user.setUsername(form.getUsername());
         user.setPassword(form.getPassword());
-        user.setMail(form.getMail());
-        user.setFirstName(form.getFirstName());
-        user.setLastName(form.getLastName());
+        user.setNickname(form.getNickname());
         user.setCountryIso(findByName(form.getCountryIso()));
         return user;
     }
@@ -45,9 +41,7 @@ public class UserMapper {
         User user = new User();
         user.setUsername(form.getUsername());
         user.setPassword(form.getPassword());
-        user.setMail(form.getMail());
-        user.setFirstName(form.getFirstName());
-        user.setLastName(form.getLastName());
+        user.setNickname(form.getNickname());
         user.setCountryIso(findByName(form.getCountryIso()));
         user.setEnabled(form.isEnabled());
         return user;

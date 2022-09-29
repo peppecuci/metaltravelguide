@@ -1,5 +1,6 @@
 package com.metaltravelguide.places.services.implementation;
 
+import com.metaltravelguide.places.exceptions.AlreadyExistsException;
 import com.metaltravelguide.places.exceptions.CannotChangeOtherAdminException;
 import com.metaltravelguide.places.exceptions.ElementNotFoundException;
 import com.metaltravelguide.places.exceptions.UserNotTheSameException;
@@ -41,9 +42,13 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
     }
 
     public void create(UserCreateForm form) {
-        User user = userMapper.toEntity(form);
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
+        try {
+            User user = new User(form.getUsername(), encoder.encode(form.getPassword()));
+            userRepository.save(user);
+        }
+        catch(Exception exception) {
+            throw new AlreadyExistsException(form.getUsername(), "username");
+        }
     }
 
     public List<UserDTO> readAll(String role) {
@@ -65,15 +70,16 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             throw new CannotChangeOtherAdminException(User.class, user.getUsername());
         if (form.getPassword() != null)
             user.setPassword(encoder.encode(form.getPassword()));
-        if (form.getMail() != null)
-            user.setMail(form.getMail());
-        if (form.getFirstName() != null)
-            user.setFirstName(form.getFirstName());
-        if (form.getLastName() != null)
-            user.setLastName(form.getLastName());
+        if (form.getNickname() != null)
+            user.setNickname(form.getNickname());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        }
+        catch(Exception exception) {
+            throw new AlreadyExistsException(form.getNickname(), "nickname");
+        }
         return userMapper.toDto(user);
     }
 
@@ -92,15 +98,16 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             throw new UserNotTheSameException(user.getUsername(), authentication.getName());
         if (form.getPassword() != null)
             user.setPassword(encoder.encode(form.getPassword()));
-        if (form.getMail() != null)
-            user.setMail(form.getMail());
-        if (form.getFirstName() != null)
-            user.setFirstName(form.getFirstName());
-        if (form.getLastName() != null)
-            user.setLastName(form.getLastName());
+        if (form.getNickname() != null)
+            user.setNickname(form.getNickname());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        }
+        catch(Exception exception) {
+            throw new AlreadyExistsException(form.getNickname(), "nickname");
+        }
         return userMapper.toDto(user);
     }
 
