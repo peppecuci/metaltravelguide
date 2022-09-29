@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-contact',
@@ -9,36 +10,23 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 export class ContactComponent implements OnInit {
   // variables
   contactForm = new FormGroup({
-    name: new FormControl("", [Validators.required, Validators.minLength(3)]),
-    mail: new FormControl("", [Validators.required, Validators.email]),
+    name: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
+    mail: new FormControl("", [Validators.required, Validators.email, Validators.maxLength(255)]),
     message: new FormControl("", [Validators.required, Validators.minLength(4)])
-  });
-  private isClicked: boolean = false;
-  private wasSent: boolean = false;
+  }, {updateOn: "submit"});
 
-  constructor() { }
-
-  get IsClicked(): boolean {
-    return this.isClicked;
-  }
-
-  get WasSent(): boolean {
-    return this.wasSent;
-  }
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
 
   contact(): void {
     if (this.contactForm.valid) {
-      this.isClicked = false;
-      this.wasSent = true;
       this.contactForm.reset();
+      this.toastr.success("Comment sent successfully", "Success");
     }
     else {
-      this.isClicked = true;
-      this.wasSent = false;
+      this.toastr.error("Error sending comment", "Error");
     }
   }
-
 }

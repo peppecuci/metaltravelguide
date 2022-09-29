@@ -1,123 +1,116 @@
-<div class="row justify-content-center">
-  <div class="col-12 col-md-10 col-lg-8 col-xl-6">
-    <label for="search">Search:</label>
-    <input class="form-control mb-3" type="text" name="search" id="search" [(ngModel)]="search" #inputPlaces>
-    <div class="w-100 border mb-3" style="height: 400px" #divMap>
+<div class="row row-cols-1 row-cols-lg-2 g-3">
+  <div class="col">
+    <form class="bg-light p-3 p-lg-5 border rounded-3">
+      <div class="form-floating">
+        <input class="form-control mb-3" type="text" name="search" id="search" [(ngModel)]="search" #inputPlaces>
+        <label class="form-label" for="search">Search:</label>
+      </div>
+      <div class="w-100 border mb-3" style="height: 400px" #divMap>
+      </div>
+    </form>
   </div>
+  <div class="col">
+    <form class="bg-light p-3 p-lg-5 border rounded-3" [formGroup]="addForm" (submit)="add()">
+      <div class="form-floating mb-3">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('name')?.invalid && (addForm.get('name')?.touched || addForm.get('name')?.dirty), 'is-valid': addForm.get('name')?.valid && (addForm.get('name')?.touched || addForm.get('name')?.dirty) }" type="text" id="name" name="name" formControlName="name" required>
+        <label for="name">Name:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('name')?.hasError('required')">Name is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('name')?.hasError('minlength')">Name must be at least 2 characters long</div>
+      </div>
+      <div class="form-floating mb-3">
+        <select class="form-select" [ngClass]="{'is-invalid': addForm.get('type')?.invalid && (addForm.get('type')?.touched || addForm.get('type')?.dirty), 'is-valid': addForm.get('type')?.valid && (addForm.get('type')?.touched || addForm.get('type')?.dirty) }" id="type" name="type" formControlName="type" required>
+          <option *ngFor="let type of Types" [value]="type[0]" [label]="type[1]"></option>
+        </select>
+        <label for="type">Type:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('type')?.hasError('required')">Type is required</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('googleId')?.invalid && (addForm.get('googleId')?.touched || addForm.get('googleId')?.dirty), 'is-valid': addForm.get('googleId')?.valid && (addForm.get('googleId')?.touched || addForm.get('googleId')?.dirty) }" type="text" id="googleId" name="googleId" formControlName="googleId">
+        <label for="googleId">GoogleId:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('googleId')?.hasError('minlength')">GoogleId must be at least 4 characters long</div>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" [ngClass]="{'is-invalid': addForm.get('description')?.invalid && (addForm.get('description')?.touched || addForm.get('description')?.dirty), 'is-valid': addForm.get('description')?.valid && (addForm.get('description')?.touched || addForm.get('description')?.dirty) }" id="description" name="description" formControlName="description" style="height:10em" required></textarea>
+        <label for="description">Description:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('description')?.hasError('required')">Description is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('description')?.hasError('minlength')">Description must be at least 4 characters long</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('image')?.invalid && (addForm.get('image')?.touched || addForm.get('image')?.dirty), 'is-valid': addForm.get('image')?.valid && (addForm.get('image')?.touched || addForm.get('image')?.dirty) }" type="text" id="image" name="image" formControlName="image" required>
+        <label for="image">Image url:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('image')?.hasError('required')">Image is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('image')?.hasError('minlength')">Image must be at least 4 characters long</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="address">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('street')?.invalid && (addForm.get('street')?.touched || addForm.get('street')?.dirty), 'is-valid': addForm.get('street')?.valid && (addForm.get('street')?.touched || addForm.get('street')?.dirty) }" type="text" id="street" name="street" formControlName="street" required>
+        <label for="street">Street:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('street')?.hasError('required')">Street is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('street')?.hasError('minlength')">Street must be at least 1 character long</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="address">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('number')?.invalid && (addForm.get('number')?.touched || addForm.get('number')?.dirty), 'is-valid': addForm.get('number')?.valid && (addForm.get('number')?.touched || addForm.get('number')?.dirty) }" type="text" id="number" name="number" formControlName="number" required>
+        <label for="number">Number:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('number')?.hasError('required')">Number is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('number')?.hasError('minlength')">Number must be at least 1 character long</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="address">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('extra')?.invalid && (addForm.get('extra')?.touched || addForm.get('extra')?.dirty), 'is-valid': addForm.get('extra')?.valid && (addForm.get('extra')?.touched || addForm.get('extra')?.dirty) }" type="text" id="extra" name="extra" formControlName="extra">
+        <label for="extra">Extra:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('extra')?.hasError('minlength')">Extra info must be at least 1 character long</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="address">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('city')?.invalid && (addForm.get('city')?.touched || addForm.get('city')?.dirty), 'is-valid': addForm.get('city')?.valid && (addForm.get('city')?.touched || addForm.get('city')?.dirty) }" type="text" id="city" name="city" formControlName="city" required>
+        <label for="city">City:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('city')?.hasError('required')">City is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('city')?.hasError('minlength')">City must be at least 2 characters long</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="address">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('region')?.invalid && (addForm.get('region')?.touched || addForm.get('region')?.dirty), 'is-valid': addForm.get('region')?.valid && (addForm.get('region')?.touched || addForm.get('region')?.dirty) }" type="text" id="region" name="region" formControlName="region" required>
+        <label for="region">Region:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('region')?.hasError('required')">Region is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('region')?.hasError('minlength')">Region must be at least 2 characters long</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="address">
+        <select class="form-select" [ngClass]="{'is-invalid': addForm.get('countryIso')?.invalid && (addForm.get('countryIso')?.touched || addForm.get('countryIso')?.dirty), 'is-valid': addForm.get('countryIso')?.valid && (addForm.get('countryIso')?.touched || addForm.get('countryIso')?.dirty) }" id="countryIso" name="countryIso" formControlName="countryIso" required>
+          <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
+        </select>
+        <label for="countryIso">Country:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('countryIso')?.hasError('required')">Country is required</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="contact">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('website')?.invalid && (addForm.get('website')?.touched || addForm.get('website')?.dirty), 'is-valid': addForm.get('website')?.valid && (addForm.get('website')?.touched || addForm.get('website')?.dirty) }" type="text" id="website" name="website" formControlName="website">
+        <label for="website">Website url:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('website')?.hasError('pattern')">Not a valid URL</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="contact">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('facebook')?.invalid && (addForm.get('facebook')?.touched || addForm.get('facebook')?.dirty), 'is-valid': addForm.get('facebook')?.valid && (addForm.get('facebook')?.touched || addForm.get('facebook')?.dirty) }" type="text" id="facebook" name="facebook" formControlName="facebook">
+        <label for="facebook">Facebook url:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('facebook')?.hasError('pattern')">Not a valid URL</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="contact">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('instagram')?.invalid && (addForm.get('instagram')?.touched || addForm.get('instagram')?.dirty), 'is-valid': addForm.get('instagram')?.valid && (addForm.get('instagram')?.touched || addForm.get('instagram')?.dirty) }" type="text" id="instagram" name="instagram" formControlName="instagram">
+        <label for="instagram">Instagram url:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('instagram')?.hasError('pattern')">Not a valid URL</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="contact">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('twitter')?.invalid && (addForm.get('twitter')?.touched || addForm.get('twitter')?.dirty), 'is-valid': addForm.get('twitter')?.valid && (addForm.get('twitter')?.touched || addForm.get('twitter')?.dirty) }" type="text" id="twitter" name="twitter" formControlName="twitter">
+        <label for="twitter">Twitter url:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('twitter')?.hasError('pattern')">Not a valid URL</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="contact">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('mail')?.invalid && (addForm.get('mail')?.touched || addForm.get('mail')?.dirty), 'is-valid': addForm.get('mail')?.valid && (addForm.get('mail')?.touched || addForm.get('mail')?.dirty) }" type="email" id="mail" name="mail" formControlName="mail">
+        <label for="mail">E-mail:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('mail')?.hasError('email')">Not a valid e-mail address</div>
+      </div>
+      <div class="form-floating mb-3" formGroupName="contact">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('telephone')?.invalid && (addForm.get('telephone')?.touched || addForm.get('telephone')?.dirty), 'is-valid': addForm.get('telephone')?.valid && (addForm.get('telephone')?.touched || addForm.get('telephone')?.dirty) }" type="tel" pattern="^[+]?[0-9]{9,20}$" id="telephone" name="telephone" formControlName="telephone">
+        <label for="telephone">Telephone:</label>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('telephone')?.hasError('pattern')">Not a valid telephone</div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-success w-100">Add</button>
+      </div>
+    </form>
   </div>
-  <form class="col-12 col-md-10 col-lg-8 col-xl-6 bg-light p-4 p-md-5 border rounded-3" [formGroup]="addForm" (submit)="add()">
-    <div class="form-group mb-3">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" name="name" formControlName="name">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('name')?.hasError('required') && IsSubmitted">Name is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('name')?.hasError('minlength') && IsSubmitted">Name must be at least 2 characters long</div>
-      <p>{{addForm.get('name')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3">
-      <label for="type">Type:</label>
-      <select class="form-control" id="type" name="type" formControlName="type">
-        <option *ngFor="let type of Types" [value]="type[0]" [label]="type[1]"></option>
-      </select>
-      <p>{{addForm.get('type')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3">
-      <label for="googleId">GoogleId:</label>
-      <input type="text" class="form-control" id="googleId" name="googleId" formControlName="googleId">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('googleId')?.hasError('minlength') && IsSubmitted">GoogleId must be at least 4 characters long</div>
-      <p>{{addForm.get('googleId')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3">
-      <label for="description">Description:</label>
-      <textarea class="form-control" id="description" name="description" formControlName="description" rows="10"></textarea>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('description')?.hasError('required') && IsSubmitted">Description is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('description')?.hasError('minlength') && IsSubmitted">Description must be at least 4 characters long</div>
-      <p>{{addForm.get('description')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3">
-      <label for="image">Image:</label>
-      <input type="text" class="form-control" id="image" name="image" formControlName="image">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('image')?.hasError('required') && IsSubmitted">Image is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('image')?.hasError('minlength') && IsSubmitted">Image must be at least 4 characters long</div>
-      <p>{{addForm.get('image')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="address">
-      <label for="street">Street:</label>
-      <input type="text" class="form-control" id="street" name="street" formControlName="street">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('street')?.hasError('required') && IsSubmitted">Street is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('street')?.hasError('minlength') && IsSubmitted">Street must be at least 1 character long</div>
-      <p>{{addForm.get('street')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="address">
-      <label for="number">Number:</label>
-      <input type="text" class="form-control" id="number" name="number" formControlName="number">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('number')?.hasError('required') && IsSubmitted">Number is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('number')?.hasError('minlength') && IsSubmitted">Number must be at least 1 character long</div>
-      <p>{{addForm.get('number')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="address">
-      <label for="extra">Extra:</label>
-      <input type="text" class="form-control" id="extra" name="extra" formControlName="extra">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('extra')?.hasError('minlength') && IsSubmitted">Extra info must be at least 1 character long</div>
-      <p>{{addForm.get('extra')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="address">
-      <label for="city">City:</label>
-      <input type="text" class="form-control" id="city" name="city" formControlName="city">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('city')?.hasError('required') && IsSubmitted">City is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('city')?.hasError('minlength') && IsSubmitted">City must be at least 2 characters long</div>
-      <p>{{addForm.get('city')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="address">
-      <label for="region">Region:</label>
-      <input type="text" class="form-control" id="region" name="region" formControlName="region">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('region')?.hasError('required') && IsSubmitted">Region is required</div>
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('region')?.hasError('minlength') && IsSubmitted">Region must be at least 2 characters long</div>
-      <p>{{addForm.get('region')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="address">
-      <label for="countryIso">Country:</label>
-      <select class="form-control" id="countryIso" name="countryIso" formControlName="countryIso">
-        <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
-      </select>
-      <p>{{addForm.get('countryIso')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="contact">
-      <label for="website">Website:</label>
-      <input type="text" class="form-control" id="website" name="website" formControlName="website">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('website')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
-      <p>{{addForm.get('website')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="contact">
-      <label for="facebook">Facebook:</label>
-      <input type="text" class="form-control" id="facebook" name="facebook" formControlName="facebook">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('facebook')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
-      <p>{{addForm.get('facebook')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="contact">
-      <label for="instagram">Instagram:</label>
-      <input type="text" class="form-control" id="instagram" name="instagram" formControlName="instagram">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('instagram')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
-      <p>{{addForm.get('instagram')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="contact">
-      <label for="twitter">Twitter:</label>
-      <input type="text" class="form-control" id="twitter" name="twitter" formControlName="twitter">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('twitter')?.hasError('pattern') && IsSubmitted">Not a valid URL</div>
-      <p>{{addForm.get('twitter')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="contact">
-      <label for="mail">E-mail:</label>
-      <input type="email" class="form-control" id="mail" name="mail" formControlName="mail">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('mail')?.hasError('email') && IsSubmitted">Not a valid e-mail address</div>
-      <p>{{addForm.get('mail')?.errors | json}}</p>
-    </div>
-    <div class="form-group mb-3" formGroupName="contact">
-      <label for="telephone">Telephone:</label>
-      <input type="tel" pattern="^[+]?[0-9]{9,20}$" class="form-control" id="telephone" name="telephone" formControlName="telephone">
-      <div class="alert alert-danger p-2 mt-3"  *ngIf="addForm.get('telephone')?.hasError('pattern') && IsSubmitted">Not a valid telephone</div>
-      <p>{{addForm.get('telephone')?.errors | json}}</p>
-    </div>
-    <button type="submit" class="btn btn-success">Add</button>
-  </form>
 </div>
 

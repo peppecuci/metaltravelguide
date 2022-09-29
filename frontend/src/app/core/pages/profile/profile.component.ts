@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Country } from "../../enums/Country";
+import { IUser} from "../../../features/users/models/IUser";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { RxwebValidators } from "@rxweb/reactive-form-validators";
 import { UsersService } from "../../../features/users/services/users.service";
 import { AuthService } from "../../security/services/auth.service";
 import { SessionService } from "../../security/services/session.service";
-import { IUser} from "../../../features/users/models/IUser";
-import { Country } from "../../enums/Country";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { RxwebValidators } from "@rxweb/reactive-form-validators";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -22,12 +22,12 @@ export class ProfileComponent implements OnInit {
 
   updateForm = new FormGroup({
     id: new FormControl(0),
-    username: new FormControl("", [Validators.required, Validators.email, Validators.maxLength(255)]),
+    username: new FormControl({value: "", disabled: true}),
     nickname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9\\_]+$")]),
     password: new FormControl("", [Validators.minLength(8), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9]+$")]),
     confirmPassword: new FormControl("", [RxwebValidators.compare({fieldName: 'password'})]),
     countryIso: new FormControl("Choose a country...", [Validators.required, Validators.maxLength(2)])
-  },  {updateOn: 'blur'});
+  },  {updateOn: 'submit'});
 
   constructor(private userService: UsersService, private auth: AuthService, private session: SessionService, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum)
@@ -63,8 +63,9 @@ export class ProfileComponent implements OnInit {
           this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", nickname: this.user.nickname, countryIso: this.user.countryIso});
           this.toastr.success("Profile has been saved", "Success")
         });
+      }, error => {
+        this.toastr.error("Error updating profile", "Error")
       });
     }
-
   }
 }

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IComment } from "../../models/IComment";
 import { CommentsService } from "../../services/comments.service";
 import { ToastrService } from "ngx-toastr";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-place-comments',
@@ -13,12 +13,13 @@ export class PlaceCommentsComponent implements OnInit {
 
   @Input() id!: number;
   @Input() username!: string;
+  @Input() isConnected!: boolean;
 
   commentForm = new FormGroup({
-    text: new FormControl(""),
+    text: new FormControl("", [Validators.required, Validators.minLength(1)]),
     username: new FormControl(""),
     placeId: new FormControl(0)
-  });
+  },  {updateOn: 'submit'});
 
   private comments: IComment[] = [];
 
@@ -44,6 +45,8 @@ export class PlaceCommentsComponent implements OnInit {
       this.commentsService.add(this.commentForm.value).subscribe(() => {
         this.readComments();
         this.toastr.success("Comment added successfully", "Success");
+      }, error => {
+        this.toastr.error("Error posting comment", "Error");
       });
     }
   }
@@ -53,6 +56,8 @@ export class PlaceCommentsComponent implements OnInit {
       this.commentsService.delete(id).subscribe(() => {
         this.readComments();
         this.toastr.success("Comment deleted successfully", "Success");
+      }, error => {
+        this.toastr.error("Error deleting comment", "Error");
       });
     }
   }

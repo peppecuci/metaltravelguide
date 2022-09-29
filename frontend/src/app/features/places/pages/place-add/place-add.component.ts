@@ -27,8 +27,6 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   private user?: IUser;
   private place?: any;
 
-  private isSubmitted: boolean = false;
-
   public search: string = "";
   map!: google.maps.Map;
   marker: google.maps.Marker = new google.maps.Marker();
@@ -42,7 +40,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
       extra: new FormControl("", [Validators.minLength(1)]),
       city: new FormControl("", [Validators.required, Validators.minLength(2)]),
       region: new FormControl("", [Validators.required, Validators.minLength(2)]),
-      countryIso: new FormControl("", [Validators.required]),
+      countryIso: new FormControl("", [Validators.required, Validators.minLength(2)]),
       lat: new FormControl(0),
       lon: new FormControl(0)
     }),
@@ -58,7 +56,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     description: new FormControl("", [Validators.required, Validators.minLength(4)]),
     image: new FormControl("", [Validators.required, Validators.minLength(4)]),
     username: new FormControl("")
-  });
+  }, {updateOn: "submit"});
 
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum);
@@ -71,10 +69,6 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
 
   get Place(): IPlace {
     return <IPlace>this.place;
-  }
-
-  get IsSubmitted(): boolean {
-    return this.isSubmitted;
   }
 
   get Countries(): [string, Country][] {
@@ -188,12 +182,13 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   }
 
   add(): void {
-    this.isSubmitted = true;
     if (this.addForm.valid) {
       this.placesService.add(this.addForm.value).subscribe((data: any) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
         this.toastr.success("Place has been added", "Success")
+      }, error => {
+        this.toastr.error("Error creating place", "Error");
       });
     }
   }

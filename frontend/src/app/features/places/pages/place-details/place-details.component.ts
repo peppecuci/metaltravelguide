@@ -48,6 +48,10 @@ export class PlaceDetailsComponent implements OnInit {
     return this.session.isAdmin();
   }
 
+  get IsConnected(): boolean {
+    return this.session.isConnected();
+  }
+
   get Id(): number {
     return this.id;
   }
@@ -65,6 +69,8 @@ export class PlaceDetailsComponent implements OnInit {
       this.placesService.delete(this.id).subscribe(() => {
         this.router.navigate(["/places/all"]);
         this.toastr.success("Place has been updated", "Success");
+      }, error => {
+        this.toastr.success("Error deleting place", "Error");
       });
     }
   }

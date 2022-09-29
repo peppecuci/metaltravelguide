@@ -54,7 +54,7 @@
       <p class="blog-post-meta">Added: {{Place.dateCreated | date: "short"}} by <a routerLink="/users/{{Place.username}}">{{Place.username}}</a></p>
       <p>{{Place.description}}</p>
     </article>
-    <app-place-comments [id]="Id" [username]="Username"></app-place-comments>
+    <app-place-comments [id]="Id" [username]="Username" [isConnected]="IsConnected"></app-place-comments>
   </div>
   <div class="col-12 col-md-4">
     <iframe

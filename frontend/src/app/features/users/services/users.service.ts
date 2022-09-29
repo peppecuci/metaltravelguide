@@ -45,9 +45,7 @@ export class UsersService {
     }
     const user: any = {
       "username": form.username,
-      "mail": form.mail,
-      "firstName": form.firstName,
-      "lastName": form.lastName,
+      "nickname": form.nickname,
       "countryIso": form.countryIso
     }
     if (form.password.length > 0)
