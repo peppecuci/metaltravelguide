@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import jwtDecode from "jwt-decode";
 import { IPayload } from "../types/IPayload";
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,6 @@ export class SessionService {
 
   logout() {
     this.token$.next(null);
-    this.toastr.success("Logout successful", "Success")
   }
 
   getUser(token: string): any {

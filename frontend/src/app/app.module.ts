@@ -42,7 +42,8 @@ import { ToastrModule } from "ngx-toastr";
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton: true,
-      tapToDismiss: true
+      tapToDismiss: true,
+      newestOnTop: true
     })
   ],
   providers: [],
