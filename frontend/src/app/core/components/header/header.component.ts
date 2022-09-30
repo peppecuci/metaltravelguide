@@ -9,14 +9,17 @@ import { SessionService } from "../../security/services/session.service";
 })
 export class HeaderComponent implements OnInit {
   // variables
-  username: string  = "";
 
   // constructor
   constructor(private router: Router, private sessionService: SessionService) {}
 
   // getters
   get Username(): string {
-    return this.username;
+    const token = localStorage.getItem("token");
+    if(token)
+      return this.sessionService.getUser(token);
+    else
+      return "";
   }
 
   get isConnected(): boolean {
@@ -29,12 +32,6 @@ export class HeaderComponent implements OnInit {
 
   // methods
   ngOnInit(): void {
-    let token: string = "";
-    if (localStorage.getItem("token") != null)
-    { // @ts-ignore
-      token = localStorage.getItem("token");
-      this.username = this.sessionService.getUser(token);
-    }
   }
 
   logout(): void {

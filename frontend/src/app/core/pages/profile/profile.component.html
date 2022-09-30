@@ -27,7 +27,8 @@
     <div class="form-floating mb-3">
       <select class="form-select" [ngClass]="{'is-invalid': updateForm.get('countryIso')?.invalid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty), 'is-valid': updateForm.get('countryIso')?.valid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty)}" id="countryIso" name="countryIso" formControlName="countryIso">
         <option selected>Choose a country...</option>
-        <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
+        <option *ngFor="let country of Countries" [value]="country[0]"
+                [label]="country[1]"></option>
       </select>
       <label for="countryIso">Country:</label>
       <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('countryIso')?.invalid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty)">You must choose a country</div>

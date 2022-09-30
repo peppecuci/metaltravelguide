@@ -44,8 +44,8 @@ export class SessionService {
 
   isConnected(): boolean {
     let isConnected = false;
-    this.Token$.subscribe( data => {
-      if (data != null)
+    this.Token$.subscribe( token => {
+      if (token != null)
         isConnected = true;
     });
     return isConnected;
@@ -53,8 +53,8 @@ export class SessionService {
 
   isAdmin(): boolean {
     let isAdmin = false;
-    this.Token$.subscribe( data => {
-      if (data != null && this.getRole(data) == "ROLE_ADMIN")
+    this.Token$.subscribe( token => {
+      if (token != null && this.getRole(token) == "ROLE_ADMIN")
         isAdmin = true;
     });
     return isAdmin;

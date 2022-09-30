@@ -40,6 +40,12 @@ export class PlaceDetailsComponent implements OnInit {
     return <IPlace>this.place;
   }
 
+  get PlaceNickname(): string {
+    let username = "";
+    this.usersService.readOne(this.place!.userId).subscribe((user: IUser) => username = user.nickname);
+    return username;
+  }
+
   get IsOwner(): boolean {
     return this.isOwner;
   }
