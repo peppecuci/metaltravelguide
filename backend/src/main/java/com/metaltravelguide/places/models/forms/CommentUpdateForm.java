@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CommentUpdateForm {
     private String text;
-    private String username;
+    private Long userId;
     private Long placeId;
     private boolean status;
 }
