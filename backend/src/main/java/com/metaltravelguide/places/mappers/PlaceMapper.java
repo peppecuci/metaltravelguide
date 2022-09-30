@@ -27,7 +27,7 @@ public class PlaceMapper {
                 .type(entity.getType())
                 .description(entity.getDescription())
                 .image(entity.getImage())
-                .username(entity.getUser().getUsername())
+                .userId(entity.getUser().getId())
                 .dateCreated(entity.getDateCreated())
                 .dateLastModified(entity.getDateLastModified())
                 .build();

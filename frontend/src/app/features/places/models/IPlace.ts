@@ -10,7 +10,7 @@ export interface IPlace {
   type: string;
   description: string;
   image: string;
-  username: string;
+  userId: number;
   dateCreated: string;
   dateLastModified: string;
 }

@@ -4,5 +4,8 @@ import com.metaltravelguide.places.models.dtos.PlaceDTO;
 import com.metaltravelguide.places.models.forms.PlaceCreateForm;
 import com.metaltravelguide.places.models.forms.PlaceUpdateForm;
 
+import java.util.List;
+
 public interface PlaceService extends CrudService<PlaceDTO, Long, PlaceCreateForm, PlaceUpdateForm> {
+    List<PlaceDTO> readAllFromUser(Long id);
 }

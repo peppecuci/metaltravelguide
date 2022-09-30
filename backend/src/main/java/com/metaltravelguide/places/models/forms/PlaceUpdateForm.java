@@ -14,5 +14,5 @@ public class PlaceUpdateForm {
     private Type type;
     private String description;
     private String image;
-    private String username;
+    private Long userId;
 }

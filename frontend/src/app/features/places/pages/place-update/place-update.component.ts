@@ -7,7 +7,7 @@ import { Country } from "../../../../core/enums/Country";
 import { Type } from "../../../../core/enums/Type";
 import { IUser } from "../../../users/models/IUser";
 import { IPlace } from "../../models/IPlace";
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-place-update',
@@ -48,7 +48,7 @@ export class PlaceUpdateComponent implements OnInit {
     type: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required, Validators.minLength(4)]),
     image: new FormControl("", [Validators.required, Validators.minLength(4)]),
-    username: new FormControl("")
+    userId: new FormControl(0)
   }, {updateOn: "submit"});
 
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
@@ -117,8 +117,8 @@ export class PlaceUpdateComponent implements OnInit {
         this.updateForm.controls['description'].setValue(this.place.description);
       if (this.place.image)
         this.updateForm.controls['image'].setValue(this.place.image);
-      if (this.place.username)
-        this.updateForm.controls['username'].setValue(this.place.username);
+      if (this.place.userId)
+        this.updateForm.controls['userId'].setValue(this.place.userId);
     });
   }
 

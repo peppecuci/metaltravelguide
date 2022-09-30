@@ -23,6 +23,16 @@ export class UsersService {
     return this.httpClient.get<any>(this.apiServer + "all", {headers});
   }
 
+  readOne(id: number): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.get<any>(this.apiServer + id, {headers});
+  }
+
   getProfile(): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
+import { UsersService } from "../../../users/services/users.service";
 import { PlacesService } from "../../services/places.service";
 import { SessionService } from "../../../../core/security/services/session.service";
+import { IUser } from "../../../users/models/IUser";
 import { IPlace } from "../../models/IPlace";
 import { ToastrService } from "ngx-toastr";
 
@@ -14,23 +16,21 @@ import { ToastrService } from "ngx-toastr";
 export class PlaceDetailsComponent implements OnInit {
 
   private place: IPlace | null = null;
+  private placeId: number = 0;
+  private userId: number = 0;
   private isOwner: boolean = false;
-  private id: number = 0;
-  private username: string = "";
   private mapURL: string = "";
 
-  constructor(private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService, private toastr: ToastrService) { }
+  constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.placesService.readOne(this.id).subscribe((data: IPlace) => {
+    this.placeId = Number(this.route.snapshot.paramMap.get('id'));
+    this.placesService.readOne(this.placeId).subscribe((data: IPlace) => {
       this.place = data;
-      let token: string = "";
-      if (localStorage.getItem("token") != null)
-      { // @ts-ignore
-        token = localStorage.getItem("token");
-        this.username = this.session.getUser(token)
-        this.isOwner = data.username == this.username;
+      if (this.session.isConnected()) {
+        this.usersService.getProfile().subscribe((data: IUser) => {
+          this.isOwner = data.id == this.userId;
+        });
       }
       this.mapURL = `https://www.google.com/maps/embed/v1/search?key=${environment.APIKEY}&q=${this.place.address.street}+${this.place.address.number}+${this.place.address.city}`;
     });
@@ -52,12 +52,12 @@ export class PlaceDetailsComponent implements OnInit {
     return this.session.isConnected();
   }
 
-  get Id(): number {
-    return this.id;
+  get PlaceId(): number {
+    return this.placeId;
   }
 
-  get Username(): string {
-    return this.username;
+  get UserId(): number {
+    return this.userId;
   }
 
   get MapURL(): string {
@@ -66,7 +66,7 @@ export class PlaceDetailsComponent implements OnInit {
 
   delete(): void {
     if (confirm("Are you sure you want to delete this Place?")) {
-      this.placesService.delete(this.id).subscribe(() => {
+      this.placesService.delete(this.placeId).subscribe(() => {
         this.router.navigate(["/places/all"]);
         this.toastr.success("Place deleted successfully", "Success");
       }, response => {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from "../../enums/Country";
-import { IUser} from "../../../features/users/models/IUser";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { RxwebValidators } from "@rxweb/reactive-form-validators";
+import { Country } from "../../enums/Country";
+import { IUser} from "../../../features/users/models/IUser";
 import { UsersService } from "../../../features/users/services/users.service";
 import { AuthService } from "../../security/services/auth.service";
 import { SessionService } from "../../security/services/session.service";

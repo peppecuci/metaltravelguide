@@ -55,7 +55,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     type: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required, Validators.minLength(4)]),
     image: new FormControl("", [Validators.required, Validators.minLength(4)]),
-    username: new FormControl("")
+    userId: new FormControl(0)
   }, {updateOn: "submit"});
 
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2, private toastr: ToastrService) {
@@ -82,7 +82,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.usersService.getProfile().subscribe((data: IUser) => {
       this.user = data;
-      this.addForm.patchValue({username: this.user.username});
+      this.addForm.patchValue({userId: this.user.id});
       this.addForm.markAsUntouched();
       this.addForm.markAsPristine();
     });

@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IComment } from "../../models/IComment";
 import { CommentsService } from "../../services/comments.service";
+import { UsersService } from "../../../users/services/users.service";
 import { ToastrService } from "ngx-toastr";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-place-comments',
@@ -11,19 +12,19 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 })
 export class PlaceCommentsComponent implements OnInit {
 
-  @Input() id!: number;
-  @Input() username!: string;
+  @Input() placeId!: number;
+  @Input() userId!: number;
   @Input() isConnected!: boolean;
 
   commentForm = new FormGroup({
     text: new FormControl("", [Validators.required, Validators.minLength(1)]),
-    username: new FormControl(""),
+    userId: new FormControl(0),
     placeId: new FormControl(0)
   },  {updateOn: 'submit'});
 
   private comments: IComment[] = [];
 
-  constructor(private commentsService: CommentsService, private toastr: ToastrService) { }
+  constructor(private usersService: UsersService, private commentsService: CommentsService, private toastr: ToastrService) { }
 
   get Comments(): IComment[] {
     return this.comments;
@@ -34,12 +35,12 @@ export class PlaceCommentsComponent implements OnInit {
   }
 
   private readComments(): void {
-    this.commentsService.readAllByPlace(this.id).subscribe((data: IComment[]) => {
+    this.commentForm.reset();
+    this.commentForm.patchValue({userId: this.userId, placeId: this.placeId})
+    this.commentForm.markAsUntouched();
+    this.commentForm.markAsPristine();
+    this.commentsService.readAllByPlace(this.placeId).subscribe((data: IComment[]) => {
       this.comments = data;
-      this.commentForm.reset();
-      this.commentForm.patchValue({username: this.username, placeId: this.id})
-      this.commentForm.markAsUntouched();
-      this.commentForm.markAsPristine();
     });
   }
 

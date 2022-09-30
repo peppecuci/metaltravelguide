@@ -2,8 +2,8 @@
   <h2 class="blog-post-title mb-3 border-bottom">Comments</h2>
   <div class="row border-bottom" *ngFor="let comment of Comments">
     <div class="d-flex justify-content-between">
-      <p class="blog-post-meta">Added: {{comment.dateCreated | date: "short"}} by <a routerLink="/users/{{comment.username}}">{{comment.username}}</a></p>
-      <p><a class="btn" (click)="delete(comment.id!)" *ngIf="username == comment.username">Delete <i class="bi bi-x-circle-fill text-danger"></i></a></p>
+      <p class="blog-post-meta">Added: {{comment.dateCreated | date: "short"}} by <a routerLink="/users/{{comment.userId}}">{{comment.userId}}</a></p>
+      <p><a class="btn" (click)="delete(comment.id!)" *ngIf="userId == comment.userId">Delete <i class="bi bi-x-circle-fill text-danger"></i></a></p>
     </div>
     <p>{{comment.text}}</p>
   </div>

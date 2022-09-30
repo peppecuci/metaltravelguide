@@ -27,6 +27,11 @@ public class PlaceController {
         return placeService.readAll();
     }
 
+    @GetMapping("/user/{id:[0-9]+}")
+    public List<PlaceDTO> readAllFromUser(@PathVariable Long id) {
+        return placeService.readAllFromUser(id);
+    }
+
     @GetMapping("/{id:[0-9]+}")
     public PlaceDTO readOne(@PathVariable Long id) {
         return placeService.readOne(id);
