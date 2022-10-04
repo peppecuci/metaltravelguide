@@ -12,6 +12,7 @@ import { DateAsAgoPipe } from "../../core/pipes/date-as-ago.pipe";
 import { PlaceAddComponent } from './pages/place-add/place-add.component';
 import { PlaceUpdateComponent } from './pages/place-update/place-update.component';
 import { PlaceCommentsComponent } from './components/place-comments/place-comments.component';
+import { FilterByCountryPipe } from './pipes/filter-by-country.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PlaceCommentsComponent } from './components/place-comments/place-commen
     DateAsAgoPipe,
     PlaceAddComponent,
     PlaceUpdateComponent,
-    PlaceCommentsComponent
+    PlaceCommentsComponent,
+    FilterByCountryPipe
   ],
     imports: [
       CommonModule,

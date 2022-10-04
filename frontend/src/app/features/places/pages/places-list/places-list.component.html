@@ -1,3 +1,10 @@
 <div class="row g-3">
-  <app-place-card class="col-12 col-sm-6 col-lg-4" *ngFor="let place of Places" [place]="place"></app-place-card>
+  <div class="form-floating mb-3">
+    <select class="form-select" id="countryIso" name="countryIso" [(ngModel)]="countryIso">
+      <option selected>Filter by country...</option>
+      <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
+    </select>
+    <label for="countryIso">Country:</label>
+  </div>
+  <app-place-card class="col-12 col-sm-6 col-lg-4" *ngFor="let place of Places | filterByCountry: countryIso" [place]="place"></app-place-card>
 </div>
