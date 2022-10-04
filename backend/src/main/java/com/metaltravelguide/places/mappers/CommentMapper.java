@@ -30,6 +30,7 @@ public class CommentMapper {
                 .status(entity.isStatus())
                 .dateCreated(entity.getDateCreated())
                 .userId(entity.getUser().getId())
+                .userNickname(entity.getUser().getNickname())
                 .placeId(entity.getPlace().getId())
                 .build();
     }
