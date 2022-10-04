@@ -41,7 +41,7 @@ public class User implements UserDetails {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.nickname = username.split("@")[0] + Math.floor(Math.random()*101);
+        this.nickname = username.split("@")[0] + (int)(Math.random()*10000);
     }
 
     public User(String username, String password, String nickname) {

@@ -3,6 +3,7 @@ export interface IComment {
   text: string;
   status?: boolean;
   userId: number;
+  userNickname: string;
   placeId: number;
   dateCreated?: string;
 }

@@ -18,6 +18,7 @@ export class PlaceDetailsComponent implements OnInit {
   private place: IPlace | null = null;
   private placeId: number = 0;
   private userId: number = 0;
+  private userNickname: string = "";
   private isOwner: boolean = false;
   private mapURL: string = "";
 
@@ -25,11 +26,13 @@ export class PlaceDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.placeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.placesService.readOne(this.placeId).subscribe((data: IPlace) => {
-      this.place = data;
+    this.placesService.readOne(this.placeId).subscribe((place: IPlace) => {
+      this.place = place;
       if (this.session.isConnected()) {
-        this.usersService.getProfile().subscribe((data: IUser) => {
-          this.isOwner = data.id == this.userId;
+        this.usersService.getProfile().subscribe((user: IUser) => {
+          this.userId = user.id;
+          this.userNickname = user.nickname
+          this.isOwner = user.id == place.userId;
         });
       }
       this.mapURL = `https://www.google.com/maps/embed/v1/search?key=${environment.APIKEY}&q=${this.place.address.street}+${this.place.address.number}+${this.place.address.city}`;
@@ -38,12 +41,6 @@ export class PlaceDetailsComponent implements OnInit {
 
   get Place(): IPlace {
     return <IPlace>this.place;
-  }
-
-  get PlaceNickname(): string {
-    let username = "";
-    this.usersService.readOne(this.place!.userId).subscribe((user: IUser) => username = user.nickname);
-    return username;
   }
 
   get IsOwner(): boolean {
@@ -64,6 +61,10 @@ export class PlaceDetailsComponent implements OnInit {
 
   get UserId(): number {
     return this.userId;
+  }
+
+  get UserNickname(): string {
+    return this.userNickname;
   }
 
   get MapURL(): string {
