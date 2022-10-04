@@ -41,6 +41,13 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
+    public List<PlaceDTO> readAllFromUser(Long id) {
+        return placeRepository.findAllByUser(id).stream()
+                .map(placeMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public PlaceDTO readOne(Long id) {
         return placeRepository.findById(id)
                 .map(placeMapper::toDto)

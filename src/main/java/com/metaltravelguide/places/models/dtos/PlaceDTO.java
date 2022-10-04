@@ -22,7 +22,8 @@ public class PlaceDTO {
     private Type type;
     private String description;
     private String image;
-    private String username;
+    private Long userId;
+    private String userNickname;
     private Instant dateCreated;
     private Instant dateLastModified;
 }

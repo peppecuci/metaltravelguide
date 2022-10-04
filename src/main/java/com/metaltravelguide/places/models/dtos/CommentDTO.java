@@ -15,6 +15,7 @@ public class CommentDTO {
     private String text;
     private boolean status;
     private Instant dateCreated;
-    private String username;
+    private Long userId;
+    private String userNickname;
     private Long placeId;
 }

@@ -29,7 +29,8 @@ public class CommentMapper {
                 .text(entity.getText())
                 .status(entity.isStatus())
                 .dateCreated(entity.getDateCreated())
-                .username(entity.getUser().getUsername())
+                .userId(entity.getUser().getId())
+                .userNickname(entity.getUser().getNickname())
                 .placeId(entity.getPlace().getId())
                 .build();
     }
@@ -39,17 +40,6 @@ public class CommentMapper {
             return null;
         Comment comment = new Comment();
         comment.setText(form.getText());
-        comment.setUser(userRepository.findByUsername(form.getUsername()).orElseThrow(() -> new UsernameNotFoundException("Username not found.")));
-        comment.setPlace(placeRepository.findById(form.getPlaceId()).orElseThrow(() -> new ElementNotFoundException(Place.class, "Place not found.")));
-        return comment;
-    }
-
-    public Comment toEntity(CommentUpdateForm form) {
-        if (form == null)
-            return null;
-        Comment comment = new Comment();
-        comment.setText(form.getText());
-        comment.setStatus(form.isStatus());
         comment.setUser(userRepository.findByUsername(form.getUsername()).orElseThrow(() -> new UsernameNotFoundException("Username not found.")));
         comment.setPlace(placeRepository.findById(form.getPlaceId()).orElseThrow(() -> new ElementNotFoundException(Place.class, "Place not found.")));
         return comment;
