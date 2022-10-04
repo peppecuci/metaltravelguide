@@ -43,6 +43,7 @@ public class CommentController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public CommentDTO create(@Valid @RequestBody CommentCreateForm commentCreateForm, Authentication auth) {
         commentCreateForm.setUsername(auth.getName());
+        System.out.println(commentCreateForm);
         return commentService.create(commentCreateForm);
     }
 

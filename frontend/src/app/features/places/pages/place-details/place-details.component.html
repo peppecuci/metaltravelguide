@@ -55,7 +55,7 @@
       <p class="blog-post-meta" *ngIf="!IsConnected">Added: {{Place.dateCreated | date: "short"}} by {{Place.userNickname}}</p>
       <p>{{Place.description}}</p>
     </article>
-    <app-place-comments [placeId]="PlaceId" [userId]="UserId" [userNickname]="UserNickname" [isConnected]="IsConnected"></app-place-comments>
+    <app-place-comments [placeId]="PlaceId" [userId]="UserId" [isConnected]="IsConnected"></app-place-comments>
   </div>
   <div class="col-12 col-md-4">
     <iframe

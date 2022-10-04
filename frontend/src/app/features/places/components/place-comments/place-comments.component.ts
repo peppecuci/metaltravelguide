@@ -14,13 +14,10 @@ export class PlaceCommentsComponent implements OnInit {
 
   @Input() placeId!: number;
   @Input() userId!: number;
-  @Input() userNickname!: string;
   @Input() isConnected!: boolean;
 
   commentForm = new FormGroup({
     text: new FormControl("", [Validators.required, Validators.minLength(1)]),
-    userId: new FormControl(0),
-    userNickname: new FormControl(""),
     placeId: new FormControl(0)
   },  {updateOn: 'submit'});
 
@@ -38,7 +35,7 @@ export class PlaceCommentsComponent implements OnInit {
 
   private readComments(): void {
     this.commentForm.reset();
-    this.commentForm.patchValue({userId: this.userId, userNickname: this.userNickname, placeId: this.placeId})
+    this.commentForm.patchValue({placeId: this.placeId})
     this.commentForm.markAsUntouched();
     this.commentForm.markAsPristine();
     this.commentsService.readAllByPlace(this.placeId).subscribe((data: IComment[]) => {

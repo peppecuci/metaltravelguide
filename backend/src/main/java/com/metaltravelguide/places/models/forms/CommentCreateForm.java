@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 public class CommentCreateForm {
     @NotBlank
     private String text;
-    @NotBlank
     private String username;
     @NotNull
     private Long placeId;

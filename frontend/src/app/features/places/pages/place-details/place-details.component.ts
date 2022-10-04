@@ -18,7 +18,6 @@ export class PlaceDetailsComponent implements OnInit {
   private place: IPlace | null = null;
   private placeId: number = 0;
   private userId: number = 0;
-  private userNickname: string = "";
   private isOwner: boolean = false;
   private mapURL: string = "";
 
@@ -31,7 +30,6 @@ export class PlaceDetailsComponent implements OnInit {
       if (this.session.isConnected()) {
         this.usersService.getProfile().subscribe((user: IUser) => {
           this.userId = user.id;
-          this.userNickname = user.nickname
           this.isOwner = user.id == place.userId;
         });
       }
@@ -61,10 +59,6 @@ export class PlaceDetailsComponent implements OnInit {
 
   get UserId(): number {
     return this.userId;
-  }
-
-  get UserNickname(): string {
-    return this.userNickname;
   }
 
   get MapURL(): string {
