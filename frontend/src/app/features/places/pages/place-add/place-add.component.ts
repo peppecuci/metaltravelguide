@@ -58,11 +58,14 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     userId: new FormControl(0)
   }, {updateOn: "submit"});
 
+
+  // constructor
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum);
     this.types = Object.entries(this.typeEnum);
   }
 
+  // getters
   get User(): IUser {
     return <IUser>this.user;
   }
@@ -79,6 +82,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     return this.types;
   }
 
+  // methods
   ngOnInit(): void {
     this.usersService.getProfile().subscribe((data: IUser) => {
       this.user = data;

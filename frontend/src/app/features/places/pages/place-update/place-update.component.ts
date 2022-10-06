@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UsersService } from "../../../users/services/users.service";
@@ -14,15 +14,22 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: './place-update.component.html',
   styleUrls: ['./place-update.component.css']
 })
-export class PlaceUpdateComponent implements OnInit {
+export class PlaceUpdateComponent implements OnInit, AfterViewInit {
+  @ViewChild('divMap') divMap!: ElementRef;
+  @ViewChild('inputPlaces') inputPlaces!: ElementRef;
+
   public countryEnum = Country;
-  private countries : [string, Country][] = [];
+  private readonly countries : [string, Country][] = [];
   public typeEnum = Type;
-  private types : [string, Type][] = [];
+  private readonly types : [string, Type][] = [];
 
   private user?: IUser;
-  private place?: IPlace;
+  private place?: any;
   private id: number = 0;
+
+  public search: string = "";
+  map!: google.maps.Map;
+  marker: google.maps.Marker = new google.maps.Marker();
 
   updateForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -51,11 +58,13 @@ export class PlaceUpdateComponent implements OnInit {
     userId: new FormControl(0)
   }, {updateOn: "submit"});
 
-  constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
+  //constructor
+  constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum);
     this.types = Object.entries(this.typeEnum);
   }
 
+  // getters
   get User(): IUser {
     return <IUser>this.user;
   }
@@ -72,6 +81,7 @@ export class PlaceUpdateComponent implements OnInit {
     return this.types;
   }
 
+  // methods
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.usersService.getProfile().subscribe((data: IUser) => {
@@ -120,6 +130,107 @@ export class PlaceUpdateComponent implements OnInit {
       if (this.place.userId)
         this.updateForm.controls['userId'].setValue(this.place.userId);
     });
+  }
+
+  ngAfterViewInit(): void {
+    if (this.updateForm.controls['address'].controls['lat'].value == null || this.updateForm.controls['address'].controls['lon'].value == null) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.updateForm.controls['address'].controls['lat'].setValue(position.coords.latitude);
+          this.updateForm.controls['address'].controls['lon'].setValue(position.coords.longitude);
+        });
+      }
+      else {
+        this.updateForm.controls['address'].controls['lat'].setValue(20);
+        this.updateForm.controls['address'].controls['lon'].setValue(-30);
+      }
+    }
+    this.loadMap();
+    this.loadAutoComplete();
+  }
+
+  private loadMap(): any {
+    const options = {
+      center: new google.maps.LatLng(this.updateForm.controls['address'].controls['lat'].value!, this.updateForm.controls['address'].controls['lon'].value!),
+      zoom: 2,
+      gestureHandling: "greedy",
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.renderer.selectRootElement(this.divMap.nativeElement), options);
+    google.maps.event.addListener(this.map, "click", (location: any) => {
+      if (location.placeId) {
+        const service = new google.maps.places.PlacesService(this.map);
+        service.getDetails({placeId: location.placeId}, (place) => {
+          this.place = place;
+          this.search = <string>place!.name + ", " + place!.formatted_address;
+          this.map.setCenter(this.place.geometry.location);
+          this.marker.setPosition(this.place.geometry.location);
+          this.marker.setMap(this.map);
+          this.fillForm(this.place);
+        });
+      }
+    });
+  }
+
+  private loadAutoComplete(): void {
+    const autoComplete = new google.maps.places.Autocomplete(this.renderer.selectRootElement(this.inputPlaces.nativeElement), {
+      fields: ["name", "place_id", "address_components", "geometry", "international_phone_number", "photos", "website"],
+      types: ["establishment"]
+    });
+    google.maps.event.addListener(autoComplete, 'place_changed', () => {
+      this.place = autoComplete.getPlace();
+      this.map.setCenter(this.place.geometry.location);
+      this.marker.setPosition(this.place.geometry.location);
+      this.marker.setMap(this.map);
+      this.fillForm(this.place);
+    });
+  }
+
+  private fillForm(place: any): void {
+    console.log(place);
+    const addressNameFormat: any = {
+      'route': 'long_name',
+      'street_number': 'short_name',
+      'locality': 'short_name',
+      'administrative_area_level_1': 'short_name',
+      'country': 'short_name',
+      'postal_code': 'short_name'
+    };
+
+    const componentForm = {
+      street: 'route',
+      number: 'street_number',
+      city: 'locality',
+      region: 'administrative_area_level_1',
+      countryIso: 'country',
+      extra: 'postal_code'
+    };
+
+    const getAddressComp = (type: any) => {
+      for (const component of place.address_components) {
+        if (component.types[0] === type) {
+          return component[addressNameFormat[type]];
+        }
+      }
+      return '';
+    };
+
+    Object.entries(componentForm).forEach(entry => {
+      const [key, value] = entry;
+      // @ts-ignore
+      this.updateForm.controls['address'].controls[key].setValue(getAddressComp(value));
+    });
+
+    if (this.place.name)
+      this.updateForm.controls['name'].setValue(this.place.name);
+    if (this.place.photos[0] && this.updateForm.controls['image'].value == "")
+      this.updateForm.controls['image'].setValue(this.place.photos[0].getUrl());
+    if (this.place.place_id)
+      this.updateForm.controls['googleId'].setValue(this.place.place_id);
+    if (this.place.international_phone_number)
+      this.updateForm.controls['contact'].controls['telephone'].setValue(this.place.international_phone_number.replace(/\s/g, "").replace(/-/g, ""));
+    if (this.place.website)
+      this.updateForm.controls['contact'].controls['website'].setValue(this.place.website);
   }
 
   update(): void {

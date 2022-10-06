@@ -12,5 +12,4 @@ export class FilterByCountryPipe implements PipeTransform {
     }
     return value.filter((place)=> place.address.countryIso == countryIso)
   }
-
 }
