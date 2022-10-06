@@ -75,7 +75,7 @@ export enum Country {
   FO = "Faroe Islands",
   FR = "France",
   GA = "Gabon",
-  GB = "United Kingdom of Great Britain and Northern Ireland",
+  GB = "United Kingdom of GB and NI",
   GD = "Grenada",
   GE = "Georgia",
   GF = "French Guiana",

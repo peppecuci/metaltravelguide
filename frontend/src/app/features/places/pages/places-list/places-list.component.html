@@ -1,10 +1,23 @@
-<div class="row g-3">
-  <div class="form-floating mb-3">
-    <select class="form-select" id="countryIso" name="countryIso" [(ngModel)]="countryIso">
-      <option selected>Filter by country...</option>
-      <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
-    </select>
-    <label for="countryIso">Country:</label>
+<div class="row g-3 mb-3">
+  <div class="col-12 col-md-6">
+    <div class="form-floating">
+      <select class="form-select" id="countryIso" name="countryIso" [(ngModel)]="countryIso">
+        <option selected>Filter by country...</option>
+        <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
+      </select>
+      <label for="countryIso">Country:</label>
+    </div>
   </div>
-  <app-place-card class="col-12 col-sm-6 col-lg-4" *ngFor="let place of Places | filterByCountry: countryIso" [place]="place"></app-place-card>
+  <div class="col-12 col-md-6">
+    <div class="form-floating">
+      <select class="form-select" id="type" name="type" [(ngModel)]="type">
+        <option selected>Filter by type...</option>
+        <option *ngFor="let type of Types" [value]="type[0]" [label]="type[1]"></option>
+      </select>
+      <label for="type">Type:</label>
+    </div>
+  </div>
+</div>
+<div class="row g-3">
+  <app-place-card class="col-12 col-sm-6 col-lg-4" *ngFor="let place of Places | filterByCountry: countryIso | filterByType: type" [place]="place"></app-place-card>
 </div>

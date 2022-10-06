@@ -13,6 +13,7 @@ import { PlaceAddComponent } from './pages/place-add/place-add.component';
 import { PlaceUpdateComponent } from './pages/place-update/place-update.component';
 import { PlaceCommentsComponent } from './components/place-comments/place-comments.component';
 import { FilterByCountryPipe } from './pipes/filter-by-country.pipe';
+import { FilterByTypePipe } from './pipes/filter-by-type.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FilterByCountryPipe } from './pipes/filter-by-country.pipe';
     PlaceAddComponent,
     PlaceUpdateComponent,
     PlaceCommentsComponent,
-    FilterByCountryPipe
+    FilterByCountryPipe,
+    FilterByTypePipe
   ],
     imports: [
       CommonModule,
