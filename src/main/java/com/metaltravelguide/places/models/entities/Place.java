@@ -10,6 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "places")
@@ -43,6 +45,9 @@ public class Place {
     @JoinColumn(name="user_id")
     private User user;
 
+    @ManyToMany
+    private Set<User> likes = new HashSet<>();
+
     public Place(String name, Address address, Contact contact, Type type, String description, String image) {
         this.name = name;
         this.address = address;
@@ -55,5 +60,11 @@ public class Place {
     public Place(String name, Address address, Contact contact, Type type, String description, String image, User user) {
         this(name, address, contact, type, description, image);
         this.user = user;
+    }
+
+    public Place(String name, Address address, Contact contact, Type type, String description, String image, User user, Set<User> likes) {
+        this(name, address, contact, type, description, image);
+        this.user = user;
+        this.likes = likes;
     }
 }

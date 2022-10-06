@@ -51,6 +51,18 @@ public class PlaceController {
         return placeService.update(id, placeUpdateForm);
     }
 
+    @PatchMapping("/like/{id:[0-9]+}")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    public void addLike(@Valid @PathVariable Long id, Authentication auth) {
+        placeService.addLike(id, auth.getName());
+    }
+
+    @PatchMapping("/unlike/{id:[0-9]+}")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    public void unLike(@Valid @PathVariable Long id, Authentication auth) {
+        placeService.unLike(id, auth.getName());
+    }
+
     @DeleteMapping("/delete/{id:[0-9]+}")
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public void delete(@Valid @PathVariable Long id) {
