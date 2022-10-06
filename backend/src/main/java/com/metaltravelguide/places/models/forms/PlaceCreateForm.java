@@ -23,6 +23,5 @@ public class PlaceCreateForm {
     private String description;
     @NotNull
     private String image;
-    @NotBlank
     private String username;
 }
