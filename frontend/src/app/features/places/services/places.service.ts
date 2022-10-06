@@ -64,4 +64,24 @@ export class PlacesService {
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
     return this.httpClient.delete<any>(this.apiServer + "delete/" + id, {headers});
   }
+
+  like(id: number): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.patch<any>(this.apiServer + "like/" + id, {} ,{headers});
+  }
+
+  unlike(id: number): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.patch<any>(this.apiServer + "unlike/" + id, {},{headers});
+  }
 }

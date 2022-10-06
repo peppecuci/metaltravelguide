@@ -36,11 +36,17 @@
         </div>
         <div class="col-12 col-md-4 row align-items-center">
           <div class="row text-center">
-            <a class="d-flex justify-content-center mb-2" href="">
-              <i class="bi bi-heart h1 text-danger"></i>
+            <a class="d-flex justify-content-center" *ngIf="!IsLiked">
+              <button class="btn" (click)="like()">
+                <i class="bi bi-heart fs-1 text-danger"></i>
+              </button>
             </a>
-            <p>Like</p>
-            <p>(Likes: 0)</p>
+            <a class="d-flex justify-content-center" *ngIf="IsLiked">
+              <button class="btn" (click)="unlike()">
+                <i class="bi bi-heart-fill fs-1 text-danger"></i>
+              </button>
+            </a>
+            <strong>{{Place.likes.length}} people like(s) this place</strong>
           </div>
         </div>
       </div>

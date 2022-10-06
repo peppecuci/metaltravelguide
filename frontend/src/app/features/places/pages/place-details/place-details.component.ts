@@ -19,22 +19,14 @@ export class PlaceDetailsComponent implements OnInit {
   private placeId: number = 0;
   private userId: number = 0;
   private isOwner: boolean = false;
+  private isLiked: boolean = false;
   private mapURL: string = "";
 
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.placeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.placesService.readOne(this.placeId).subscribe((place: IPlace) => {
-      this.place = place;
-      if (this.session.isConnected()) {
-        this.usersService.getProfile().subscribe((user: IUser) => {
-          this.userId = user.id;
-          this.isOwner = user.id == place.userId;
-        });
-      }
-      this.mapURL = `https://www.google.com/maps/embed/v1/search?key=${environment.APIKEY}&q=${this.place.address.street}+${this.place.address.number}+${this.place.address.city}`;
-    });
+    this.loadPlace();
   }
 
   get Place(): IPlace {
@@ -43,6 +35,10 @@ export class PlaceDetailsComponent implements OnInit {
 
   get IsOwner(): boolean {
     return this.isOwner;
+  }
+
+  get IsLiked(): boolean {
+    return this.isLiked;
   }
 
   get IsAdmin(): boolean {
@@ -65,6 +61,20 @@ export class PlaceDetailsComponent implements OnInit {
     return this.mapURL;
   }
 
+  loadPlace(): void {
+    this.placesService.readOne(this.placeId).subscribe((place: IPlace) => {
+      this.place = place;
+      if (this.session.isConnected()) {
+        this.usersService.getProfile().subscribe((user: IUser) => {
+          this.userId = user.id;
+          this.isOwner = user.id == place.userId;
+          this.isLiked = place.likes.includes(user.username);
+        });
+      }
+      this.mapURL = `https://www.google.com/maps/embed/v1/search?key=${environment.APIKEY}&q=${this.place.address.street}+${this.place.address.number}+${this.place.address.city}`;
+    });
+  }
+
   delete(): void {
     if (confirm("Are you sure you want to delete this Place?")) {
       this.placesService.delete(this.placeId).subscribe(() => {
@@ -74,5 +84,13 @@ export class PlaceDetailsComponent implements OnInit {
         this.toastr.error("Error deleting place", "Error");
       });
     }
+  }
+
+  like(): void {
+    this.placesService.like(this.placeId).subscribe(() => this.loadPlace());
+  }
+
+  unlike(): void {
+    this.placesService.unlike(this.placeId).subscribe(() => this.loadPlace());
   }
 }

@@ -12,6 +12,7 @@ export interface IPlace {
   image: string;
   userId: number;
   userNickname: string;
+  likes: string[];
   dateCreated: string;
   dateLastModified: string;
 }
