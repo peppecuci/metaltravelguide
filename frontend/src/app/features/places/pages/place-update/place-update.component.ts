@@ -246,7 +246,7 @@ export class PlaceUpdateComponent implements OnInit, AfterViewInit {
       });
     }
     else {
-      this.toastr.error("Error updating place", "Error");
+      this.toastr.error("Missing info", "Error");
     }
   }
 }

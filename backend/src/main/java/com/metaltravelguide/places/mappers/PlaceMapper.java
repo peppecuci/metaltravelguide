@@ -2,10 +2,13 @@ package com.metaltravelguide.places.mappers;
 
 import com.metaltravelguide.places.models.dtos.PlaceDTO;
 import com.metaltravelguide.places.models.entities.Place;
+import com.metaltravelguide.places.models.entities.User;
 import com.metaltravelguide.places.models.forms.PlaceCreateForm;
 import com.metaltravelguide.places.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 @Component
 public class PlaceMapper {
@@ -29,6 +32,7 @@ public class PlaceMapper {
                 .image(entity.getImage())
                 .userId(entity.getUser().getId())
                 .userNickname(entity.getUser().getNickname())
+                .likes(entity.getLikes().stream().map(User::getUsername).collect(Collectors.toSet()))
                 .dateCreated(entity.getDateCreated())
                 .dateLastModified(entity.getDateLastModified())
                 .build();

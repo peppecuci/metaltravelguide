@@ -195,5 +195,8 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
         this.toastr.error("Error adding place", "Error");
       });
     }
+    else {
+      this.toastr.error("Missing info", "Error");
+    }
   }
 }

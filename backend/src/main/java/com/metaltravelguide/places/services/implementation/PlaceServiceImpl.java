@@ -8,9 +8,11 @@ import com.metaltravelguide.places.models.entities.Place;
 import com.metaltravelguide.places.models.forms.PlaceCreateForm;
 import com.metaltravelguide.places.models.forms.PlaceUpdateForm;
 import com.metaltravelguide.places.repositories.PlaceRepository;
+import com.metaltravelguide.places.repositories.UserRepository;
 import com.metaltravelguide.places.services.PlaceService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +21,12 @@ import java.util.stream.Collectors;
 @Service
 public class PlaceServiceImpl implements PlaceService {
     private final PlaceRepository placeRepository;
+    private final UserRepository userRepository;
     private final PlaceMapper placeMapper;
 
-    public PlaceServiceImpl(PlaceRepository placeRepository, PlaceMapper placeMapper) {
+    public PlaceServiceImpl(PlaceRepository placeRepository, UserRepository userRepository, PlaceMapper placeMapper) {
         this.placeRepository = placeRepository;
+        this.userRepository = userRepository;
         this.placeMapper = placeMapper;
     }
 
@@ -91,5 +95,27 @@ public class PlaceServiceImpl implements PlaceService {
         if (!isAdmin && !isOwner)
             throw new UserNotTheSameException(place.getUser().getUsername(), authentication.getName());
         placeRepository.delete(place);
+    }
+
+    @Override
+    public void addLike(Long id, String username) {
+        Place place = placeRepository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(Place.class, id));
+        var likes = place.getLikes();
+        likes.add(userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found")));
+        place.setLikes(likes);
+        placeRepository.save(place);
+    }
+
+    @Override
+    public void unLike(Long id, String username) {
+        Place place = placeRepository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(Place.class, id));
+        var likes = place.getLikes();
+        likes.remove(userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found")));
+        place.setLikes(likes);
+        placeRepository.save(place);
     }
 }

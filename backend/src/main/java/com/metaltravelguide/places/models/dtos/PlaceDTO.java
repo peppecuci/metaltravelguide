@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.Instant;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.metaltravelguide.places.models.entities.Place} entity
@@ -24,6 +25,7 @@ public class PlaceDTO {
     private String image;
     private Long userId;
     private String userNickname;
+    private Set<String> likes;
     private Instant dateCreated;
     private Instant dateLastModified;
 }
