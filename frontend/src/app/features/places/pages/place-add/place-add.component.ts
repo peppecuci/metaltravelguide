@@ -20,9 +20,9 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaces') inputPlaces!: ElementRef;
 
   public countryEnum = Country;
-  private readonly countries : [string, Country][] = [];
+  private readonly countries: [string, Country][] = [];
   public typeEnum = Type;
-  private readonly types : [string, Type][] = [];
+  private readonly types: [string, Type][] = [];
 
   private user?: IUser;
   private place?: any;
@@ -57,7 +57,6 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     image: new FormControl("", [Validators.required, Validators.minLength(4)]),
     userId: new FormControl(0)
   }, {updateOn: "submit"});
-
 
   // constructor
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2, private toastr: ToastrService) {
@@ -94,8 +93,8 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     this.loadMap();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-        this.map.setZoom(17);
+          this.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+          this.map.setZoom(17);
         }
       );
     }
@@ -191,11 +190,10 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
         this.place = data;
         this.router.navigate(["/places/all"]);
         this.toastr.success("Place added successfully", "Success")
-      }, response => {
+      }, () => {
         this.toastr.error("Error adding place", "Error");
       });
-    }
-    else {
+    } else {
       this.toastr.error("Missing info", "Error");
     }
   }

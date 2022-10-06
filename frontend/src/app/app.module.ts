@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from "@angular/common/http";
 import { SecurityModule } from "./core/security/security.module";
-
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./core/components/header/header.component";
 import { FooterComponent } from "./core/components/footer/footer.component";

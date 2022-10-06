@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlacesComponent implements OnInit {
 
+  // constructor
   constructor() { }
 
+  // methods
   ngOnInit(): void {
   }
 

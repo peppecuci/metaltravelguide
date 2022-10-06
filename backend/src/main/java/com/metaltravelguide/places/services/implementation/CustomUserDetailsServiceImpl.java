@@ -98,7 +98,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             throw new UserNotTheSameException(user.getUsername(), authentication.getName());
         if (form.getPassword() != null)
             user.setPassword(encoder.encode(form.getPassword()));
-        if (form.getNickname() != null)
+        if (form.getNickname() != null && !form.getNickname().equals(user.getNickname()))
             user.setNickname(form.getNickname());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));

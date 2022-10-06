@@ -19,20 +19,10 @@ export class PlacesListComponent implements OnInit {
   public countryIso: string = "Filter by country...";
   public type: string = "Filter by type...";
 
+  // constructor
   constructor(private service: PlacesService) { }
 
-  ngOnInit(): void {
-    this.countries = Object.entries(this.countryEnum);
-    this.types = Object.entries(this.typeEnum);
-    this.service.readAll().subscribe((data: IPlace[]) => {
-      this.places = data;
-      const placesIso = data.map( (element) => element.address.countryIso ).filter((e, i, self) => self.indexOf(e) === i);
-      this.countries = this.countries.filter((entry) => placesIso.includes(entry[0]));
-      const placesType = data.map( (element) => element.type ).filter((e, i, self) => self.indexOf(e) === i);
-      this.types = this.types.filter((entry) => placesType.includes(entry[0]));
-    });
-  }
-
+  // getters
   get Places(): IPlace[] {
     return this.places;
   }
@@ -43,5 +33,18 @@ export class PlacesListComponent implements OnInit {
 
   get Types(): [string, Type][] {
     return this.types;
+  }
+
+  // methods
+  ngOnInit(): void {
+    this.countries = Object.entries(this.countryEnum);
+    this.types = Object.entries(this.typeEnum);
+    this.service.readAll().subscribe((data: IPlace[]) => {
+      this.places = data;
+      const placesIso = data.map( (element) => element.address.countryIso ).filter((e, i, self) => self.indexOf(e) === i);
+      this.countries = this.countries.filter((entry) => placesIso.includes(entry[0]));
+      const placesType = data.map( (element) => element.type ).filter((e, i, self) => self.indexOf(e) === i);
+      this.types = this.types.filter((entry) => placesType.includes(entry[0]));
+    });
   }
 }

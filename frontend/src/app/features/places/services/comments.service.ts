@@ -10,8 +10,10 @@ export class CommentsService {
 
   private apiServer = environment.APISERVER + "comment/";
 
+  // constructor
   constructor(private httpClient: HttpClient) { }
 
+  // methods
   readAllByPlace(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
@@ -22,14 +24,14 @@ export class CommentsService {
     return this.httpClient.get<any>(this.apiServer + "place/" + id, {headers});
   }
 
-  add(comment: any): Observable<any> {
+  add(form: any): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this.httpClient.post<any>(this.apiServer + "create", comment,{headers});
+    return this.httpClient.post<any>(this.apiServer + "create", form,{headers});
   }
 
   delete(id: number): Observable<any> {

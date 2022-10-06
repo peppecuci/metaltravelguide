@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../../../environments/environment";
-
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 
@@ -11,8 +10,12 @@ export class UsersService {
 
   private apiServer = environment.APISERVER + "user/";
 
+  // constructor
   constructor(private httpClient: HttpClient) { }
 
+  // getters
+
+  // methods
   readAll(): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)

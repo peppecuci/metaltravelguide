@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../../../environments/environment";
-
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-
-import { IPlace } from "../models/IPlace";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +10,10 @@ export class PlacesService {
 
   private apiServer = environment.APISERVER + "place/";
 
+  // constructor
   constructor(private httpClient: HttpClient) { }
 
+  // methods
   readAll(): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
@@ -22,7 +21,7 @@ export class PlacesService {
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this.httpClient.get<IPlace[]>(this.apiServer + "all", {headers});
+    return this.httpClient.get<any>(this.apiServer + "all", {headers});
   }
 
   readOne(id: number): Observable<any> {
@@ -32,17 +31,17 @@ export class PlacesService {
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this.httpClient.get<IPlace>(this.apiServer + id, {headers});
+    return this.httpClient.get<any>(this.apiServer + id, {headers});
   }
 
-  add(place: any): Observable<any> {
+  add(form: any): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this.httpClient.post<any>(this.apiServer + "create/", place, {headers});
+    return this.httpClient.post<any>(this.apiServer + "create", form, {headers});
   }
 
   update(id: number, place: any): Observable<any> {

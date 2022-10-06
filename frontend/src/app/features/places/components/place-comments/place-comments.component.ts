@@ -23,12 +23,15 @@ export class PlaceCommentsComponent implements OnInit {
 
   private comments: IComment[] = [];
 
+  // constructor
   constructor(private usersService: UsersService, private commentsService: CommentsService, private toastr: ToastrService) { }
 
+  // getters
   get Comments(): IComment[] {
     return this.comments;
   }
 
+  // methods
   ngOnInit(): void {
     this.readComments();
   }

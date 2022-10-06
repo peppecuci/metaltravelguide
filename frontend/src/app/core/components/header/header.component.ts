@@ -8,7 +8,6 @@ import { SessionService } from "../../security/services/session.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  // variables
 
   // constructor
   constructor(private router: Router, private sessionService: SessionService) {}
@@ -34,7 +33,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logout(): void {
+  public logout(): void {
     localStorage.clear();
     this.sessionService.logout();
     this.router.navigate(["/"]);

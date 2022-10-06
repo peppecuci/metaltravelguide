@@ -19,9 +19,9 @@ export class PlaceUpdateComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaces') inputPlaces!: ElementRef;
 
   public countryEnum = Country;
-  private readonly countries : [string, Country][] = [];
+  private readonly countries: [string, Country][] = [];
   public typeEnum = Type;
-  private readonly types : [string, Type][] = [];
+  private readonly types: [string, Type][] = [];
 
   private user?: IUser;
   private place?: any;
@@ -139,8 +139,7 @@ export class PlaceUpdateComponent implements OnInit, AfterViewInit {
           this.updateForm.controls['address'].controls['lat'].setValue(position.coords.latitude);
           this.updateForm.controls['address'].controls['lon'].setValue(position.coords.longitude);
         });
-      }
-      else {
+      } else {
         this.updateForm.controls['address'].controls['lat'].setValue(20);
         this.updateForm.controls['address'].controls['lon'].setValue(-30);
       }
@@ -234,18 +233,15 @@ export class PlaceUpdateComponent implements OnInit, AfterViewInit {
   }
 
   update(): void {
-    console.log(this.updateForm.valid);
-    console.log(this.updateForm.get('city')?.errors);
     if (this.updateForm.valid) {
       this.placesService.update(this.id, this.updateForm.value).subscribe((data: IPlace) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
         this.toastr.success("Place updated successfully", "Success")
-      }, response => {
+      }, () => {
         this.toastr.error("Error updating place", "Error");
       });
-    }
-    else {
+    } else {
       this.toastr.error("Missing info", "Error");
     }
   }

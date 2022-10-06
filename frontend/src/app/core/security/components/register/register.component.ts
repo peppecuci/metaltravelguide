@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register() {
+  public register() {
     if (this.registerForm.valid) {
       this.auth.register(this.registerForm.value).subscribe(() => {
         this.toastr.success("Registration successful", "Success")

@@ -22,13 +22,10 @@ export class PlaceDetailsComponent implements OnInit {
   private isLiked: boolean = false;
   private mapURL: string = "";
 
+  // constructor
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private session: SessionService, private toastr: ToastrService) { }
 
-  ngOnInit(): void {
-    this.placeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.loadPlace();
-  }
-
+  // getters
   get Place(): IPlace {
     return <IPlace>this.place;
   }
@@ -61,7 +58,13 @@ export class PlaceDetailsComponent implements OnInit {
     return this.mapURL;
   }
 
-  loadPlace(): void {
+  // methods
+  ngOnInit(): void {
+    this.placeId = Number(this.route.snapshot.paramMap.get('id'));
+    this.loadPlace();
+  }
+
+  private loadPlace(): void {
     this.placesService.readOne(this.placeId).subscribe((place: IPlace) => {
       this.place = place;
       if (this.session.isConnected()) {
@@ -80,7 +83,7 @@ export class PlaceDetailsComponent implements OnInit {
       this.placesService.delete(this.placeId).subscribe(() => {
         this.router.navigate(["/places/all"]);
         this.toastr.success("Place deleted successfully", "Success");
-      }, response => {
+      }, () => {
         this.toastr.error("Error deleting place", "Error");
       });
     }

@@ -16,7 +16,7 @@ import { ToastrService } from "ngx-toastr";
 export class ProfileComponent implements OnInit {
   // variables
   public countryEnum = Country;
-  private countries : [string, Country][] = [];
+  private readonly countries : [string, Country][] = [];
 
   private user?: IUser;
 
@@ -29,10 +29,12 @@ export class ProfileComponent implements OnInit {
     countryIso: new FormControl("Choose a country...", [Validators.required, Validators.maxLength(2)])
   },  {updateOn: 'submit'});
 
+  // constructor
   constructor(private userService: UsersService, private auth: AuthService, private session: SessionService, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum)
   }
 
+  // getters
   get User(): IUser {
     return <IUser>this.user;
   }
@@ -41,14 +43,22 @@ export class ProfileComponent implements OnInit {
     return this.countries;
   }
 
+  // methods
   ngOnInit(): void {
+    this.loadProfile();
+  }
+
+  private loadProfile(): void {
     this.userService.getProfile().subscribe((data: IUser) => {
       this.user = data;
-      this.updateForm.setValue({id: this.user.id, username: this.user.username, password: "", confirmPassword: "", nickname: this.user.nickname, countryIso: this.user.countryIso});
+      this.updateForm.reset();
+      this.updateForm.patchValue({id: this.user.id, username: this.user.username, nickname: this.user.nickname, countryIso: this.user.countryIso});
+      this.updateForm.markAsUntouched();
+      this.updateForm.markAsPristine();
     });
   }
 
-  update(): void {
+  public update(): void {
     if (this.updateForm.valid) {
       this.userService.update(this.updateForm.value).subscribe(() => {
         if (this.updateForm.value.password!.length > 0) {
@@ -58,14 +68,8 @@ export class ProfileComponent implements OnInit {
             this.session.login(token);
           });
         }
-        this.userService.getProfile().subscribe((data: IUser) => {
-          this.user = data;
-          this.updateForm.reset();
-          this.updateForm.patchValue({id: this.user.id, username: this.user.username, nickname: this.user.nickname, countryIso: this.user.countryIso});
-          this.updateForm.markAsUntouched();
-          this.updateForm.markAsPristine();
-          this.toastr.success("Profile updated successfully", "Success")
-        });
+        this.loadProfile();
+        this.toastr.success("Profile updated successfully", "Success")
       }, response => {
         this.toastr.error(response.error.message, "Error")
       });

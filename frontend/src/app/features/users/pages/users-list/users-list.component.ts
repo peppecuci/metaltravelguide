@@ -13,15 +13,18 @@ export class UsersListComponent implements OnInit {
 
   private users: IUser[] = [];
 
+  // constructor
   constructor(private service: UsersService, private router: Router, private toastr: ToastrService) {
   }
 
-  ngOnInit(): void {
-    this.service.readAll().subscribe((data: IUser[]) => this.users = data);
-  }
-
+  // getters
   get Users(): IUser[] {
     return this.users;
+  }
+
+  // methods
+  ngOnInit(): void {
+    this.service.readAll().subscribe((data: IUser[]) => this.users = data);
   }
 
   delete(id: number): void {

@@ -9,9 +9,10 @@ import { IPlace } from "../../models/IPlace";
 export class PlaceCardComponent implements OnInit {
   @Input() place?: IPlace;
 
+  // constructor
   constructor() { }
 
+  // methods
   ngOnInit(): void {
   }
-
 }

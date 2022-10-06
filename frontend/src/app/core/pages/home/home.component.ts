@@ -11,31 +11,31 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // variables
+
   loginForm = new FormGroup({
     username: new FormControl("", [Validators.required, Validators.email, Validators.maxLength(255)]),
     password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(255), Validators.pattern('^[a-zA-Z0-9]+$')]),
   },  {updateOn: 'submit'});
+
+  //constructor
+  constructor(private sessionService: SessionService, private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   // getters
   get isConnected(): boolean {
     return this.sessionService.isConnected();
   }
 
-  //constructor
-  constructor(private sessionService: SessionService, private authService: AuthService, private router: Router, private toastr: ToastrService) {}
-
   //methods
   ngOnInit(): void { }
 
-  login(): void {
+  public login(): void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(data => {
         let token = data["token"];
         this.sessionService.login(token);
         this.router.navigate(["/"]);
         this.toastr.success("Login successful", "Success");
-      }, response => {
+      }, () => {
         this.loginForm.patchValue({password: ""});
         this.loginForm.markAsUntouched();
         this.loginForm.markAsPristine();

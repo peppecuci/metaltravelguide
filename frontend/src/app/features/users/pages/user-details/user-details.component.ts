@@ -14,14 +14,17 @@ export class UserDetailsComponent implements OnInit {
   private userId?: number;
   private user?: IUser;
 
+  // constructor
   constructor(private userService: UsersService, private route: ActivatedRoute) { }
 
+  // getters
+  get User(): IUser {
+    return <IUser>this.user;
+  }
+
+  // methods
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
     this.userService.readOne(this.userId).subscribe((data: IUser) => this.user = data);
-  }
-
-  get User(): IUser {
-    return <IUser>this.user;
   }
 }

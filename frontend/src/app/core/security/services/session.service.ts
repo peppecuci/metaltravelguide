@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import jwtDecode from "jwt-decode";
 import { IPayload } from "../types/IPayload";
-import { ToastrService } from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class SessionService {
   private token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   // constructor
-  constructor(private toastr: ToastrService) {
+  constructor() {
     const token = localStorage.getItem("token");
     if (token) {
       this.token$.next(token);
@@ -25,24 +24,24 @@ export class SessionService {
   }
 
   // methods
-  login(token: string) {
+  public login(token: string) {
     localStorage.setItem("token", token);
     this.token$.next(token);
   }
 
-  logout() {
+  public logout() {
     this.token$.next(null);
   }
 
-  getUser(token: string): any {
+  public getUser(token: string): any {
     return jwtDecode<IPayload>(token).sub;
   }
 
-  getRole(token: string): any {
+  public getRole(token: string): any {
     return jwtDecode<IPayload>(token).roles[0];
   }
 
-  isConnected(): boolean {
+  public isConnected(): boolean {
     let isConnected = false;
     this.Token$.subscribe( token => {
       if (token != null)
@@ -51,7 +50,7 @@ export class SessionService {
     return isConnected;
   }
 
-  isAdmin(): boolean {
+  public isAdmin(): boolean {
     let isAdmin = false;
     this.Token$.subscribe( token => {
       if (token != null && this.getRole(token) == "ROLE_ADMIN")

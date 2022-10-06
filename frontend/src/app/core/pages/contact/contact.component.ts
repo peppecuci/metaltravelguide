@@ -8,19 +8,21 @@ import { ToastrService } from "ngx-toastr";
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  // variables
+
   contactForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255)]),
     mail: new FormControl("", [Validators.required, Validators.email, Validators.maxLength(255)]),
     message: new FormControl("", [Validators.required, Validators.minLength(4)])
   }, {updateOn: "submit"});
 
+  // constructor
   constructor(private toastr: ToastrService) { }
 
+  // methods
   ngOnInit(): void {
   }
 
-  contact(): void {
+  public contact(): void {
     if (this.contactForm.valid) {
       this.contactForm.reset();
       this.toastr.success("Comment sent successfully", "Success");
