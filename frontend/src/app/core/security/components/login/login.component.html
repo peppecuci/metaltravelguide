@@ -3,17 +3,17 @@
     <div class="form-floating mb-3">
       <input class="form-control" type="email" id="username" name="username" formControlName="username" required />
       <label for="username">E-mail:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.get('username')?.hasError('required') && (loginForm.get('username')?.touched || loginForm.get('username')?.dirty)">E-mail is required</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.get('username')?.hasError('maxlength') && (loginForm.get('username')?.touched || loginForm.get('username')?.dirty)">E-mail cannot be more than 255 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.get('username')?.hasError('email') && (loginForm.get('username')?.touched || loginForm.get('username')?.dirty)">Please enter a valid E-mail</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.controls['username'].hasError('required') && (loginForm.controls['username'].touched || loginForm.controls['username'].dirty)">E-mail is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.controls['username'].hasError('maxlength') && (loginForm.controls['username'].touched || loginForm.controls['username'].dirty)">E-mail cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.controls['username'].hasError('email') && (loginForm.controls['username'].touched || loginForm.controls['username'].dirty)">Please enter a valid E-mail</div>
     </div>
     <div class="form-floating mb-3">
       <input class="form-control" type="password" id="password" name="password" formControlName="password" required />
       <label for="password">Password:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.get('password')?.hasError('required') && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">Password is required</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.get('password')?.hasError('minlength') && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">Password must be at least 8 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.get('password')?.hasError('maxlength') && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">Password cannot be more than 255 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.get('password')?.hasError('pattern') && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">Password must contain only numbers and letters</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty)">Password is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.controls['password'].hasError('minlength') && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty)">Password must be at least 8 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.controls['password'].hasError('maxlength') && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty)">Password cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="loginForm.controls['password'].hasError('pattern') && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty)">Password must contain only numbers and letters</div>
     </div>
     <div class="col-12">
       <button class="btn btn-success w-100" type="submit">Login</button>

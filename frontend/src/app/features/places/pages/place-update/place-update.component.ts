@@ -234,6 +234,8 @@ export class PlaceUpdateComponent implements OnInit, AfterViewInit {
   }
 
   update(): void {
+    console.log(this.updateForm.valid);
+    console.log(this.updateForm.get('city')?.errors);
     if (this.updateForm.valid) {
       this.placesService.update(this.id, this.updateForm.value).subscribe((data: IPlace) => {
         this.place = data;
@@ -242,6 +244,9 @@ export class PlaceUpdateComponent implements OnInit, AfterViewInit {
       }, response => {
         this.toastr.error("Error updating place", "Error");
       });
+    }
+    else {
+      this.toastr.error("Error updating place", "Error");
     }
   }
 }

@@ -86,9 +86,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.usersService.getProfile().subscribe((data: IUser) => {
       this.user = data;
-      this.addForm.patchValue({userId: this.user.id});
-      this.addForm.markAsUntouched();
-      this.addForm.markAsPristine();
+      this.addForm.controls['userId'].setValue(this.user.id);
     });
   }
 

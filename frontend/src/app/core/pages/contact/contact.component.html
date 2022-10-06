@@ -6,21 +6,21 @@
     <div class="form-floating mb-3">
       <input class="form-control" type="text" id="name" name="name" placeholder="" formControlName="name">
       <label for="name">Your name:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('name')?.hasError('required') && (contactForm.get('name')?.touched || contactForm.get('name')?.dirty)">Name is required</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('name')?.hasError('minlength') && (contactForm.get('name')?.touched || contactForm.get('name')?.dirty)">Name must be at least 3 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('name')?.hasError('maxlength') && (contactForm.get('name')?.touched || contactForm.get('name')?.dirty)">Name cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.controls['name'].hasError('required') && (contactForm.controls['name'].touched || contactForm.controls['name'].dirty)">Name is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.controls['name'].hasError('minlength') && (contactForm.controls['name'].touched || contactForm.controls['name'].dirty)">Name must be at least 3 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.controls['name'].hasError('maxlength') && (contactForm.controls['name'].touched || contactForm.controls['name'].dirty)">Name cannot be more than 255 characters long</div>
     </div>
     <div class="form-floating mb-3">
       <input class="form-control" type="email" id="mail" name="mail" formControlName="mail">
       <label for="mail">Your E-mail:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('mail')?.hasError('required') && (contactForm.get('mail')?.touched || contactForm.get('mail')?.dirty)">Mail is required</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('mail')?.hasError('email') && (contactForm.get('mail')?.touched || contactForm.get('mail')?.dirty)">Enter a valid mail</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.controls['mail'].hasError('required') && (contactForm.controls['mail'].touched || contactForm.controls['mail'].dirty)">Mail is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.controls['mail'].hasError('email') && (contactForm.controls['mail'].touched || contactForm.controls['mail'].dirty)">Enter a valid mail</div>
     </div>
     <div class="form-floating mb-3">
       <textarea class="form-control" id="message" name="message" formControlName="message" style="height:10em"></textarea>
       <label for="message">Your message:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('message')?.hasError('required') && (contactForm.get('message')?.touched || contactForm.get('message')?.dirty)">Message is required</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.get('message')?.hasError('minlength') && (contactForm.get('message')?.touched || contactForm.get('message')?.dirty)">Message must be at least 4 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.controls['message'].hasError('required') && (contactForm.controls['message'].touched || contactForm.controls['message'].dirty)">Message is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="contactForm.controls['message'].hasError('minlength') && (contactForm.controls['message'].touched || contactForm.controls['message'].dirty)">Message must be at least 4 characters long</div>
     </div>
     <div class="col-12">
       <button class="btn btn-success w-100" type="submit">Send comment</button>

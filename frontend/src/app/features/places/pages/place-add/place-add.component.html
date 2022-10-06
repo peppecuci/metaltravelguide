@@ -12,100 +12,100 @@
   <div class="col">
     <form class="bg-light p-3 p-lg-5 border rounded-3" [formGroup]="addForm" (submit)="add()">
       <div class="form-floating mb-3">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('name')?.invalid && (addForm.get('name')?.touched || addForm.get('name')?.dirty), 'is-valid': addForm.get('name')?.valid && (addForm.get('name')?.touched || addForm.get('name')?.dirty) }" type="text" id="name" name="name" formControlName="name" required>
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['name'].invalid && (addForm.controls['name'].touched || addForm.controls['name'].dirty), 'is-valid': addForm.controls['name'].valid && (addForm.controls['name'].touched || addForm.controls['name'].dirty) }" type="text" id="name" name="name" formControlName="name" required>
         <label for="name">Name:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('name')?.hasError('required')">Name is required</div>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('name')?.hasError('minlength')">Name must be at least 2 characters long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['name'].hasError('required')">Name is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['name'].hasError('minlength')">Name must be at least 2 characters long</div>
       </div>
       <div class="form-floating mb-3">
-        <select class="form-select" [ngClass]="{'is-invalid': addForm.get('type')?.invalid && (addForm.get('type')?.touched || addForm.get('type')?.dirty), 'is-valid': addForm.get('type')?.valid && (addForm.get('type')?.touched || addForm.get('type')?.dirty) }" id="type" name="type" formControlName="type" required>
+        <select class="form-select" [ngClass]="{'is-invalid': addForm.controls['type'].invalid && (addForm.controls['type'].touched || addForm.controls['type'].dirty), 'is-valid': addForm.controls['type'].valid && (addForm.controls['type'].touched || addForm.controls['type'].dirty) }" id="type" name="type" formControlName="type" required>
           <option *ngFor="let type of Types" [value]="type[0]" [label]="type[1]"></option>
         </select>
         <label for="type">Type:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('type')?.hasError('required')">Type is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['type'].hasError('required')">Type is required</div>
       </div>
       <div class="form-floating mb-3">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('googleId')?.invalid && (addForm.get('googleId')?.touched || addForm.get('googleId')?.dirty), 'is-valid': addForm.get('googleId')?.valid && (addForm.get('googleId')?.touched || addForm.get('googleId')?.dirty) }" type="text" id="googleId" name="googleId" formControlName="googleId">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['googleId'].invalid && (addForm.controls['googleId'].touched || addForm.controls['googleId'].dirty), 'is-valid': addForm.controls['googleId'].valid && (addForm.controls['googleId'].touched || addForm.controls['googleId'].dirty) }" type="text" id="googleId" name="googleId" formControlName="googleId">
         <label for="googleId">GoogleId:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('googleId')?.hasError('minlength')">GoogleId must be at least 4 characters long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['googleId'].hasError('minlength')">GoogleId must be at least 4 characters long</div>
       </div>
       <div class="form-floating mb-3">
-        <textarea class="form-control" [ngClass]="{'is-invalid': addForm.get('description')?.invalid && (addForm.get('description')?.touched || addForm.get('description')?.dirty), 'is-valid': addForm.get('description')?.valid && (addForm.get('description')?.touched || addForm.get('description')?.dirty) }" id="description" name="description" formControlName="description" style="height:10em" required></textarea>
+        <textarea class="form-control" [ngClass]="{'is-invalid': addForm.controls['description'].invalid && (addForm.controls['description'].touched || addForm.controls['description'].dirty), 'is-valid': addForm.controls['description'].valid && (addForm.controls['description'].touched || addForm.controls['description'].dirty) }" id="description" name="description" formControlName="description" style="height:10em" required></textarea>
         <label for="description">Description:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('description')?.hasError('required')">Description is required</div>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('description')?.hasError('minlength')">Description must be at least 4 characters long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['description'].hasError('required')">Description is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['description'].hasError('minlength')">Description must be at least 4 characters long</div>
       </div>
       <div class="form-floating mb-3">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('image')?.invalid && (addForm.get('image')?.touched || addForm.get('image')?.dirty), 'is-valid': addForm.get('image')?.valid && (addForm.get('image')?.touched || addForm.get('image')?.dirty) }" type="text" id="image" name="image" formControlName="image" required>
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['image'].invalid && (addForm.controls['image'].touched || addForm.controls['image'].dirty), 'is-valid': addForm.controls['image'].valid && (addForm.controls['image'].touched || addForm.controls['image'].dirty) }" type="text" id="image" name="image" formControlName="image" required>
         <label for="image">Image url:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('image')?.hasError('required')">Image is required</div>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('image')?.hasError('minlength')">Image must be at least 4 characters long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['image'].hasError('required')">Image is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['image'].hasError('minlength')">Image must be at least 4 characters long</div>
       </div>
       <div class="form-floating mb-3" formGroupName="address">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('street')?.invalid && (addForm.get('street')?.touched || addForm.get('street')?.dirty), 'is-valid': addForm.get('street')?.valid && (addForm.get('street')?.touched || addForm.get('street')?.dirty) }" type="text" id="street" name="street" formControlName="street" required>
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['address'].controls['street'].invalid && (addForm.controls['address'].controls['street'].touched || addForm.controls['address'].controls['street'].dirty), 'is-valid': addForm.controls['address'].controls['street'].valid && (addForm.controls['address'].controls['street'].touched || addForm.controls['address'].controls['street'].dirty) }" type="text" id="street" name="street" formControlName="street" required>
         <label for="street">Street:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('street')?.hasError('required')">Street is required</div>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('street')?.hasError('minlength')">Street must be at least 1 character long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['street'].hasError('required')">Street is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['street'].hasError('minlength')">Street must be at least 1 character long</div>
       </div>
       <div class="form-floating mb-3" formGroupName="address">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('number')?.invalid && (addForm.get('number')?.touched || addForm.get('number')?.dirty), 'is-valid': addForm.get('number')?.valid && (addForm.get('number')?.touched || addForm.get('number')?.dirty) }" type="text" id="number" name="number" formControlName="number" required>
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['address'].controls['number'].invalid && (addForm.controls['address'].controls['number'].touched || addForm.controls['address'].controls['number'].dirty), 'is-valid': addForm.controls['address'].controls['number'].valid && (addForm.controls['address'].controls['number'].touched || addForm.controls['address'].controls['number'].dirty) }" type="text" id="number" name="number" formControlName="number" required>
         <label for="number">Number:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('number')?.hasError('required')">Number is required</div>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('number')?.hasError('minlength')">Number must be at least 1 character long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['number'].hasError('required')">Number is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['number'].hasError('minlength')">Number must be at least 1 character long</div>
       </div>
       <div class="form-floating mb-3" formGroupName="address">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('extra')?.invalid && (addForm.get('extra')?.touched || addForm.get('extra')?.dirty), 'is-valid': addForm.get('extra')?.valid && (addForm.get('extra')?.touched || addForm.get('extra')?.dirty) }" type="text" id="extra" name="extra" formControlName="extra">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['address'].controls['extra'].invalid && (addForm.controls['address'].controls['extra'].touched || addForm.controls['address'].controls['extra'].dirty), 'is-valid': addForm.controls['address'].controls['extra'].valid && (addForm.controls['address'].controls['extra'].touched || addForm.controls['address'].controls['extra'].dirty) }" type="text" id="extra" name="extra" formControlName="extra">
         <label for="extra">Extra:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('extra')?.hasError('minlength')">Extra info must be at least 1 character long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['extra'].hasError('minlength')">Extra info must be at least 1 character long</div>
       </div>
       <div class="form-floating mb-3" formGroupName="address">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('city')?.invalid && (addForm.get('city')?.touched || addForm.get('city')?.dirty), 'is-valid': addForm.get('city')?.valid && (addForm.get('city')?.touched || addForm.get('city')?.dirty) }" type="text" id="city" name="city" formControlName="city" required>
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['address'].controls['city'].invalid && (addForm.controls['address'].controls['city'].touched || addForm.controls['address'].controls['city'].dirty), 'is-valid': addForm.controls['address'].controls['city'].valid && (addForm.controls['address'].controls['city'].touched || addForm.controls['address'].controls['city'].dirty) }" type="text" id="city" name="city" formControlName="city" required>
         <label for="city">City:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('city')?.hasError('required')">City is required</div>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('city')?.hasError('minlength')">City must be at least 2 characters long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['city'].hasError('required')">City is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['city'].hasError('minlength')">City must be at least 2 characters long</div>
       </div>
       <div class="form-floating mb-3" formGroupName="address">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('region')?.invalid && (addForm.get('region')?.touched || addForm.get('region')?.dirty), 'is-valid': addForm.get('region')?.valid && (addForm.get('region')?.touched || addForm.get('region')?.dirty) }" type="text" id="region" name="region" formControlName="region" required>
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['address'].controls['region'].invalid && (addForm.controls['address'].controls['region'].touched || addForm.controls['address'].controls['region'].dirty), 'is-valid': addForm.controls['address'].controls['region'].valid && (addForm.controls['address'].controls['region'].touched || addForm.controls['address'].controls['region'].dirty) }" type="text" id="region" name="region" formControlName="region" required>
         <label for="region">Region:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('region')?.hasError('required')">Region is required</div>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('region')?.hasError('minlength')">Region must be at least 2 characters long</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['region'].hasError('required')">Region is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['region'].hasError('minlength')">Region must be at least 2 characters long</div>
       </div>
       <div class="form-floating mb-3" formGroupName="address">
-        <select class="form-select" [ngClass]="{'is-invalid': addForm.get('countryIso')?.invalid && (addForm.get('countryIso')?.touched || addForm.get('countryIso')?.dirty), 'is-valid': addForm.get('countryIso')?.valid && (addForm.get('countryIso')?.touched || addForm.get('countryIso')?.dirty) }" id="countryIso" name="countryIso" formControlName="countryIso" required>
+        <select class="form-select" [ngClass]="{'is-invalid': addForm.controls['address'].controls['countryIso'].invalid && (addForm.controls['address'].controls['countryIso'].touched || addForm.controls['address'].controls['countryIso'].dirty), 'is-valid': addForm.controls['address'].controls['countryIso'].valid && (addForm.controls['address'].controls['countryIso'].touched || addForm.controls['address'].controls['countryIso'].dirty) }" id="countryIso" name="countryIso" formControlName="countryIso" required>
           <option *ngFor="let country of Countries" [value]="country[0]" [label]="country[1]"></option>
         </select>
         <label for="countryIso">Country:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('countryIso')?.hasError('required')">Country is required</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['address'].controls['countryIso'].hasError('required')">Country is required</div>
       </div>
       <div class="form-floating mb-3" formGroupName="contact">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('website')?.invalid && (addForm.get('website')?.touched || addForm.get('website')?.dirty), 'is-valid': addForm.get('website')?.valid && (addForm.get('website')?.touched || addForm.get('website')?.dirty) }" type="text" id="website" name="website" formControlName="website">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['contact'].controls['website'].invalid && (addForm.controls['contact'].controls['website'].touched || addForm.controls['contact'].controls['website'].dirty), 'is-valid': addForm.controls['contact'].controls['website'].valid && (addForm.controls['contact'].controls['website'].touched || addForm.controls['contact'].controls['website'].dirty) }" type="text" id="website" name="website" formControlName="website">
         <label for="website">Website url:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('website')?.hasError('pattern')">Not a valid URL</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['contact'].controls['website'].hasError('pattern')">Not a valid URL</div>
       </div>
       <div class="form-floating mb-3" formGroupName="contact">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('facebook')?.invalid && (addForm.get('facebook')?.touched || addForm.get('facebook')?.dirty), 'is-valid': addForm.get('facebook')?.valid && (addForm.get('facebook')?.touched || addForm.get('facebook')?.dirty) }" type="text" id="facebook" name="facebook" formControlName="facebook">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['contact'].controls['facebook'].invalid && (addForm.controls['contact'].controls['facebook'].touched || addForm.controls['contact'].controls['facebook'].dirty), 'is-valid': addForm.controls['contact'].controls['facebook'].valid && (addForm.controls['contact'].controls['facebook'].touched || addForm.controls['contact'].controls['facebook'].dirty) }" type="text" id="facebook" name="facebook" formControlName="facebook">
         <label for="facebook">Facebook url:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('facebook')?.hasError('pattern')">Not a valid URL</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['contact'].controls['facebook'].hasError('pattern')">Not a valid URL</div>
       </div>
       <div class="form-floating mb-3" formGroupName="contact">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('instagram')?.invalid && (addForm.get('instagram')?.touched || addForm.get('instagram')?.dirty), 'is-valid': addForm.get('instagram')?.valid && (addForm.get('instagram')?.touched || addForm.get('instagram')?.dirty) }" type="text" id="instagram" name="instagram" formControlName="instagram">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['contact'].controls['instagram'].invalid && (addForm.controls['contact'].controls['instagram'].touched || addForm.controls['contact'].controls['instagram'].dirty), 'is-valid': addForm.controls['contact'].controls['instagram'].valid && (addForm.controls['contact'].controls['instagram'].touched || addForm.controls['contact'].controls['instagram'].dirty) }" type="text" id="instagram" name="instagram" formControlName="instagram">
         <label for="instagram">Instagram url:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('instagram')?.hasError('pattern')">Not a valid URL</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['contact'].controls['instagram'].hasError('pattern')">Not a valid URL</div>
       </div>
       <div class="form-floating mb-3" formGroupName="contact">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('twitter')?.invalid && (addForm.get('twitter')?.touched || addForm.get('twitter')?.dirty), 'is-valid': addForm.get('twitter')?.valid && (addForm.get('twitter')?.touched || addForm.get('twitter')?.dirty) }" type="text" id="twitter" name="twitter" formControlName="twitter">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['contact'].controls['twitter'].invalid && (addForm.controls['contact'].controls['twitter'].touched || addForm.controls['contact'].controls['twitter'].dirty), 'is-valid': addForm.controls['contact'].controls['twitter'].valid && (addForm.controls['contact'].controls['twitter'].touched || addForm.controls['contact'].controls['twitter'].dirty) }" type="text" id="twitter" name="twitter" formControlName="twitter">
         <label for="twitter">Twitter url:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('twitter')?.hasError('pattern')">Not a valid URL</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['contact'].controls['twitter'].hasError('pattern')">Not a valid URL</div>
       </div>
       <div class="form-floating mb-3" formGroupName="contact">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('mail')?.invalid && (addForm.get('mail')?.touched || addForm.get('mail')?.dirty), 'is-valid': addForm.get('mail')?.valid && (addForm.get('mail')?.touched || addForm.get('mail')?.dirty) }" type="email" id="mail" name="mail" formControlName="mail">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['contact'].controls['mail'].invalid && (addForm.controls['contact'].controls['mail'].touched || addForm.controls['contact'].controls['mail'].dirty), 'is-valid': addForm.controls['contact'].controls['mail'].valid && (addForm.controls['contact'].controls['mail'].touched || addForm.controls['contact'].controls['mail'].dirty) }" type="email" id="mail" name="mail" formControlName="mail">
         <label for="mail">E-mail:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('mail')?.hasError('email')">Not a valid e-mail address</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['contact'].controls['mail'].hasError('email')">Not a valid e-mail address</div>
       </div>
       <div class="form-floating mb-3" formGroupName="contact">
-        <input class="form-control" [ngClass]="{'is-invalid': addForm.get('telephone')?.invalid && (addForm.get('telephone')?.touched || addForm.get('telephone')?.dirty), 'is-valid': addForm.get('telephone')?.valid && (addForm.get('telephone')?.touched || addForm.get('telephone')?.dirty) }" type="tel" pattern="^[+]?[0-9]{9,20}$" id="telephone" name="telephone" formControlName="telephone">
+        <input class="form-control" [ngClass]="{'is-invalid': addForm.controls['contact'].controls['telephone'].invalid && (addForm.controls['contact'].controls['telephone'].touched || addForm.controls['contact'].controls['telephone'].dirty), 'is-valid': addForm.controls['contact'].controls['telephone'].valid && (addForm.controls['contact'].controls['telephone'].touched || addForm.controls['contact'].controls['telephone'].dirty) }" type="tel" pattern="^[+]?[0-9]{9,20}$" id="telephone" name="telephone" formControlName="telephone">
         <label for="telephone">Telephone:</label>
-        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.get('telephone')?.hasError('pattern')">Not a valid telephone</div>
+        <div class="alert alert-danger p-2 mt-3" *ngIf="addForm.controls['contact'].controls['telephone'].hasError('pattern')">Not a valid telephone</div>
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-success w-100">Add</button>

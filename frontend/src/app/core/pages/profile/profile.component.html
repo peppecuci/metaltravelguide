@@ -5,33 +5,33 @@
       <label for="username">E-mail:</label>
     </div>
     <div class="form-floating mb-3">
-      <input class="form-control" [ngClass]="{'is-invalid': updateForm.get('nickname')?.invalid && (updateForm.get('nickname')?.touched || updateForm.get('nickname')?.dirty), 'is-valid': updateForm.get('nickname')?.valid && (updateForm.get('nickname')?.touched || updateForm.get('nickname')?.dirty)}" type="text" id="nickname" name="nickname" formControlName="nickname" />
+      <input class="form-control" [ngClass]="{'is-invalid': updateForm.controls['nickname'].invalid && (updateForm.controls['nickname'].touched || updateForm.controls['nickname'].dirty), 'is-valid': updateForm.controls['nickname'].valid && (updateForm.controls['nickname'].touched || updateForm.controls['nickname'].dirty)}" type="text" id="nickname" name="nickname" formControlName="nickname" />
       <label for="nickname">Nickname:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('nickname')?.hasError('minlength') && (updateForm.get('nickname')?.touched || updateForm.get('nickname')?.dirty)">Nickname must be at least 3 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('nickname')?.hasError('maxlength') && (updateForm.get('nickname')?.touched || updateForm.get('nickname')?.dirty)">Nickname cannot be more than 255 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('nickname')?.hasError('pattern') && (updateForm.get('nickname')?.touched || updateForm.get('nickname')?.dirty)">Nickname must contain only numbers and lowercase letters</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['nickname'].hasError('minlength') && (updateForm.controls['nickname'].touched || updateForm.controls['nickname'].dirty)">Nickname must be at least 3 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['nickname'].hasError('maxlength') && (updateForm.controls['nickname'].touched || updateForm.controls['nickname'].dirty)">Nickname cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['nickname'].hasError('pattern') && (updateForm.controls['nickname'].touched || updateForm.controls['nickname'].dirty)">Nickname must contain only numbers and lowercase letters</div>
     </div>
     <div class="form-floating mb-3">
-      <input class="form-control" [ngClass]="{'is-invalid': updateForm.get('password')?.invalid && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty), 'is-valid': updateForm.get('password')?.valid && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)}" type="password" id="password" name="password" formControlName="password" />
+      <input class="form-control" [ngClass]="{'is-invalid': updateForm.controls['password'].invalid && (updateForm.controls['password'].touched || updateForm.controls['password'].dirty), 'is-valid': updateForm.controls['password'].valid && (updateForm.controls['password'].touched || updateForm.controls['password'].dirty)}" type="password" id="password" name="password" formControlName="password" />
       <label for="password">New password:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('required') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password is required</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('minlength') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password must be at least 8 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('maxlength') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password cannot be more than 255 characters long</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('password')?.hasError('pattern') && (updateForm.get('password')?.touched || updateForm.get('password')?.dirty)">Password must contain only numbers and letters</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['password'].hasError('required') && (updateForm.controls['password'].touched || updateForm.controls['password'].dirty)">Password is required</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['password'].hasError('minlength') && (updateForm.controls['password'].touched || updateForm.controls['password'].dirty)">Password must be at least 8 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['password'].hasError('maxlength') && (updateForm.controls['password'].touched || updateForm.controls['password'].dirty)">Password cannot be more than 255 characters long</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['password'].hasError('pattern') && (updateForm.controls['password'].touched || updateForm.controls['password'].dirty)">Password must contain only numbers and letters</div>
     </div>
     <div class="form-floating mb-3">
-      <input class="form-control" [ngClass]="{'is-invalid': updateForm.get('confirmPassword')?.invalid && (updateForm.get('confirmPassword')?.touched || updateForm.get('confirmPassword')?.dirty), 'is-valid': updateForm.get('confirmPassword')?.valid && (updateForm.get('confirmPassword')?.touched || updateForm.get('confirmPassword')?.dirty)}" type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" />
+      <input class="form-control" [ngClass]="{'is-invalid': updateForm.controls['confirmPassword'].invalid && (updateForm.controls['confirmPassword'].touched || updateForm.controls['confirmPassword'].dirty), 'is-valid': updateForm.controls['confirmPassword'].valid && (updateForm.controls['confirmPassword'].touched || updateForm.controls['confirmPassword'].dirty)}" type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" />
       <label for="confirmPassword">Confirm password:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('confirmPassword')?.invalid && (updateForm.get('confirmPassword')?.touched || updateForm.get('confirmPassword')?.dirty)">Passwords must match</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['confirmPassword'].invalid && (updateForm.controls['confirmPassword'].touched || updateForm.controls['confirmPassword'].dirty)">Passwords must match</div>
     </div>
     <div class="form-floating mb-3">
-      <select class="form-select" [ngClass]="{'is-invalid': updateForm.get('countryIso')?.invalid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty), 'is-valid': updateForm.get('countryIso')?.valid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty)}" id="countryIso" name="countryIso" formControlName="countryIso">
+      <select class="form-select" [ngClass]="{'is-invalid': updateForm.controls['countryIso'].invalid && (updateForm.controls['countryIso'].touched || updateForm.controls['countryIso'].dirty), 'is-valid': updateForm.controls['countryIso'].valid && (updateForm.controls['countryIso'].touched || updateForm.controls['countryIso'].dirty)}" id="countryIso" name="countryIso" formControlName="countryIso">
         <option selected>Choose a country...</option>
         <option *ngFor="let country of Countries" [value]="country[0]"
                 [label]="country[1]"></option>
       </select>
       <label for="countryIso">Country:</label>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.get('countryIso')?.invalid && (updateForm.get('countryIso')?.touched || updateForm.get('countryIso')?.dirty)">You must choose a country</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="updateForm.controls['countryIso'].invalid && (updateForm.controls['countryIso'].touched || updateForm.controls['countryIso'].dirty)">You must choose a country</div>
     </div>
     <div class="col-12">
       <button class="btn btn-success w-100" type="submit">Save changes</button>

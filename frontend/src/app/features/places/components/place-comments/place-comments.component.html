@@ -11,9 +11,9 @@
   <form class="mt-3" [formGroup]="commentForm" (submit)="add()" *ngIf="isConnected">
     <div class="form-check mb-3">
       <label class="form-label" for="text">Write your comment:</label>
-      <textarea class="form-control" [ngClass]="{'is-invalid': commentForm.get('text')?.invalid && (commentForm.get('text')?.touched || commentForm.get('text')?.dirty), 'is-valid': commentForm.get('text')?.valid && (commentForm.get('text')?.touched || commentForm.get('text')?.dirty)}" id="text" name="text" formControlName="text" style="height:4em" required></textarea>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="commentForm.get('text')?.hasError('required') && (commentForm.get('text')?.touched || commentForm.get('text')?.dirty)">Comment can't be empty</div>
-      <div class="alert alert-danger p-2 mt-3" *ngIf="commentForm.get('text')?.hasError('minlength') && (commentForm.get('text')?.touched || commentForm.get('text')?.dirty)">Comment can't be empty</div>
+      <textarea class="form-control" [ngClass]="{'is-invalid': commentForm.controls['text'].invalid && (commentForm.controls['text'].touched || commentForm.controls['text'].dirty), 'is-valid': commentForm.controls['text'].valid && (commentForm.controls['text'].touched || commentForm.controls['text'].dirty)}" id="text" name="text" formControlName="text" style="height:4em" required></textarea>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="commentForm.controls['text'].hasError('required') && (commentForm.controls['text'].touched || commentForm.controls['text'].dirty)">Comment can't be empty</div>
+      <div class="alert alert-danger p-2 mt-3" *ngIf="commentForm.controls['text'].hasError('minlength') && (commentForm.controls['text'].touched || commentForm.controls['text'].dirty)">Comment can't be empty</div>
     </div>
     <div class="form-check">
       <button type="submit" class="btn btn-success">Submit</button>
