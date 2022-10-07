@@ -8,6 +8,7 @@ import { IPlace } from "../../models/IPlace";
 })
 export class PlaceCardComponent implements OnInit {
   @Input() place?: IPlace;
+  @Input() isAdmin?: boolean;
 
   // constructor
   constructor() { }

@@ -33,6 +33,7 @@ public class PlaceMapper {
                 .userId(entity.getUser().getId())
                 .userNickname(entity.getUser().getNickname())
                 .likes(entity.getLikes().stream().map(User::getUsername).collect(Collectors.toSet()))
+                .status(entity.isStatus())
                 .dateCreated(entity.getDateCreated())
                 .dateLastModified(entity.getDateLastModified())
                 .build();

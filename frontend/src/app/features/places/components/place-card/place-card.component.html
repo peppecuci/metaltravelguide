@@ -11,6 +11,8 @@
           <img class="me-2" height="24" src="assets/logos/{{place.type.toLowerCase()}}.svg" alt="{{place.type.toLowerCase()}}" style="opacity: 60%"/>
           <small class="text-muted">{{place.type}}</small>
         </div>
+        <button class="btn btn-outline-success" *ngIf="isAdmin && !place.status">Approve</button>
+        <button class="btn btn-outline-success" *ngIf="isAdmin && place.status">Remove</button>
       </div>
     </div>
   </div>

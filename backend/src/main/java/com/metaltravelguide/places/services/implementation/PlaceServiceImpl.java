@@ -118,4 +118,20 @@ public class PlaceServiceImpl implements PlaceService {
         place.setLikes(likes);
         placeRepository.save(place);
     }
+
+    @Override
+    public void approve(Long id) {
+        Place place = placeRepository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(Place.class, id));
+        place.setStatus(true);
+        placeRepository.save(place);
+    }
+
+    @Override
+    public void refuse(Long id) {
+        Place place = placeRepository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(Place.class, id));
+        place.setStatus(false);
+        placeRepository.save(place);
+    }
 }

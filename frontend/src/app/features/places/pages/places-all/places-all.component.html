@@ -19,5 +19,5 @@
   </div>
 </div>
 <div class="row g-3">
-  <app-place-card class="col-12 col-sm-6 col-lg-4" *ngFor="let place of Places | filterByCountry: countryIso | filterByType: type" [place]="place"></app-place-card>
+  <app-place-card class="col-12 col-sm-6 col-lg-4" [isAdmin]="IsAdmin" *ngFor="let place of Places | filterByCountry: countryIso | filterByType: type" [place]="place"></app-place-card>
 </div>

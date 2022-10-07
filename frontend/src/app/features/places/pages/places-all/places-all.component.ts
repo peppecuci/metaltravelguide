@@ -3,13 +3,14 @@ import { IPlace } from "../../models/IPlace";
 import { PlacesService } from "../../services/places.service";
 import { Country } from "../../../../core/enums/Country";
 import { Type } from "../../../../core/enums/Type";
+import {SessionService} from "../../../../core/security/services/session.service";
 
 @Component({
   selector: 'app-places-list',
-  templateUrl: './places-list.component.html',
-  styleUrls: ['./places-list.component.css']
+  templateUrl: './places-all.component.html',
+  styleUrls: ['./places-all.component.css']
 })
-export class PlacesListComponent implements OnInit {
+export class PlacesAllComponent implements OnInit {
   public countryEnum = Country;
   private countries : [string, Country][] = [];
   public typeEnum = Type;
@@ -20,7 +21,7 @@ export class PlacesListComponent implements OnInit {
   public type: string = "Filter by type...";
 
   // constructor
-  constructor(private service: PlacesService) { }
+  constructor(private service: PlacesService, private session: SessionService) { }
 
   // getters
   get Places(): IPlace[] {
@@ -33,6 +34,10 @@ export class PlacesListComponent implements OnInit {
 
   get Types(): [string, Type][] {
     return this.types;
+  }
+
+  get IsAdmin(): boolean {
+    return this.session.isAdmin();
   }
 
   // methods

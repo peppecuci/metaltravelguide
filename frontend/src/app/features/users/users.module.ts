@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
-import { UsersListComponent } from './pages/users-list/users-list.component';
+import { UsersAllComponent } from './pages/users-all/users-all.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UsersListComponent,
+    UsersAllComponent,
     UserDetailsComponent
   ],
   imports: [

@@ -13,6 +13,7 @@ export interface IPlace {
   userId: number;
   userNickname: string;
   likes: string[];
+  status: boolean;
   dateCreated: string;
   dateLastModified: string;
 }

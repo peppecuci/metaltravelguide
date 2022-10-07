@@ -14,7 +14,7 @@ export class PlacesService {
   constructor(private httpClient: HttpClient) { }
 
   // methods
-  readAll(): Observable<any> {
+  public readAll(): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -24,7 +24,7 @@ export class PlacesService {
     return this.httpClient.get<any>(this.apiServer + "all", {headers});
   }
 
-  readOne(id: number): Observable<any> {
+  public readOne(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -34,7 +34,7 @@ export class PlacesService {
     return this.httpClient.get<any>(this.apiServer + id, {headers});
   }
 
-  add(form: any): Observable<any> {
+  public add(form: any): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -44,7 +44,7 @@ export class PlacesService {
     return this.httpClient.post<any>(this.apiServer + "create", form, {headers});
   }
 
-  update(id: number, place: any): Observable<any> {
+  public update(id: number, place: any): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -54,7 +54,7 @@ export class PlacesService {
     return this.httpClient.patch<any>(this.apiServer + "update/" + id, place, {headers});
   }
 
-  delete(id: number): Observable<any> {
+  public delete(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -64,7 +64,7 @@ export class PlacesService {
     return this.httpClient.delete<any>(this.apiServer + "delete/" + id, {headers});
   }
 
-  like(id: number): Observable<any> {
+  public like(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -74,7 +74,7 @@ export class PlacesService {
     return this.httpClient.patch<any>(this.apiServer + "like/" + id, {} ,{headers});
   }
 
-  unlike(id: number): Observable<any> {
+  public unlike(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore

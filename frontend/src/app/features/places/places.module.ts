@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlacesRoutingModule } from './places-routing.module';
-import { PlacesListComponent } from './pages/places-list/places-list.component';
+import { PlacesAllComponent } from './pages/places-all/places-all.component';
 import { PlaceDetailsComponent } from './pages/place-details/place-details.component';
 import { PlacesComponent } from './places.component';
 import { HttpClientModule } from "@angular/common/http";
@@ -17,7 +17,7 @@ import { FilterByTypePipe } from './pipes/filter-by-type.pipe';
 
 @NgModule({
   declarations: [
-    PlacesListComponent,
+    PlacesAllComponent,
     PlaceDetailsComponent,
     PlacesComponent,
     PlaceCardComponent,

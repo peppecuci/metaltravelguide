@@ -16,7 +16,7 @@ export class UsersService {
   // getters
 
   // methods
-  readAll(): Observable<any> {
+  public readAll(): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -26,7 +26,7 @@ export class UsersService {
     return this.httpClient.get<any>(this.apiServer + "all", {headers});
   }
 
-  readOne(id: number): Observable<any> {
+  public readOne(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -36,7 +36,7 @@ export class UsersService {
     return this.httpClient.get<any>(this.apiServer + id, {headers});
   }
 
-  getProfile(): Observable<any> {
+  public getProfile(): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -46,7 +46,7 @@ export class UsersService {
     return this.httpClient.get<any>(this.apiServer + "profile", {headers});
   }
 
-  update(form: any): Observable<any> {
+  public update(form: any): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -63,7 +63,7 @@ export class UsersService {
     return this.httpClient.patch<any>(this.apiServer + "updateProfile", user, {headers});
   }
 
-  delete(id: number): Observable<any> {
+  public delete(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
