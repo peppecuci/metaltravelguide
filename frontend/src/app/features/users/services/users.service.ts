@@ -57,7 +57,7 @@ export class UsersService {
       "nickname": form.nickname,
       "countryIso": form.countryIso
     }
-    if (form.password.length > 0)
+    if (form.password != null)
       user.password = form.password;
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
     return this.httpClient.patch<any>(this.apiServer + "updateProfile", user, {headers});
