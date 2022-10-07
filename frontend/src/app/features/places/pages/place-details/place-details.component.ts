@@ -78,7 +78,7 @@ export class PlaceDetailsComponent implements OnInit {
     });
   }
 
-  delete(): void {
+  public delete(): void {
     if (confirm("Are you sure you want to delete this Place?")) {
       this.placesService.delete(this.placeId).subscribe(() => {
         this.router.navigate(["/places/all"]);
@@ -89,11 +89,11 @@ export class PlaceDetailsComponent implements OnInit {
     }
   }
 
-  like(): void {
+  public like(): void {
     this.placesService.like(this.placeId).subscribe(() => this.loadPlace());
   }
 
-  unlike(): void {
+  public unlike(): void {
     this.placesService.unlike(this.placeId).subscribe(() => this.loadPlace());
   }
 }

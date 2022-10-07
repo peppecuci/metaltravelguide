@@ -48,6 +48,9 @@ public class Place {
     @ManyToMany
     private Set<User> likes = new HashSet<>();
 
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
+
     public Place(String name, Address address, Contact contact, Type type, String description, String image) {
         this.name = name;
         this.address = address;

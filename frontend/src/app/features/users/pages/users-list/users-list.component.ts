@@ -24,14 +24,18 @@ export class UsersListComponent implements OnInit {
 
   // methods
   ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  private loadUsers(): void {
     this.service.readAll().subscribe((data: IUser[]) => this.users = data);
   }
 
-  delete(id: number): void {
+  public delete(id: number): void {
     if (confirm("Are you sure you want to delete this User?")) {
-      this.service.delete(id).subscribe(data => {
-        this.router.navigate(["/users/all"]);
-      }, response => {
+      this.service.delete(id).subscribe(() => {
+        this.loadUsers();
+      }, () => {
         this.toastr.error("Error deleting user", "Error");
       });
     }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { RxwebValidators } from "@rxweb/reactive-form-validators";
-import { Country } from "../../enums/Country";
-import { IUser} from "../../../features/users/models/IUser";
-import { UsersService } from "../../../features/users/services/users.service";
-import { AuthService } from "../../security/services/auth.service";
-import { SessionService } from "../../security/services/session.service";
+import { Country } from "../../../../core/enums/Country";
+import { IUser} from "../../models/IUser";
+import { UsersService } from "../../services/users.service";
+import { AuthService } from "../../../../core/security/services/auth.service";
+import { SessionService } from "../../../../core/security/services/session.service";
 import { ToastrService } from "ngx-toastr";
 
 @Component({

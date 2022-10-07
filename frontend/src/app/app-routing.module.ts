@@ -5,7 +5,7 @@ import { LoginComponent } from "./core/security/components/login/login.component
 import { HomeComponent } from "./core/pages/home/home.component";
 import { PrivacyComponent } from "./core/pages/privacy/privacy.component";
 import { ContactComponent } from "./core/pages/contact/contact.component";
-import { ProfileComponent } from "./core/pages/profile/profile.component";
+import { ProfileComponent } from "./features/users/pages/profile/profile.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

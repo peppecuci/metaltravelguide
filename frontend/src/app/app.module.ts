@@ -9,7 +9,7 @@ import { FooterComponent } from "./core/components/footer/footer.component";
 import { HomeComponent } from './core/pages/home/home.component';
 import { PrivacyComponent } from './core/pages/privacy/privacy.component';
 import { ContactComponent } from './core/pages/contact/contact.component';
-import { ProfileComponent } from "./core/pages/profile/profile.component";
+import { ProfileComponent } from "./features/users/pages/profile/profile.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";

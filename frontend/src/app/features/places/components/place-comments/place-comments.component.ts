@@ -33,10 +33,10 @@ export class PlaceCommentsComponent implements OnInit {
 
   // methods
   ngOnInit(): void {
-    this.readComments();
+    this.loadComments();
   }
 
-  private readComments(): void {
+  private loadComments(): void {
     this.commentForm.reset();
     this.commentForm.patchValue({placeId: this.placeId})
     this.commentForm.markAsUntouched();
@@ -49,7 +49,7 @@ export class PlaceCommentsComponent implements OnInit {
   public add(): void {
     if(this.commentForm.valid) {
       this.commentsService.add(this.commentForm.value).subscribe(() => {
-        this.readComments();
+        this.loadComments();
         this.toastr.success("Comment adding successfully", "Success");
       }, error => {
         this.toastr.error("Error adding comment", "Error");
@@ -60,7 +60,7 @@ export class PlaceCommentsComponent implements OnInit {
   public delete(id: number): void {
     if (confirm("Are you sure you want to delete this Comment?")) {
       this.commentsService.delete(id).subscribe(() => {
-        this.readComments();
+        this.loadComments();
         this.toastr.success("Comment deleted successfully", "Success");
       }, response => {
         this.toastr.error("Error deleting comment", "Error");
