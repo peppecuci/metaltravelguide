@@ -44,7 +44,6 @@ public class Place {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
-
     @ManyToMany
     private Set<User> likes = new HashSet<>();
 
@@ -60,14 +59,14 @@ public class Place {
         this.image = image;
     }
 
-    public Place(String name, Address address, Contact contact, Type type, String description, String image, User user) {
+    public Place(String name, Address address, Contact contact, Type type, String description, String image, boolean status, User user) {
         this(name, address, contact, type, description, image);
+        this.status = status;
         this.user = user;
     }
 
-    public Place(String name, Address address, Contact contact, Type type, String description, String image, User user, Set<User> likes) {
-        this(name, address, contact, type, description, image);
-        this.user = user;
+    public Place(String name, Address address, Contact contact, Type type, String description, String image, boolean status, User user, Set<User> likes) {
+        this(name, address, contact, type, description, image, status, user);
         this.likes = likes;
     }
 }

@@ -1,0 +1,26 @@
+<div class="row mb-3">
+  <div class="d-flex col justify-content-center justify-content-sm-end">
+    <button class="btn btn-outline-success" (click)="approveAll()">Approve all</button>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-sm table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    <tr *ngFor="let place of Places">
+      <td>{{ place.userNickname }}</td>
+      <td>{{ place.name }}</td>
+      <td>{{ place.description }}</td>
+      <td *ngIf="!place.status"><button class="btn btn-success" (click)="approve(place.id)">Approve</button></td>
+      <td *ngIf="place.status"><button class="btn btn-danger" (click)="refuse(place.id)">Refuse</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

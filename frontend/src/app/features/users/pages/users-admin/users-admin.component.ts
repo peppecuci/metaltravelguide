@@ -6,10 +6,10 @@ import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-users-list',
-  templateUrl: './users-all.component.html',
-  styleUrls: ['./users-all.component.css']
+  templateUrl: './users-admin.component.html',
+  styleUrls: ['./users-admin.component.css']
 })
-export class UsersAllComponent implements OnInit {
+export class UsersAdminComponent implements OnInit {
 
   private users: IUser[] = [];
 

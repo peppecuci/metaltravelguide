@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IPlace } from "../../models/IPlace";
+import {PlacesService} from "../../services/places.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-place-card',
@@ -8,10 +10,9 @@ import { IPlace } from "../../models/IPlace";
 })
 export class PlaceCardComponent implements OnInit {
   @Input() place?: IPlace;
-  @Input() isAdmin?: boolean;
 
   // constructor
-  constructor() { }
+  constructor(private placesService: PlacesService, private toastr: ToastrService) { }
 
   // methods
   ngOnInit(): void {

@@ -189,7 +189,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
       this.placesService.add(this.addForm.value).subscribe((data: any) => {
         this.place = data;
         this.router.navigate(["/places/all"]);
-        this.toastr.success("Place added successfully", "Success")
+        this.toastr.success("Place added successfully and should be available when an Admin approves it", "Success")
       }, () => {
         this.toastr.error("Error adding place", "Error");
       });

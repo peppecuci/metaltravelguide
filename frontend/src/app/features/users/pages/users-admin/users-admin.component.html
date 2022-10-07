@@ -2,7 +2,6 @@
   <table class="table table-striped table-sm">
     <thead>
     <tr>
-      <th scope="col">#id</th>
       <th scope="col">E-mail</th>
       <th scope="col">Nickname</th>
       <th scope="col">Delete</th>
@@ -10,7 +9,6 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of Users">
-      <td>{{ user.id }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.nickname }}</td>
       <td><a class="btn" (click)="delete(user.id)"><i class="bi bi-x-circle-fill text-danger"></i></a></td>
