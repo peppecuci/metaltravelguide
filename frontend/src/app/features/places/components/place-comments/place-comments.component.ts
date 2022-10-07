@@ -15,6 +15,7 @@ export class PlaceCommentsComponent implements OnInit {
   @Input() placeId!: number;
   @Input() userId!: number;
   @Input() isConnected!: boolean;
+  @Input() isAdmin!: boolean;
 
   commentForm = new FormGroup({
     text: new FormControl("", [Validators.required, Validators.minLength(1)]),

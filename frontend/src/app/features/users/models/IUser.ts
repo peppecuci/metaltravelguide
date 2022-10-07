@@ -4,4 +4,5 @@ export interface IUser {
   password: string;
   nickname: string;
   countryIso: string;
+  places: number[];
 }

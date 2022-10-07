@@ -15,6 +15,7 @@ import { PlaceCommentsComponent } from './components/place-comments/place-commen
 import { FilterByCountryPipe } from './pipes/filter-by-country.pipe';
 import { FilterByTypePipe } from './pipes/filter-by-type.pipe';
 import { PlacesAdminComponent } from './pages/places-admin/places-admin.component';
+import { PlacesMapComponent } from './pages/places-map/places-map.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PlacesAdminComponent } from './pages/places-admin/places-admin.componen
     PlaceCommentsComponent,
     FilterByCountryPipe,
     FilterByTypePipe,
-    PlacesAdminComponent
+    PlacesAdminComponent,
+    PlacesMapComponent
   ],
     imports: [
       CommonModule,

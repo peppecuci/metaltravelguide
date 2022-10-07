@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between">
       <p class="blog-post-meta" *ngIf="isConnected">Added: {{comment.dateCreated | date: "short"}} by <a routerLink="/users/{{comment.userId}}">{{comment.userNickname}}</a></p>
       <p class="blog-post-meta" *ngIf="!isConnected">Added: {{comment.dateCreated | date: "short"}} by {{comment.userNickname}}</p>
-      <p><a class="btn" (click)="delete(comment.id!)" *ngIf="userId == comment.userId">Delete <i class="bi bi-x-circle-fill text-danger"></i></a></p>
+      <p><a class="btn" (click)="delete(comment.id!)" *ngIf="userId == comment.userId || isAdmin">Delete <i class="bi bi-x-circle-fill text-danger"></i></a></p>
     </div>
     <p>{{comment.text}}</p>
   </div>

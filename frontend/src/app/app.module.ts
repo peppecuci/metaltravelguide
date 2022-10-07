@@ -37,7 +37,7 @@ import { ToastrModule } from "ngx-toastr";
     ToastrModule.forRoot({
       timeOut: 2000,
       easing: 'ease-in',
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       closeButton: true,
       tapToDismiss: true,
