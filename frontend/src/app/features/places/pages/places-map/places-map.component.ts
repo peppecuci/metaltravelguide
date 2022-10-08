@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {PlacesService} from "../../services/places.service";
-import {IPlace} from "../../models/IPlace";
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { PlacesService } from "../../services/places.service";
+import { IPlace } from "../../models/IPlace";
+declare var MarkerClusterer: any;
 
 @Component({
   selector: 'app-places-map',
@@ -21,7 +22,11 @@ export class PlacesMapComponent implements OnInit, AfterViewInit {
       this.places = places
       places.forEach((place) => {
         this.createMarker(place);
-      })
+      });
+      new MarkerClusterer(this.map, this.markers, {
+        imagePath:
+          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+      });
     });
   }
 
@@ -47,10 +52,7 @@ export class PlacesMapComponent implements OnInit, AfterViewInit {
   }
 
   private createMarker(place: IPlace): any {
-    const marker = new google.maps.Marker();
-    marker.setPosition({lat: place.address.lat, lng: place.address.lon});
-    // marker.setIcon("assets/logos/" + place.type.toLowerCase() + ".svg");
-    marker.setMap(this.map);
+    const marker = new google.maps.Marker({position: new google.maps.LatLng(place.address.lat, place.address.lon), title: place.name, map: this.map, icon: {url: "assets/logos/" + place.type.toLowerCase() + ".svg", scaledSize: new google.maps.Size(25, 25)}});
+    this.markers.push(marker);
   }
-
 }
