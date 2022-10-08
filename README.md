@@ -15,3 +15,7 @@ A "Headbanger's Travel Guide" [website](https://headbangerstravelguide.com/) clo
 Check the frontend here: [MTG Website](https://luisromeroaraya.github.io/metaltravelguide/)
 
 You can test the Backend API commands here: [Swagger-UI](https://metaltravelguide.herokuapp.com/swagger-ui/index.html)
+
+UML case diagram:
+
+![UML case diagram](uml_case_diagram.png)
