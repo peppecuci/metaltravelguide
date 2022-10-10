@@ -87,11 +87,10 @@ export class ProfileComponent implements OnInit {
       },
       (error:any,result:any)=> {
         if (!error && result && result.event === "success") {
-          this.updateForm.patchValue({image: result.info.url})
+          this.updateForm.controls['image'].setValue(result.info.url);
         }
       }
     );
-
     myWidget.open()
   }
 }

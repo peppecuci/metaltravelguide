@@ -55,6 +55,7 @@ export class UsersService {
     const user: any = {
       "username": form.username,
       "nickname": form.nickname,
+      "image": form.image,
       "countryIso": form.countryIso
     }
     if (form.password != null)

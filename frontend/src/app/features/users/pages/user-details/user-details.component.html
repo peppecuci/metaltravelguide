@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center" *ngIf="User">
   <div class="card text-center" style="width: 16rem">
-    <div class="card-header">User details</div>
-    <img src="assets/logos/profile-default.png" class="card-img-top rounded-circle" loading="lazy" alt="{{User.nickname}}">
+    <div class="card-header mb-2">User details</div>
+    <img src="{{User.image}}" class="card-img-top rounded-circle" loading="lazy" style="width: 150px; margin: auto;" alt="{{User.nickname}}">
     <div class="card-body">
       <h5 class="card-title">{{User.nickname}}</h5>
       <p class="card-text"><span class="fs-4 fi fi-{{User.countryIso.toLowerCase()}}"></span></p>
