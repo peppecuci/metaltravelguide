@@ -15,7 +15,6 @@ export class PlacesMapComponent implements OnInit, AfterViewInit {
   private markers: google.maps.Marker[] = [];
   private infoWindow?: google.maps.InfoWindow;
 
-
   private places: IPlace[] = [];
 
   constructor(private placesService: PlacesService, private renderer: Renderer2) { }
@@ -37,8 +36,7 @@ export class PlacesMapComponent implements OnInit, AfterViewInit {
       navigator.geolocation.getCurrentPosition((position) => {
           this.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
           this.map.setZoom(11);
-        }
-      );
+        });
     }
   }
 
@@ -59,7 +57,7 @@ export class PlacesMapComponent implements OnInit, AfterViewInit {
       this.map.setZoom(17);
       this.map.setCenter(marker.getPosition() as google.maps.LatLng);
       this.infoWindow?.setContent(
-        "<a class='text-decoration-none text-black' href='/places/" + marker.getTitle() + "'><div class='card shadow-sm'><img class='bd-placeholder-img card-img-top' src='" + marker.getTitle() + "' alt='" + marker.getTitle() + "'/><div class='card-body'><h5 class='card-title'>" + marker.getTitle() + "</h5><div class='d-flex justify-content-between'><p>" + marker.getTitle() + " " + marker.getTitle() + ", " + marker.getTitle() + " " + marker.getTitle() + "<span class='fi fi-" + "BE" + "'></span></p></div><div class='d-flex justify-content-between align-items-center'><div class='d-flex align-items-center'><img class='me-2' height='24' src='assets/logos/" + "bar" + ".svg' alt='" + "bar" + "' style='opacity: 60%'/><small class='text-muted'>" + "BAR" + "</small></div></div></div></div></a>"
+        "<a class='text-decoration-none text-black' href='/places/" + place.id + "'><div class='card shadow-sm' style='width: 15rem'><img class='bd-placeholder-img card-img-top' src='" + place.image + "' alt='" + place.name + "' style='object-fit: cover; height: 100px;'/><div class='card-body'><strong class='card-title mb-1'>" + marker.getTitle() + "</strong><div class='d-flex'><p class='mb-1'>" + place.address.street + " " + place.address.number + ", " + place.address.extra + ", " + place.address.city + " <span class='fi fi-" + place.address.countryIso.toLowerCase() + "'></span></p></div><div class='d-flex align-items-center'><img class='me-1' height='16' src='assets/logos/" + place.type.toLowerCase() + ".svg' alt='" + place.type.toLowerCase() + "' style='opacity: 60%'/><span class='text-muted'>" + place.type + "</span></div></div></div></a>"
       );
       this.infoWindow?.open(this.map, this.marker);
     });

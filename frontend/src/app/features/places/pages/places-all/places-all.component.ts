@@ -6,7 +6,7 @@ import { Type } from "../../../../core/enums/Type";
 import {SessionService} from "../../../../core/security/services/session.service";
 
 @Component({
-  selector: 'app-places-list',
+  selector: 'app-places-all',
   templateUrl: './places-all.component.html',
   styleUrls: ['./places-all.component.css']
 })

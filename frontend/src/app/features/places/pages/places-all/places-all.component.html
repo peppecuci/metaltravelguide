@@ -1,9 +1,9 @@
-<div class="row g-3 mb-3" *ngIf="IsAdmin">
+<div class="row g-2 g-sm-3 mb-3" *ngIf="IsAdmin">
   <div class="d-flex col justify-content-center justify-content-sm-end">
     <a class="btn btn-success" routerLink="/places/admin">Admin area</a>
   </div>
 </div>
-<div class="row g-3 mb-3">
+<div class="row g-2 g-sm-3 mb-2 mb-sm-3">
   <div class="col-12 col-md-6">
     <div class="form-floating">
       <select class="form-select" id="countryIso" name="countryIso" [(ngModel)]="countryIso">
@@ -24,5 +24,10 @@
   </div>
 </div>
 <div class="row g-3">
-  <app-place-card class="col-12 col-sm-6 col-lg-4" *ngFor="let place of Places | filterByCountry: countryIso | filterByType: type" [place]="place"></app-place-card>
+  <div class="col-12 col-sm-3 order-2 order-sm-1" style="height: calc(100vh - 75px - 7rem); overflow-y: scroll">
+    <app-places-list [places]="Places | filterByCountry: countryIso | filterByType: type"></app-places-list>
+  </div>
+  <div class="col-12 col-sm-9 order-1 order-sm-2">
+    <app-places-map></app-places-map>
+  </div>
 </div>
