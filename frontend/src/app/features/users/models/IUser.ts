@@ -3,6 +3,7 @@ export interface IUser {
   username: string;
   password: string;
   nickname: string;
+  image?: string;
   countryIso: string;
   places: number[];
 }

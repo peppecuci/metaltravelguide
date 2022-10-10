@@ -72,6 +72,8 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             user.setPassword(encoder.encode(form.getPassword()));
         if (form.getNickname() != null)
             user.setNickname(form.getNickname());
+        if (form.getImage() != null)
+            user.setImage(form.getImage());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
         try {
@@ -100,6 +102,8 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             user.setPassword(encoder.encode(form.getPassword()));
         if (form.getNickname() != null && !form.getNickname().equals(user.getNickname()))
             user.setNickname(form.getNickname());
+        if (form.getImage() != null)
+            user.setImage(form.getImage());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
         try {

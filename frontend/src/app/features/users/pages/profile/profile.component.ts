@@ -7,6 +7,7 @@ import { UsersService } from "../../services/users.service";
 import { AuthService } from "../../../../core/security/services/auth.service";
 import { SessionService } from "../../../../core/security/services/session.service";
 import { ToastrService } from "ngx-toastr";
+declare let cloudinary: any ;
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
     nickname: new FormControl("", [Validators.required, Validators.minLength(3), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9\\_]+$")]),
     password: new FormControl("", [Validators.minLength(8), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9]+$")]),
     confirmPassword: new FormControl("", [RxwebValidators.compare({fieldName: 'password'})]),
+    image: new FormControl(""),
     countryIso: new FormControl("Choose a country...", [Validators.required, Validators.maxLength(2)])
   },  {updateOn: 'submit'});
 
@@ -52,7 +54,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getProfile().subscribe((data: IUser) => {
       this.user = data;
       this.updateForm.reset();
-      this.updateForm.patchValue({id: this.user.id, username: this.user.username, nickname: this.user.nickname, countryIso: this.user.countryIso});
+      this.updateForm.patchValue({id: this.user.id, username: this.user.username, nickname: this.user.nickname, image: this.user.image, countryIso: this.user.countryIso});
       this.updateForm.markAsUntouched();
       this.updateForm.markAsPristine();
     });
@@ -75,5 +77,21 @@ export class ProfileComponent implements OnInit {
         this.toastr.error(response.error.message, "Error")
       });
     }
+  }
+
+  cloudinaryGo(){
+    const myWidget = cloudinary.createUploadWidget(
+      {
+        cloudName: 'dkndu29j4',
+        uploadPreset: 'user_images'
+      },
+      (error:any,result:any)=> {
+        if (!error && result && result.event === "success") {
+          this.updateForm.patchValue({image: result.info.url})
+        }
+      }
+    );
+
+    myWidget.open()
   }
 }

@@ -21,6 +21,7 @@ public class UserMapper {
                 .id(entity.getId())
                 .username(entity.getUsername())
                 .nickname(entity.getNickname())
+                .image(entity.getImage())
                 .countryIso(entity.getCountryIso().name())
                 .enabled(entity.isEnabled())
                 .roles(entity.getRoles())
@@ -42,6 +43,7 @@ public class UserMapper {
         user.setUsername(form.getUsername());
         user.setPassword(form.getPassword());
         user.setNickname(form.getNickname());
+        user.setImage(form.getImage());
         user.setCountryIso(findByName(form.getCountryIso()));
         user.setEnabled(form.isEnabled());
         return user;
