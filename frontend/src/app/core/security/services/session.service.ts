@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from "rxjs";
 import jwtDecode from "jwt-decode";
 import { IPayload } from "../types/IPayload";
+import { IUser } from "../../../features/users/models/IUser";
+import {UsersService} from "../../../features/users/services/users.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,10 @@ import { IPayload } from "../types/IPayload";
 export class SessionService {
   // variables
   private token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  private user?: IUser;
 
   // constructor
-  constructor() {
+  constructor(private usersService: UsersService) {
     const token = localStorage.getItem("token");
     if (token) {
       this.token$.next(token);
@@ -23,17 +26,23 @@ export class SessionService {
     return this.token$.asObservable();
   }
 
-  // methods
+  get User(): IUser {
+    return <IUser>this.user;
+  }
+
+// methods
   public login(token: string) {
     localStorage.setItem("token", token);
     this.token$.next(token);
+    this.usersService.getProfile().subscribe((data: IUser) => this.user = data);
   }
 
   public logout() {
     this.token$.next(null);
+    this.user = {countryIso: "", id: 0, image: "", nickname: "", password: "", places: [], username: ""};
   }
 
-  public getUser(token: string): any {
+  public getUsername(token: string): any {
     return jwtDecode<IPayload>(token).sub;
   }
 

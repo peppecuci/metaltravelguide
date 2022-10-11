@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { SessionService } from "../../security/services/session.service";
+import { IUser } from "../../../features/users/models/IUser";
 
 @Component({
   selector: 'app-header',
@@ -13,10 +14,14 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private sessionService: SessionService) {}
 
   // getters
+  get User(): IUser {
+    return this.sessionService.User;
+  }
+
   get Username(): string {
     const token = localStorage.getItem("token");
     if(token)
-      return this.sessionService.getUser(token);
+      return this.sessionService.getUsername(token);
     else
       return "";
   }

@@ -30,11 +30,11 @@
         </li>
         <li class="nav-item dropdown" *ngIf="isConnected">
           <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="assets/logos/profile-default.png" class="rounded-circle" height="32" loading="lazy" alt="My Profile" />
+            <img src="{{ User.image }}" class="rounded-circle" height="32" loading="lazy" alt="My Profile" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <h6 class="dropdown-header fw-bold">Signed in as: {{ Username }}</h6>
+              <h6 class="dropdown-header fw-bold">Signed in as: {{ User.nickname }}</h6>
             </li>
             <li>
               <a class="dropdown-item" routerLink="profile" routerLinkActive="fw-semibold">My profile</a>
