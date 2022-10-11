@@ -28,6 +28,6 @@
     <app-places-list [places]="Places | filterByCountry: countryIso | filterByType: type"></app-places-list>
   </div>
   <div class="col-12 col-sm-9 order-1 order-sm-2">
-    <app-places-map></app-places-map>
+    <app-places-map [places]="Places | filterByCountry: countryIso | filterByType: type"></app-places-map>
   </div>
 </div>

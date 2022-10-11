@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Renderer2,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { PlacesService } from "../../services/places.service";
 import { IPlace } from "../../models/IPlace";
 declare var MarkerClusterer: any;
@@ -8,26 +18,18 @@ declare var MarkerClusterer: any;
   templateUrl: './places-map.component.html',
   styleUrls: ['./places-map.component.css']
 })
-export class PlacesMapComponent implements OnInit, AfterViewInit {
+export class PlacesMapComponent implements OnInit, AfterViewInit, OnChanges {
+  @Input() places!: IPlace[];
   @ViewChild('divMap') divMap!: ElementRef;
   private map!: google.maps.Map;
   private marker?: google.maps.Marker;
   private markers: google.maps.Marker[] = [];
+  private markerClusterer = new MarkerClusterer(this.map, this.markers, {imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"});
   private infoWindow?: google.maps.InfoWindow;
-
-  private places: IPlace[] = [];
 
   constructor(private placesService: PlacesService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    this.placesService.readAll().subscribe((places: IPlace[]) => {
-      this.places = places
-      places.forEach((place) => {
-        this.createMarker(place);
-      });
-      new MarkerClusterer(this.map, this.markers, {imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"});
-      this.infoWindow = new google.maps.InfoWindow();
-    });
   }
 
   ngAfterViewInit(): void {
@@ -38,6 +40,17 @@ export class PlacesMapComponent implements OnInit, AfterViewInit {
           this.map.setZoom(11);
         });
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.markers = [];
+    this.places.forEach((place) => {
+      this.createMarker(place);
+    });
+    this.markerClusterer.setMap(this.map);
+    this.markerClusterer.clearMarkers();
+    this.markerClusterer.addMarkers(this.markers);
+    this.infoWindow = new google.maps.InfoWindow();
   }
 
   private loadMap(): any {
@@ -51,7 +64,7 @@ export class PlacesMapComponent implements OnInit, AfterViewInit {
   }
 
   private createMarker(place: IPlace): any {
-    const marker = new google.maps.Marker({position: new google.maps.LatLng(place.address.lat, place.address.lon), title: place.name, map: this.map, icon: {url: "assets/markers/" + place.type.toLowerCase() + ".png", scaledSize: new google.maps.Size(32, 32)}});
+    const marker = new google.maps.Marker({position: new google.maps.LatLng(place.address.lat, place.address.lon), title: place.name, map: this.map, icon: {url: "assets/markers/" + place.type.toLowerCase() + ".png", scaledSize: new google.maps.Size(40, 40)}});
     marker.addListener("click", () => {
       this.marker = marker;
       this.map.setZoom(17);

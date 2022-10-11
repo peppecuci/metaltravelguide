@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IPlace } from "../../models/IPlace";
 import { PlacesService } from "../../services/places.service";
+import { SessionService } from "../../../../core/security/services/session.service";
 import { Country } from "../../../../core/enums/Country";
 import { Type } from "../../../../core/enums/Type";
-import {SessionService} from "../../../../core/security/services/session.service";
 
 @Component({
   selector: 'app-places-all',
