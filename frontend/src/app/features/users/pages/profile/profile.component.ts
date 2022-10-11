@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { RxwebValidators } from "@rxweb/reactive-form-validators";
-import { Country } from "../../../../core/enums/Country";
-import { IUser} from "../../models/IUser";
-import { UsersService } from "../../services/users.service";
 import { AuthService } from "../../../../core/security/services/auth.service";
+import { UsersService } from "../../services/users.service";
 import { SessionService } from "../../../../core/security/services/session.service";
 import { ToastrService } from "ngx-toastr";
+import { Country } from "../../../../core/enums/Country";
+import { IUser} from "../../models/IUser";
 declare let cloudinary: any ;
 
 @Component({
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   },  {updateOn: 'submit'});
 
   // constructor
-  constructor(private userService: UsersService, private auth: AuthService, private session: SessionService, private toastr: ToastrService) {
+  constructor(private auth: AuthService, private userService: UsersService, private session: SessionService, private toastr: ToastrService) {
     this.countries = Object.entries(this.countryEnum)
   }
 
@@ -62,7 +62,8 @@ export class ProfileComponent implements OnInit {
 
   public update(): void {
     if (this.updateForm.valid) {
-      this.userService.update(this.updateForm.value).subscribe(() => {
+      this.userService.update(this.updateForm.value).subscribe((data) => {
+        this.session.User = data;
         if (this.updateForm.value.password != null) {
           this.session.logout();
           console.log(this.updateForm.getRawValue());

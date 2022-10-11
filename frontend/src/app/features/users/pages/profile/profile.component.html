@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <form class="g-3 col-auto col-md-8 col-lg-6 col-xl-4 bg-light p-4 p-md-5 border rounded-3" [formGroup]="updateForm" (submit)="update()">
     <div class="form-control mb-3">
-      <img class="card-img-top rounded-circle mx-auto d-block mb-1" src="{{updateForm.controls['image'].value}}" loading="lazy" alt="Profile image" style="width: 150px"/>
+      <img class="card-img-top rounded-circle mx-auto d-block mb-1" src="{{updateForm.controls['image'].value}}" loading="lazy" alt="Profile image" style="height: 150px; width: 150px; object-fit: cover;" />
       <button class="btn btn-outline-success w-100" id="upload_widget" type="button" (click)="cloudinaryGo()">Change your picture</button>
     </div>
     <div class="form-floating mb-3">

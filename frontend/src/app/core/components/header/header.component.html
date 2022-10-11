@@ -30,11 +30,11 @@
         </li>
         <li class="nav-item dropdown" *ngIf="isConnected">
           <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ User.image }}" class="rounded-circle" height="32" loading="lazy" alt="My Profile" />
+            <img src="{{ User.image }}" class="rounded-circle" loading="lazy" alt="My Profile" style="height: 32px; width: 32px; object-fit: cover;" *ngIf="User" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <h6 class="dropdown-header fw-bold">Signed in as: {{ User.nickname }}</h6>
+              <h6 class="dropdown-header fw-bold" *ngIf="User">Signed in as: {{ User.nickname }}</h6>
             </li>
             <li>
               <a class="dropdown-item" routerLink="profile" routerLinkActive="fw-semibold">My profile</a>
@@ -46,9 +46,9 @@
           </ul>
         </li>
       </ul>
-<!--      <form role="search">-->
-<!--        <input class="form-control" type="search" placeholder="Search" aria-label="Search">-->
-<!--      </form>-->
+      <!--      <form role="search">-->
+      <!--        <input class="form-control" type="search" placeholder="Search" aria-label="Search">-->
+      <!--      </form>-->
     </div>
   </div>
 </nav>

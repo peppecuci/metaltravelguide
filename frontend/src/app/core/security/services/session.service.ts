@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import jwtDecode from "jwt-decode";
 import { IPayload } from "../types/IPayload";
 import { IUser } from "../../../features/users/models/IUser";
-import {UsersService} from "../../../features/users/services/users.service";
+import { UsersService } from "../../../features/users/services/users.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class SessionService {
     const token = localStorage.getItem("token");
     if (token) {
       this.token$.next(token);
+      this.usersService.getProfile().subscribe((data: IUser) => this.user = data);
     }
   }
 
@@ -28,6 +29,11 @@ export class SessionService {
 
   get User(): IUser {
     return <IUser>this.user;
+  }
+
+  // setters
+  set User(user: IUser) {
+    this.user = user;
   }
 
 // methods
