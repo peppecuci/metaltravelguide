@@ -116,6 +116,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
           this.place = place;
           this.search = <string>place!.name + ", " + place!.formatted_address;
           this.map.setCenter(this.place.geometry.location);
+          this.map.setZoom(17);
           this.marker.setPosition(this.place.geometry.location);
           this.marker.setMap(this.map);
           this.fillForm(this.place);
@@ -132,6 +133,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     google.maps.event.addListener(autoComplete, 'place_changed', () => {
       this.place = autoComplete.getPlace();
       this.map.setCenter(this.place.geometry.location);
+      this.map.setZoom(17);
       this.marker.setPosition(this.place.geometry.location);
       this.marker.setMap(this.map);
       this.fillForm(this.place);
@@ -182,6 +184,10 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
       this.addForm.controls['contact'].controls['telephone'].setValue(this.place.international_phone_number.replace(/\s/g, ""));
     if (this.place.website)
       this.addForm.controls['contact'].controls['website'].setValue(this.place.website);
+    if (this.place.geometry.location.lat())
+      this.addForm.controls['address'].controls['lat'].setValue(this.place.geometry.location.lat());
+    if (this.place.geometry.location.lng())
+      this.addForm.controls['address'].controls['lon'].setValue(this.place.geometry.location.lng());
   }
 
   add(): void {
