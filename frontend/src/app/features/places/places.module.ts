@@ -19,28 +19,31 @@ import { PlacesMapComponent } from './components/places-map/places-map.component
 import { PlacesListComponent } from './components/places-list/places-list.component';
 
 @NgModule({
-  declarations: [
-    PlacesAllComponent,
-    PlaceDetailsComponent,
-    PlacesComponent,
-    PlaceCardComponent,
-    SafePipe,
-    DateAsAgoPipe,
-    PlaceAddComponent,
-    PlaceUpdateComponent,
-    PlaceCommentsComponent,
-    FilterByCountryPipe,
-    FilterByTypePipe,
-    PlacesAdminComponent,
-    PlacesMapComponent,
-    PlacesListComponent
-  ],
+    declarations: [
+        PlacesAllComponent,
+        PlaceDetailsComponent,
+        PlacesComponent,
+        PlaceCardComponent,
+        SafePipe,
+        DateAsAgoPipe,
+        PlaceAddComponent,
+        PlaceUpdateComponent,
+        PlaceCommentsComponent,
+        FilterByCountryPipe,
+        FilterByTypePipe,
+        PlacesAdminComponent,
+        PlacesMapComponent,
+        PlacesListComponent
+    ],
+    exports: [
+        PlacesListComponent
+    ],
     imports: [
-      CommonModule,
-      PlacesRoutingModule,
-      HttpClientModule,
-      FormsModule,
-      ReactiveFormsModule
+        CommonModule,
+        PlacesRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class PlacesModule { }

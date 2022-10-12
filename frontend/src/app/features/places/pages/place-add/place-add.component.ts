@@ -56,7 +56,7 @@ export class PlaceAddComponent implements OnInit, AfterViewInit {
     description: new FormControl("", [Validators.required, Validators.minLength(4)]),
     image: new FormControl("", [Validators.required, Validators.minLength(4)]),
     userId: new FormControl(0)
-  }, {updateOn: "submit"});
+  }, {updateOn: "blur"});
 
   // constructor
   constructor(private usersService: UsersService, private placesService: PlacesService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2, private toastr: ToastrService) {

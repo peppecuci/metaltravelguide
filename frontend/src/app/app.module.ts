@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
+import {PlacesModule} from "./features/places/places.module";
 
 @NgModule({
   declarations: [
@@ -25,25 +26,26 @@ import { ToastrModule } from "ngx-toastr";
     ContactComponent,
     ProfileComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    SecurityModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RxReactiveFormsModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 2000,
-      easing: 'ease-in',
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-      closeButton: true,
-      tapToDismiss: true,
-      newestOnTop: true
-    })
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        SecurityModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RxReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 2000,
+            easing: 'ease-in',
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: true,
+            closeButton: true,
+            tapToDismiss: true,
+            newestOnTop: true
+        }),
+        PlacesModule
+    ],
   providers: [],
   exports: [],
   bootstrap: [AppComponent]

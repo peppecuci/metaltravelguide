@@ -25,7 +25,7 @@
 </div>
 <div class="row g-3">
   <div class="col-12 col-sm-3 order-2 order-sm-1" style="height: calc(100vh - 75px - 7rem); overflow-y: scroll">
-    <app-places-list [places]="Places | filterByCountry: countryIso | filterByType: type"></app-places-list>
+    <app-places-list class="row g-3" [places]="Places | filterByCountry: countryIso | filterByType: type"></app-places-list>
   </div>
   <div class="col-12 col-sm-9 order-1 order-sm-2">
     <app-places-map [places]="Places | filterByCountry: countryIso | filterByType: type"></app-places-map>

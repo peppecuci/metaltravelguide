@@ -76,7 +76,7 @@
       [src]="MapURL | safe">
     </iframe>
     <p class="text-center">{{Place.address.street}} {{Place.address.number}}, {{Place.address.city}} <span class="fi fi-{{Place.address.countryIso.toLowerCase()}}"></span></p>
-    <p class="text-center"><i class="bi bi-telephone-fill text-success"></i>{{Place.contact.telephone}}</p>
+    <p class="text-center" *ngIf="Place.contact.telephone"><i class="bi bi-telephone-fill text-success"></i>{{Place.contact.telephone}}</p>
     <div class="row justify-content-center">
       <div class="col-auto" *ngIf="IsOwner || IsAdmin">
         <a class="btn btn-outline-success" routerLink="/places/update/{{PlaceId}}">Edit</a>

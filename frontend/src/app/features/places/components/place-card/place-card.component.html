@@ -1,5 +1,5 @@
-<a class="text-decoration-none text-black" routerLink="/places/{{place.id}}" *ngIf="place">
-  <div class="card shadow-sm">
+<div class="card h-100 shadow-sm">
+  <a class="text-decoration-none text-black" routerLink="/places/{{place.id}}" *ngIf="place">
     <img class="bd-placeholder-img card-img-top" src="{{place.image}}" alt="{{place.name}}"/>
     <div class="card-body">
       <h5 class="card-title">{{place.name}}</h5>
@@ -11,7 +11,10 @@
           <img class="me-2" height="24" src="assets/logos/{{place.type.toLowerCase()}}.svg" alt="{{place.type.toLowerCase()}}" style="opacity: 60%"/>
           <small class="text-muted">{{place.type}}</small>
         </div>
+        <div>
+          <p class="card-text"><small class="text-muted">Added {{place.dateCreated | dateAsAgo}}</small></p>
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+</div>

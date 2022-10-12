@@ -1,4 +1,4 @@
-<div class="row align-items-center justify-content-center g-5 py-5">
+<div class="row align-items-center justify-content-center g-5 py-5 border-bottom">
   <div class="col-10 col-sm-8 col-md-6 col-lg-4">
     <img src="assets/logos/horns.svg" class="d-block w-100 img-fluid mx-lg-auto " alt="Metal Travel Guide" loading="lazy">
   </div>
@@ -32,4 +32,11 @@
       </div>
     </form>
   </div>
+</div>
+<div class="row py-3 justify-content-center">
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="me-2">Latest Places added</h2>
+    <a class="btn btn-success" routerLink="places/all">View All</a>
+  </div>
+  <app-places-list class="row row-cols-1 row-cols-md-2 row-cols-xxl-4 g-3" [places]="Places"></app-places-list>
 </div>
