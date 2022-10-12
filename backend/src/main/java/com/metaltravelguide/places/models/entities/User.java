@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private String password;
     @Column(nullable = false, unique = true)
     private String nickname;
-    private String image = "/assets/logos/profile-default.png";
+    private String image = "./assets/logos/profile-default.png";
     @Column(columnDefinition = "CHAR(2)")
     private Country countryIso = Country.BE;
     private boolean enabled = true;
