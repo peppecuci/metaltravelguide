@@ -46,4 +46,4 @@ Entity relationship diagram:
 
 ### Greetings
 - Inspired by the website ["Headbanger's Travel Guide"](https://headbangerstravelguide.com/) and the original ["The Metal Travel Guide"](https://web.archive.org/web/20040626111046/http://www.metaltravelguide.com/) created in the early 2000's.
-- Thanks to @3djdavid2 [David Vivanco](https://github.com/3djdavid2) for uploading [this Google Maps API tutorial](https://www.youtube.com/watch?v=CB1afRE9hdE)
+- Thanks to [David Vivanco](https://github.com/3djdavid2) for uploading [this Google Maps API tutorial](https://www.youtube.com/watch?v=CB1afRE9hdE)
