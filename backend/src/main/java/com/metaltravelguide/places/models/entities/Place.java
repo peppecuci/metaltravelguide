@@ -65,8 +65,19 @@ public class Place {
         this.user = user;
     }
 
+    public Place(String name, String googleId, Address address, Contact contact, Type type, String description, String image, boolean status, User user) {
+        this(name, address, contact, type, description, image, status, user);
+        this.googleId = googleId;
+    }
+
     public Place(String name, Address address, Contact contact, Type type, String description, String image, boolean status, User user, Set<User> likes) {
         this(name, address, contact, type, description, image, status, user);
+        this.likes = likes;
+    }
+
+    public Place(String name, String googleId, Address address, Contact contact, Type type, String description, String image, boolean status, User user, Set<User> likes) {
+        this(name, address, contact, type, description, image, status, user);
+        this.googleId = googleId;
         this.likes = likes;
     }
 }
