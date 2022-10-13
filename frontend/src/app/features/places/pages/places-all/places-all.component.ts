@@ -50,9 +50,9 @@ export class PlacesAllComponent implements OnInit {
   private loadPlaces(): void {
     this.service.readAll().subscribe((data: IPlace[]) => {
       this.places = data.filter((place) => place.status).sort((place1, place2) => place2.id - place1.id);
-      const placesIso = data.map( (element) => element.address.countryIso ).filter((e, i, self) => self.indexOf(e) === i);
+      const placesIso = this.places.map( (element) => element.address.countryIso ).filter((e, i, self) => self.indexOf(e) === i);
       this.countries = this.countries.filter((entry) => placesIso.includes(entry[0]));
-      const placesType = data.map( (element) => element.type ).filter((e, i, self) => self.indexOf(e) === i);
+      const placesType = this.places.map( (element) => element.type ).filter((e, i, self) => self.indexOf(e) === i);
       this.types = this.types.filter((entry) => placesType.includes(entry[0]));
     });
   }
