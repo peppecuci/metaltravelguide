@@ -41,6 +41,7 @@ Entity relationship diagram:
 - [Java-JWT](https://github.com/auth0/java-jwt)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Heroku](https://www.heroku.com)
+- [Cloudinary](https://cloudinary.com/)
 
 
 
