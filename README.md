@@ -42,7 +42,7 @@ Entity relationship diagram:
 - [PostgreSQL](https://www.postgresql.org/)
 - [Heroku](https://www.heroku.com)
 - [Cloudinary](https://cloudinary.com/)
-
+- [Favicon](https://favicon.io/)
 
 
 ### Greetings
