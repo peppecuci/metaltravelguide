@@ -64,24 +64,24 @@ export class UsersService {
     return this.httpClient.patch<any>(this.apiServer + "updateProfile", user, {headers});
   }
 
-  public enable(form: any): Observable<any> {
+  public enable(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this.httpClient.patch<any>(this.apiServer + "enable/" + form.id,{}, {headers});
+    return this.httpClient.patch<any>(this.apiServer + "enable/" + id,{}, {headers});
   }
 
-  public disable(form: any): Observable<any> {
+  public disable(id: number): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
       token = localStorage.getItem("token");
     }
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
-    return this.httpClient.patch<any>(this.apiServer + "disable/" + form.id,{}, {headers});
+    return this.httpClient.patch<any>(this.apiServer + "disable/" + id,{}, {headers});
   }
 
   public delete(id: number): Observable<any> {
