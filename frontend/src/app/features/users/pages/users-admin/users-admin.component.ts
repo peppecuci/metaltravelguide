@@ -14,7 +14,7 @@ export class UsersAdminComponent implements OnInit {
   private users: IUser[] = [];
 
   // constructor
-  constructor(private service: UsersService, private router: Router, private toastr: ToastrService) {
+  constructor(private usersService: UsersService, private router: Router, private toastr: ToastrService) {
   }
 
   // getters
@@ -28,12 +28,28 @@ export class UsersAdminComponent implements OnInit {
   }
 
   private loadUsers(): void {
-    this.service.readAll().subscribe((data: IUser[]) => this.users = data);
+    this.usersService.readAll().subscribe((data: IUser[]) => this.users = data);
+  }
+
+  public enable(id: number): void {
+    this.usersService.enable(id).subscribe(() => {
+      this.loadUsers();
+    }, () => {
+      this.toastr.error("Error enabling user", "Error");
+    });
+  }
+
+  public disable(id: number): void {
+    this.usersService.disable(id).subscribe(() => {
+      this.loadUsers();
+    }, () => {
+      this.toastr.error("Error disabling user", "Error");
+    });
   }
 
   public delete(id: number): void {
     if (confirm("Are you sure you want to delete this User?")) {
-      this.service.delete(id).subscribe(() => {
+      this.usersService.delete(id).subscribe(() => {
         this.loadUsers();
       }, () => {
         this.toastr.error("Error deleting user", "Error");

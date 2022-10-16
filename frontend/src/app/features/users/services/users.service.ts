@@ -46,7 +46,7 @@ export class UsersService {
     return this.httpClient.get<any>(this.apiServer + "profile", {headers});
   }
 
-  public update(form: any): Observable<any> {
+  public updateProfile(form: any): Observable<any> {
     let token: string = "";
     if (localStorage.getItem("token") != null)
     { // @ts-ignore
@@ -62,6 +62,26 @@ export class UsersService {
       user.password = form.password;
     const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
     return this.httpClient.patch<any>(this.apiServer + "updateProfile", user, {headers});
+  }
+
+  public enable(form: any): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.patch<any>(this.apiServer + "enable/" + form.id,{}, {headers});
+  }
+
+  public disable(form: any): Observable<any> {
+    let token: string = "";
+    if (localStorage.getItem("token") != null)
+    { // @ts-ignore
+      token = localStorage.getItem("token");
+    }
+    const headers = new HttpHeaders().append("Authorization", `Bearer ${token}`);
+    return this.httpClient.patch<any>(this.apiServer + "disable/" + form.id,{}, {headers});
   }
 
   public delete(id: number): Observable<any> {

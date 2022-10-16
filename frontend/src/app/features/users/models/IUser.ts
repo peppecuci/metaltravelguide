@@ -6,4 +6,5 @@ export interface IUser {
   image?: string;
   countryIso: string;
   places: number[];
+  enabled?: boolean;
 }

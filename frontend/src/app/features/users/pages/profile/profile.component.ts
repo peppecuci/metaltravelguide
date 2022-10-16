@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
 
   public update(): void {
     if (this.updateForm.valid) {
-      this.userService.update(this.updateForm.value).subscribe((data) => {
+      this.userService.updateProfile(this.updateForm.value).subscribe((data) => {
         this.session.User = data;
         if (this.updateForm.value.password != null) {
           this.session.logout();
