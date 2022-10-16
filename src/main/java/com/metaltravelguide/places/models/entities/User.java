@@ -29,6 +29,7 @@ public class User implements UserDetails {
     private String password;
     @Column(nullable = false, unique = true)
     private String nickname;
+    private String image = "./assets/logos/profile-default.png";
     @Column(columnDefinition = "CHAR(2)")
     private Country countryIso = Country.BE;
     private boolean enabled = true;
@@ -37,6 +38,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Place> places = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
     public User(String username, String password) {
         this.username = username;

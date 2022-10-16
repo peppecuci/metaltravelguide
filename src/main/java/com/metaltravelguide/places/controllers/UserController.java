@@ -74,6 +74,18 @@ public class UserController {
         return userService.updateProfile(form);
     }
 
+    @PatchMapping("/enable/{id:[0-9]+}")
+    @Secured({"ROLE_ADMIN"})
+    public void enable(@Valid @PathVariable Long id) {
+        userService.enable(id);
+    }
+
+    @PatchMapping("/disable/{id:[0-9]+}")
+    @Secured({"ROLE_ADMIN"})
+    public void disable(@Valid @PathVariable Long id) {
+        userService.disable(id);
+    }
+
     @DeleteMapping("/delete/{id:[0-9]+}")
     @Secured({"ROLE_ADMIN"})
     public void delete(@Valid @PathVariable Long id) {

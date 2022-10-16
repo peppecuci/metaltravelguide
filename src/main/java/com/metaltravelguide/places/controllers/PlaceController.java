@@ -63,6 +63,18 @@ public class PlaceController {
         placeService.unLike(id, auth.getName());
     }
 
+    @PatchMapping("/approve/{id:[0-9]+}")
+    @Secured({"ROLE_ADMIN"})
+    public void approve(@Valid @PathVariable Long id) {
+        placeService.approve(id);
+    }
+
+    @PatchMapping("/refuse/{id:[0-9]+}")
+    @Secured({"ROLE_ADMIN"})
+    public void refuse(@Valid @PathVariable Long id) {
+        placeService.refuse(id);
+    }
+
     @DeleteMapping("/delete/{id:[0-9]+}")
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public void delete(@Valid @PathVariable Long id) {

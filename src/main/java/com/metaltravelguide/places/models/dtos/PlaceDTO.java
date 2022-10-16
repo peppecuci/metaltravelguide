@@ -26,6 +26,7 @@ public class PlaceDTO {
     private Long userId;
     private String userNickname;
     private Set<String> likes;
+    private boolean status;
     private Instant dateCreated;
     private Instant dateLastModified;
 }

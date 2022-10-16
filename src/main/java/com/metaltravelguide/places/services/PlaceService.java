@@ -10,4 +10,6 @@ public interface PlaceService extends CrudService<PlaceDTO, Long, PlaceCreateFor
     List<PlaceDTO> readAllFromUser(Long id);
     void addLike(Long id, String username);
     void unLike(Long id, String username);
+    void approve(Long id);
+    void refuse(Long id);
 }

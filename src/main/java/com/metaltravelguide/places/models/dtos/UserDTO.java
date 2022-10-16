@@ -15,6 +15,7 @@ public class UserDTO {
     private Long id;
     private String username;
     private String nickname;
+    private String image;
     private String countryIso;
     private boolean enabled;
     private List<String> roles;

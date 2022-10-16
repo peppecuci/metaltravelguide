@@ -6,6 +6,7 @@ import com.metaltravelguide.places.exceptions.ElementNotFoundException;
 import com.metaltravelguide.places.exceptions.UserNotTheSameException;
 import com.metaltravelguide.places.mappers.UserMapper;
 import com.metaltravelguide.places.models.dtos.UserDTO;
+import com.metaltravelguide.places.models.entities.Place;
 import com.metaltravelguide.places.models.entities.User;
 import com.metaltravelguide.places.models.forms.UserCreateForm;
 import com.metaltravelguide.places.models.forms.UserUpdateForm;
@@ -72,6 +73,8 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             user.setPassword(encoder.encode(form.getPassword()));
         if (form.getNickname() != null)
             user.setNickname(form.getNickname());
+        if (form.getImage() != null)
+            user.setImage(form.getImage());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
         try {
@@ -100,6 +103,8 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             user.setPassword(encoder.encode(form.getPassword()));
         if (form.getNickname() != null && !form.getNickname().equals(user.getNickname()))
             user.setNickname(form.getNickname());
+        if (form.getImage() != null)
+            user.setImage(form.getImage());
         if (form.getCountryIso() != null)
             user.setCountryIso(findByName(form.getCountryIso()));
         try {
@@ -109,6 +114,20 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
             throw new AlreadyExistsException(form.getNickname(), "nickname");
         }
         return userMapper.toDto(user);
+    }
+
+    public void enable(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(User.class, id));
+        user.setEnabled(true);
+        userRepository.save(user);
+    }
+
+    public void disable(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(User.class, id));
+        user.setEnabled(false);
+        userRepository.save(user);
     }
 
     public void delete(Long id) {
