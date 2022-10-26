@@ -39,7 +39,7 @@ Entity relationship diagram:
 - [DateAsAgo pipe](https://techincent.com/angular-date-as-ago-minutes-hours-days-months-years-ago-pipe/)
 - [JWT-decode](https://www.npmjs.com/package/jwt-decode)
 - [Java-JWT](https://github.com/auth0/java-jwt)
-- [PostgreSQL](https://www.postgresql.org/)
+- [MySQL](https://www.mysql.com/)
 - [Heroku](https://www.heroku.com)
 - [Cloudinary](https://cloudinary.com/)
 - [Favicon](https://favicon.io/)
